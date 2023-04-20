@@ -10,6 +10,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'main',
+    // TODO: create component for this route
 		component: AppComponent,
 	},
 	{
@@ -17,22 +18,27 @@ const routes: Routes = [
 		children: [
 			{
 				path: '',
+        // TODO: create component for this route
 				component: AppComponent,
 			},
 			{
 				path: ':id',
+        // TODO: create component for this route
 				component: AppComponent,
 			},
 		],
 	},
 	{
 		path: 'cart',
+    // TODO: create component for this route
 		component: AppComponent,
 	},
 	{
 		path: 'checkout',
+    // TODO: create component for this route
 		component: AppComponent,
 	},
+  // TODO: create component for this route
 	{ path: '**', component: AppComponent },
 ];
 
