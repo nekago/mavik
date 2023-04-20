@@ -4,6 +4,6 @@
   "jsxSingleQuote": true,
   "arrowParens": "avoid",
   "semi": true,
-  "trailingComma": "none",
+  "trailingComma": "es5",
   "useTabs": true
 }
