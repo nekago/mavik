@@ -2,6 +2,8 @@
 @import "assets/scss/setting";
 
 body {
+  font-family: $nunito_regular;
+  color: $textColor;
   width: 100%;
   overflow-x: hidden;
 }
