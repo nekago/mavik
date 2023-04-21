@@ -1,0 +1,27 @@
+@import 'src/assets/scss/setting';
+
+.menu {
+  font-family: $nunito_bold;
+  font-weight: 700;
+  font-size: 16px;
+
+  &__list {
+    width: 100%;
+    display: flex;
+
+    &-item {
+      padding-inline: 20px;
+    }
+
+    &-link {
+      cursor: pointer;
+
+      &:hover {
+        color: $dark_blue;
+      }
+    }
+  }
+}
+
+
+

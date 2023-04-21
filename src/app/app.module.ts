@@ -5,11 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageModule } from './modules/main-page/main-page.module';
 import { ProductListModule } from './modules/product-list/product-list.module';
+import {HeaderModule} from "./modules/header/header.module";
 
 @NgModule({
 	declarations: [AppComponent],
-	imports: [BrowserModule, AppRoutingModule, MainPageModule, ProductListModule],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		MainPageModule,
+		ProductListModule,
+		HeaderModule,
+	],
 	providers: [],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
 })
 export class AppModule {}

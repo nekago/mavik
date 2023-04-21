@@ -1,0 +1,52 @@
+@import 'src/assets/scss/setting';
+
+.sub-header {
+  font-family: $nunito_semibold;
+  background-color: $dark_blue;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 600;
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+  }
+
+  &__time {
+    display: flex;
+    justify-content: space-between;
+
+
+    &-day {
+      color: $dark_white;
+      margin-right: 4px;
+    }
+    &-clock {
+      color: $white;
+    }
+  }
+
+  &__content {
+    display: flex;
+    &-text {
+      color: $dark-white;
+    }
+    &-call {
+      margin-left: 4px;
+      text-decoration: underline;
+      color: $white;
+      cursor: pointer;
+    }
+  }
+
+  &__telephone {
+    display: flex;
+    color: $dark-white;
+    cursor: pointer;
+    &-text{
+      margin-right: 4px;
+    }
+  }
+}
