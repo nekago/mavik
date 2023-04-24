@@ -1,0 +1,39 @@
+@import "src/assets/scss/setting";
+
+.search {
+  background-color: #F5F7FF;
+  border-radius: 30px;
+
+  position: relative;
+  &__form{
+    &-button{
+      position: absolute;
+      width: 30px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      top: 20px;
+      right: 40px;
+      background-color: transparent;
+      cursor: pointer;
+      border: none;
+      img {
+        max-height: 20px;
+        max-width: 20px;
+      }
+    }
+    &-input {
+      background-color: transparent;
+      width: 550px;
+      height: 60px;
+      border: 1px solid #F5F7FF;
+      border-radius: 30px;
+      padding: 0 20px 0 32px;
+      &::placeholder{
+        font-family: $nunito_semibold;
+        font-size: 16px;
+        color: $textAdditional;
+      }
+    }
+  }
+}
