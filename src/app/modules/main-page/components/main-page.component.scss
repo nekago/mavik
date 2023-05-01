@@ -1,0 +1,264 @@
+@import "src/assets/scss/setting";
+
+.banner {
+
+  width: 100%;
+  height: 328px;
+  margin-top: 47px;
+  &__inner{
+    padding: 50px;
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 55%, rgba(63,146,250,1) 100%);
+  }
+  &__title {
+    font-family: $nunito_semibold;
+    font-weight: 600;
+    font-size: 42px;
+    color: $black;
+  }
+
+  &__text {
+    font-family: $nunito_regular;
+    font-weight: 400;
+    font-size: 22px;
+    color: $black;
+  }
+
+  &__country {
+    display: flex;
+    justify-content: space-between;
+    max-width: 202px;
+    margin-top: 16px;
+    img {
+      max-width: 44px;
+      max-height: 44px;
+      margin-right: 16px;
+    }
+  }
+  &__info{
+    display: flex;
+    justify-content: space-between;
+    max-width: 500px;
+    margin-top: 26px;
+
+    p {
+      font-family: $nunito_light;
+      font-weight: 300;
+      font-size: 18px;
+      color: $black;
+    }
+    b {
+      color: $dark_blue;
+    }
+  }
+}
+
+
+.product {
+  margin-top: 70px;
+  width: 100%;
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+  }
+  :nth-child(0) {
+    background: radial-gradient(50% 50% at 52.66% 55.12%, #4EC093 0%, rgba(78, 192, 147, 0) 100%);
+  }
+
+  &__item {
+    position: relative;
+    width: 445px;
+    height: 350px;
+    &-link {
+      width: 100%;
+      height: 100%;
+
+      img {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+      }
+
+    }
+
+  }
+
+}
+
+.delivery {
+  margin-top: 50px;
+
+  &__title {
+    display: flex;
+  }
+  &__info {
+    display: flex;
+    justify-content: space-around;
+
+    margin-top: 10px;
+    &-text {
+      max-width: 900px;
+      font-family: $nunito_light;
+      font-weight: 300;
+      font-size: 24px;
+    }
+    &-active{
+      font-family: $nunito_semibold;
+      font-weight: 600;
+      font-size: 18px;
+      color: $textColor;
+      margin: 15px 0 30px 0;
+      >  a {
+        display: inline;
+        border-bottom: solid $black;
+      }
+    }
+  }
+  &__order {
+    display: flex;
+    flex-direction: column;
+    margin-left: 80px;
+    &-text {
+        font-family: $nunito_light;
+        font-weight: 300;
+        font-size: 24px;
+    }
+  }
+}
+
+.reviews {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 128px;
+  &__inner {
+    width: 1150px;
+    height: 290px;
+    background: linear-gradient(266.41deg, #EAECFE 0%, #BEC5FF 100%);
+    padding: 45px 150px 78px 112px;
+  }
+  &__img{
+    margin-bottom: 16px;
+  }
+  &__text {
+    font-family: $nunito_regular;
+    font-weight: 400;
+    font-size: 18px;
+    margin-left: 60px;
+  }
+
+  &__name {
+    font-family: $nunito_light;
+    font-weight: 300;
+    font-size: 14px;
+    text-align: right;
+    margin-top: 16px;
+  }
+}
+
+.cooperation {
+  &__inner {
+
+  }
+  &__title {
+    display: flex;
+    margin-top: 128px;
+  }
+
+  &__info{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 28px;
+    &-text {
+      max-width: 920px;
+      font-family: $nunito_light;
+      font-weight: 300;
+      font-size: 24px;
+      color: $textColor;
+    }
+  }
+
+  &__order{
+    &-text {
+      font-family: $nunito_light;
+      font-weight: 300;
+      font-size: 24px;
+      color: $textColor;
+    }
+    &-number {
+      text-align: right;
+      margin-top: 16px;
+      font-family: $nunito_semibold;
+      font-weight: 600;
+      font-size: 24px;
+      color: $textColor;
+      cursor: pointer;
+    }
+  }
+
+  &__companies {
+    &-text {
+      margin-top: 32px;
+      font-family: $nunito_bold;
+      font-weight: 700;
+      font-size: 28px;
+      color: $textColor;
+    }
+    &-images{
+      margin-top: 38px;
+      display: flex;
+      justify-content: space-between;
+    }
+    &-img {
+      max-width: 100px;
+      max-height: 100px;
+      object-fit: contain;
+    }
+  }
+}
+
+.contact {
+  margin-top: 128px;
+  &__inner {
+
+  }
+
+  &__title {
+    display: flex;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__text{
+    font-family: $nunito_regular;
+    font-weight: 400;
+    font-size: 32px;
+  }
+
+  &__date {
+    text-align: right;
+    font-family: $nunito_semibold;
+    font-weight: 600;
+    font-size: 24px;
+  }
+
+  &__number {
+    a {
+      display: block;
+      font-family: $nunito_semibold;
+      font-weight: 600;
+      font-size: 24px;
+    }
+
+  }
+
+  &__card {
+    margin-top: 20px;
+    border-radius: 15px;
+  }
+}

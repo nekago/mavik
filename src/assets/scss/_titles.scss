@@ -1,3 +1,26 @@
 @import "colors";
 @import "nunito-font";
 
+.title {
+  font-family: $nunito_bold;
+
+  &.title-one {
+    font-weight: 700;
+    font-size: 42px;
+    color: $dark_blue;
+    margin-left: 10px;
+  }
+
+  &.title-two {
+    font-size: 44px;
+    font-weight: 700;
+    color: #30314F;
+    margin: 30px 0 0 30px;
+  }
+
+  img {
+    width: 42px;
+    height: 42px;
+
+  }
+}
