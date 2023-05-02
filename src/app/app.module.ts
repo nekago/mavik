@@ -7,12 +7,16 @@ import { MainPageModule } from './modules/main-page/main-page.module';
 import { ProductListModule } from './modules/product-list/product-list.module';
 import {HeaderModule} from "./modules/header/header.module";
 import {FooterModule} from "./modules/footer/footer.module";
+import {RouterModule} from "@angular/router";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
+    RouterModule,
+    BrowserAnimationsModule,
 		MainPageModule,
 		ProductListModule,
 		HeaderModule,
