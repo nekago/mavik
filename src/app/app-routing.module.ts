@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import {MainPageComponent} from "./modules/main-page/components/main-page.components";
+import {ProductListComponent} from "./modules/product-list/components/product-list/product-list.component";
 
 const routes: Routes = [
 	{
@@ -11,7 +12,6 @@ const routes: Routes = [
 	},
 	{
 		path: 'main',
-    // TODO: create components for this route
 		component: MainPageComponent,
 	},
 	{
@@ -19,8 +19,7 @@ const routes: Routes = [
 		children: [
 			{
 				path: '',
-        // TODO: create components for this route
-				component: AppComponent,
+				component: ProductListComponent,
 			},
 			{
 				path: ':id',
