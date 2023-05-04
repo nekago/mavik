@@ -6,6 +6,14 @@ export interface Categories {
   img: string
 }
 
+export interface CategoriesParams {
+  id?: number,
+  name?: CategoryNames,
+  feature_types?: FeatureTypes,
+  img?: string
+}
+
+
 export type FeatureTypes = Array<FeatureType>
 
 export interface FeatureType {
@@ -28,6 +36,7 @@ export interface Product {
   description: string,
   in_stock: 1 | 0,
 }
+
 
 export type ProductFeatures = Array<ProductFeature>
 

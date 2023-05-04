@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import {MainPageComponent} from "./modules/main-page/components/main-page.components";
 import {ProductListComponent} from "./modules/product-list/components/product-list/product-list.component";
+import {PageNotFoundComponent} from "./global/modules/page-not-found/component/page-not-found.component";
 
 const routes: Routes = [
 	{
@@ -38,8 +39,8 @@ const routes: Routes = [
     // TODO: create components for this route
 		component: AppComponent,
 	},
-  // TODO: create components for this route
-	{ path: '**', component: AppComponent },
+
+	{ path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

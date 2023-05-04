@@ -9,6 +9,8 @@ import {HeaderModule} from "./modules/header/header.module";
 import {FooterModule} from "./modules/footer/footer.module";
 import {RouterModule} from "@angular/router";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientModule} from "@angular/common/http";
+import {PageNotFoundModule} from "./global/modules/page-not-found/page-not-found.module";
 
 @NgModule({
 	declarations: [AppComponent],
@@ -20,7 +22,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 		MainPageModule,
 		ProductListModule,
 		HeaderModule,
-    FooterModule
+    FooterModule,
+    HttpClientModule,
+    PageNotFoundModule
 	],
 	providers: [],
 	bootstrap: [AppComponent],
