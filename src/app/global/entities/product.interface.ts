@@ -1,18 +1,14 @@
 
-export interface Categories {
+export interface Category {
   id: number,
   name: CategoryNames,
   feature_types: FeatureTypes,
-  img: string
+  image: string,
+  slug: CategorySlugNames
 }
 
-export interface CategoriesParams {
-  id?: number,
-  name?: CategoryNames,
-  feature_types?: FeatureTypes,
-  img?: string
-}
 
+export type Categories = Array<Category>
 
 export type FeatureTypes = Array<FeatureType>
 
@@ -31,8 +27,7 @@ export interface Product {
   category: string,
   name: string,
   price: string,
-  img: string,
-  type_product: string,
+  image: string,
   description: string,
   in_stock: 1 | 0,
 }
@@ -62,6 +57,14 @@ export type CategoryNames =
   'М\`ясні вироби' |
   'Бакалія' |
   'Снеки';
+
+export type CategorySlugNames =
+  'cheese' |
+  'butter' |
+  'milk' |
+  'meat' |
+  'grocery' |
+  'snacks';
 
 
 export type CheeseFeatureTypeNames =

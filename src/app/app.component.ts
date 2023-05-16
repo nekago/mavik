@@ -9,7 +9,5 @@ import {ActivatedRoute} from "@angular/router";
 export class AppComponent {
 	title = 'mavik-freelance';
 
-  constructor(private activateRoute: ActivatedRoute) {
-    console.log(activateRoute.snapshot.params)
-  }
+
 }

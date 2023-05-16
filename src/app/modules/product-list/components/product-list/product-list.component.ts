@@ -1,48 +1,79 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductListService } from '../../services/product-list.service';
-import {ActivatedRoute, Params} from '@angular/router';
-import {lastValueFrom, Subject, takeUntil} from 'rxjs';
-import {ProductListInterface} from "../../../../global/entities/product-list.interface";
-import {Categories} from "../../../../global/entities/product.interface";
+import {
+  CategoryNames, CategorySlugNames,
+  Product,
+} from '../../../../global/entities/product.interface';
 
 @Component({
 	selector: 'app-product-list',
 	templateUrl: 'product-list.component.html',
+  styleUrls: ['product-list.component.scss']
 })
-export class ProductListComponent implements OnInit, OnDestroy {
-	private ngDestroy$ = new Subject<void>();
-  public categories: Categories | null = null;
-  public productListError: any | null = null;
+export class ProductListComponent implements OnInit {
+	public categoryName: CategoryNames = 'Сир';
+	public slugName: CategorySlugNames = 'cheese';
+	public productList: Array<Product> = [];
+
+	public pagesCount: number = 1;
+	public currentPage: number = 1;
+
+	public params: any = {};
+
+  public pages: Array<number> = []
 
 	constructor(
+		private route: ActivatedRoute,
 		private productListService: ProductListService,
-		private route: ActivatedRoute
+		private router: Router,
+    private cdr: ChangeDetectorRef,
 	) {}
 
-	ngOnInit(): void {
-		this.productListService.getCategoryByName({}).subscribe(data => {
-      console.log(data)
-    })
-
+	ngOnInit() {
+		this.route.params.subscribe(params => {
+			const slug = params['slug'];
+			this.productListService.getCategoryBySlug(slug).subscribe(res => {
+				this.productList = res.results;
+				this.pagesCount = Math.ceil(res.count / res.results.length);
+        this.generatePages(this.pagesCount);
+        this.cdr.detectChanges();
+			});
+			this.productListService.setCurrentCategoryBySlug(slug);
+		});
+		this.productListService.category$.subscribe(data => {
+			this.categoryName = data.name;
+			this.slugName = data.slug;
+		});
 	}
 
-	ngOnDestroy(): void {
-		this.ngDestroy$.next();
-		this.ngDestroy$.complete();
+	public changePage(action: 'first' | 'last' | number) {
+		if (typeof action === 'number') {
+			this.currentPage = action;
+		} else {
+			switch (action) {
+				case 'first':
+					this.currentPage = 1;
+					return;
+
+				case 'last':
+					this.currentPage = this.pagesCount;
+					return;
+			}
+		}
+
+		this.setQueryParams({ ...this.params, page: this.currentPage });
 	}
 
-  // public async getProductList(params: Params) {
-  //   try {
-  //     this.categories = await lastValueFrom(
-  //       this.productListService.getCategoryByName(params)
-  //     )
-  //   } catch (e) {
-  //     this.categories = null;
-  //     this.productListError = e
-  //   } finally {
-  //
-  //   }
+	private setQueryParams(params: any) {
+		this.router.navigate([`/categories/${this.slugName}`], {
+			queryParams: params,
+		});
+	}
 
-  // }
-
+  private generatePages(pagesNumber: number) {
+    for (let i = 0; i < pagesNumber; i++) {
+      this.pages.push(i + 1)
+    }
+  }
 }

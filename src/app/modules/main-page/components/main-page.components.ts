@@ -1,5 +1,9 @@
-import {Component} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {OwlOptions} from "ngx-owl-carousel-o";
+import {Subject} from "rxjs";
+import {Categories, Category, CategoryNames} from "../../../global/entities/product.interface";
+import {ActivatedRoute} from "@angular/router";
+import {MainPageService} from "../services/main-page.service";
 
 @Component({
   selector: 'app-main-page',
@@ -7,7 +11,29 @@ import {OwlOptions} from "ngx-owl-carousel-o";
   styleUrls: ['main-page.component.scss']
 })
 
-export class MainPageComponent {
+export class MainPageComponent  implements OnInit, OnDestroy{
+
+  private ngDestroy$ = new Subject<void>();
+  public categories!: Categories;
+
+  constructor(
+    private mainPageService: MainPageService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.mainPageService.getCategories().subscribe(data => {
+      console.log(data)
+      this.categories = data;
+    })
+
+  }
+
+  ngOnDestroy(): void {
+    this.ngDestroy$.next();
+    this.ngDestroy$.complete();
+  }
+
 
 
 

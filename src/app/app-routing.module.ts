@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import {MainPageComponent} from "./modules/main-page/components/main-page.components";
 import {ProductListComponent} from "./modules/product-list/components/product-list/product-list.component";
 import {PageNotFoundComponent} from "./global/modules/page-not-found/component/page-not-found.component";
+import {ProductComponent} from "./modules/product/components/product.component";
 
 const routes: Routes = [
 	{
@@ -16,7 +17,7 @@ const routes: Routes = [
 		component: MainPageComponent,
 	},
 	{
-		path: 'category/:name',
+		path: 'categories/:slug',
 		children: [
 			{
 				path: '',
@@ -24,8 +25,7 @@ const routes: Routes = [
 			},
 			{
 				path: ':id',
-        // TODO: create components for this route
-				component: AppComponent,
+				component: ProductComponent,
 			},
 		],
 	},

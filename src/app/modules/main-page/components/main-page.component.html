@@ -21,47 +21,11 @@
 <section class="product" id="categories">
   <div class="container">
     <div class="product__inner">
-      <div class="product__item">
-        <a href="#" class="product__item-link">
-          <h2 class="title title-two">Сир</h2>
-          <img src="/assets/images/cheese-main.png" alt="cheese-main">
+      <div class="product__item" *ngFor="let category of categories">
+        <a [routerLink]="'/categories/' + category.slug" class="product__item-link">
+          <h2 class="title title-two">{{category.name}}</h2>
+          <img [src]="category.image" [alt]="category.name">
         </a>
-
-      </div>
-      <div class="product__item">
-        <a href="#" class="product__item-link">
-          <h2 class="title title-two">Масло</h2>
-          <img src="/assets/images/butter-main.png" alt="cheese-main">
-        </a>
-
-      </div>
-      <div class="product__item">
-        <a href="#" class="product__item-link">
-          <h2 class="title title-two">Молочні вироби</h2>
-          <img src="/assets/images/milk-main.png" alt="cheese-main">
-        </a>
-
-      </div>
-      <div class="product__item">
-        <a href="#" class="product__item-link">
-          <h2 class="title title-two">М'ясні вироби</h2>
-          <img src="/assets/images/meat-main.png" alt="cheese-main">
-        </a>
-
-      </div>
-      <div class="product__item">
-        <a href="#" class="product__item-link">
-          <h2 class="title title-two">Бакалія</h2>
-          <img src="/assets/images/grocery-main.png" alt="cheese-main">
-        </a>
-
-      </div>
-      <div class="product__item">
-        <a href="#" class="product__item-link">
-          <h2 class="title title-two">Снеки</h2>
-          <img src="/assets/images/snacks-main.png" alt="cheese-main">
-        </a>
-
       </div>
     </div>
   </div>
