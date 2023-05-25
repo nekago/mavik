@@ -4,6 +4,7 @@ import {SearchComponent} from "./components/search/search.component";
 import {SubHeaderComponent} from "./components/sub-header/sub-header.component";
 import {MenuComponent} from "./components/menu/menu.component";
 import {RouterModule} from "@angular/router";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
 	exports: [HeaderComponent],
@@ -13,6 +14,6 @@ import {RouterModule} from "@angular/router";
 		SubHeaderComponent,
 		MenuComponent,
 	],
-	imports: [RouterModule],
+	imports: [RouterModule, CommonModule],
 })
 export class HeaderModule {}
