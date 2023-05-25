@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { MainPageService } from '../../main-page/services/main-page.service';
 import { ProductListInterface } from '../../../global/entities/product-list.interface';
 import { ActivatedRoute } from '@angular/router';
+import {FilterService} from "./filter.service";
 
 @Injectable({
 	providedIn: 'root',
@@ -27,7 +28,8 @@ export class ProductListService {
 	constructor(
 		private apiService: ApiService,
 		private mainPageService: MainPageService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+    private filterService: FilterService
 	) {}
 
 	public getCategoryBySlug(
@@ -39,7 +41,6 @@ export class ProductListService {
         this.params = query
       }
     )
-    console.log(this.params)
 		return this.apiService.get<ProductListInterface>(
 			`categories/${slug}/products/`,
 			this.params
@@ -57,6 +58,7 @@ export class ProductListService {
 				);
 				if (currentCategory) {
 					this.category.next(currentCategory);
+          this.filterService.initFilterState(currentCategory.filters)
 				}
 			}
 		});

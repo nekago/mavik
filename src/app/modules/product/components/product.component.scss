@@ -1,0 +1,118 @@
+@import "src/assets/scss/setting";
+
+.product {
+
+  &__inner {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__img {
+    display: block;
+
+    object-fit: cover;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-family: $nunito_semibold;
+    font-weight: 600;
+    font-size: 48px;
+  }
+
+  &__availability {
+    font-family: $nunito_regular;
+    font-weight: 400;
+    font-size: 16px;
+    color: #5EB935;
+    margin-top: 8px;
+  }
+
+  &__price {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 8px;
+    font-family: $nunito_regular;
+    font-weight: 400;
+
+    &-text {
+      font-size: 24px;
+      color: $textColor;
+    }
+
+    &-sale {
+      font-size: 24px;
+      color: $textAdditional;
+      text-decoration: line-through;
+      margin: 0 15px;
+    }
+
+    &-value {
+      font-size: 42px;
+      color: $textColor;
+    }
+  }
+
+  &__count {
+    display: flex;
+    max-width: 210px;
+    height: 60px;
+    margin-top: 34px;
+
+    > input {
+      width: 80px;
+      background: #F5F7FF;
+      font-family: $nunito_semibold;
+      font-weight: 600;
+      font-size: 42px;
+      text-align: center;
+      border: 1px solid #DDDCDF;
+
+      &[type="number"] {
+        -moz-appearance: textfield;
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+
+    &-plus, &-minus {
+      width: 65px;
+      border: 1px solid #DDDCDF;
+      background: $white;
+      cursor: pointer;
+      color: #DDDCDF;
+
+      &:hover {
+        transition: 0.2s;
+        color: $dark_blue;
+      }
+    }
+
+
+  }
+
+
+&__btn {
+  width: 327px;
+  height: 64px;
+  margin-top: 32px;
+  padding: 10px 24px;
+  font-family: $nunito_bold;
+  font-size: 24px;
+  font-weight: 700;
+  color: $white;
+  background: $dark_blue;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+}

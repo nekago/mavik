@@ -5,6 +5,9 @@ import {
   CategoryNames, CategorySlugNames,
   Product,
 } from '../../../../global/entities/product.interface';
+import {FilterState} from "../../../../global/entities/filter.inerface";
+import {Observable} from "rxjs";
+import {FilterService} from "../../services/filter.service";
 
 @Component({
 	selector: 'app-product-list',
@@ -23,11 +26,14 @@ export class ProductListComponent implements OnInit {
 
   public pages: Array<number> = []
 
+  public filterState$: Observable<FilterState> = new Observable<FilterState>()
+
 	constructor(
 		private route: ActivatedRoute,
 		private productListService: ProductListService,
 		private router: Router,
     private cdr: ChangeDetectorRef,
+    private filterService: FilterService
 	) {}
 
 	ngOnInit() {
@@ -45,6 +51,7 @@ export class ProductListComponent implements OnInit {
 			this.categoryName = data.name;
 			this.slugName = data.slug;
 		});
+    this.filterState$ = this.filterService.filterState$
 	}
 
 	public changePage(action: 'first' | 'last' | number) {
