@@ -1,6 +1,18 @@
-<div class="breadcrumbs">
-  <div class="container">
-    <a  class="breadcrumbs">Головна</a>
-    <a  class="breadcrumbs">Сири</a>
-  </div>
-</div>
+<!--<div class="breadcrumbs">-->
+<!--  <div class="container">-->
+<!--    <a  class="breadcrumbs">Головна</a>-->
+<!--    <a  class="breadcrumbs">Сири</a>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<ol class="breadcrumbs">
+
+  <li>
+    <a [routerLink]="'/main'">Головна</a>
+  </li>
+  <li *ngFor="let breadcrumb of breadcrumbs$ | async">
+    <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
+  </li>
+
+</ol>

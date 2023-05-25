@@ -1,6 +1,6 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
-import {ProductService} from "../services/product.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProductService } from '../services/product.service';
 
 @Component({
 	selector: 'app-product',
@@ -8,38 +8,33 @@ import {ProductService} from "../services/product.service";
 	styleUrls: ['product.component.scss'],
 })
 export class ProductComponent implements OnInit {
+	count: number = 1;
 
-  count: number = 1
-
-  constructor(
-    private route: ActivatedRoute,
-    private productService: ProductService
-  ) {}
+	constructor(
+		private route: ActivatedRoute,
+		private productService: ProductService
+	) {}
 
 	ngOnInit() {
+		this.productService.getProductFromCategoryById().subscribe();
+	}
 
-      this.productService.getProductFromCategoryById().subscribe( data => {
-        console.log(data)
-      } )
-  }
+	plus() {
+		this.count = this.count < 1000 ? this.count + 1 : this.count;
+	}
 
-  plus() {
-    this.count = this.count < 1000 ? this.count + 1 : this.count
-  }
-  minus() {
-    this.count = this.count > 1 ? this.count - 1 : this.count
-  }
+	minus() {
+		this.count = this.count > 1 ? this.count - 1 : this.count;
+	}
 
-  countValueValidator() {
-    console.log('aaaa')
-    if (this.count < 1) {
-      this.count = 1
-      return
-    }
+	countValueValidator() {
+		if (this.count < 1) {
+			this.count = 1;
+			return;
+		}
 
-    if (this.count > 999) {
-      this.count = 999
-    }
-
-  }
+		if (this.count > 999) {
+			this.count = 999;
+		}
+	}
 }

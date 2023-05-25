@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component,  OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductListService } from '../../services/product-list.service';
 import {
@@ -38,7 +38,7 @@ export class ProductListComponent implements OnInit {
 
 	ngOnInit() {
 		this.route.params.subscribe(params => {
-			const slug = params['slug'];
+			const slug = params['categorySlug'];
 			this.productListService.getCategoryBySlug(slug).subscribe(res => {
 				this.productList = res.results;
 				this.pagesCount = Math.ceil(res.count / res.results.length);

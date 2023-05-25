@@ -17,14 +17,14 @@ const routes: Routes = [
 		component: MainPageComponent,
 	},
 	{
-		path: 'categories/:slug',
+		path: 'categories/:categorySlug',
 		children: [
 			{
 				path: '',
 				component: ProductListComponent,
 			},
 			{
-				path: ':id',
+				path: ':productId',
 				component: ProductComponent,
 			},
 		],

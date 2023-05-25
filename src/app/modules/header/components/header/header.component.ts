@@ -26,7 +26,6 @@ export class HeaderComponent implements AfterViewInit {
     ).subscribe(url => {
       const pages = url.split('/')
       const page = pages[pages.length - 1]
-      console.log(pages)
       this.isHideAppMenu = !this.headerConfig.pagesToHideBlocks.appMenu.includes(page)
     })
   }

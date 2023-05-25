@@ -1,9 +1,25 @@
 @import "src/assets/scss/setting";
 
+//.breadcrumbs {
+//  font-family: $nunito_semibold;
+//  font-weight: 400;
+//  font-size: 18px;
+//  color: $dark_blue;
+//  margin-top: 30px;
+//}
+
+
 .breadcrumbs {
-  font-family: $nunito_semibold;
-  font-weight: 400;
-  font-size: 18px;
-  color: $dark_blue;
-  margin-top: 30px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumbs li {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.breadcrumbs li:last-child {
+  font-weight: bold;
 }
