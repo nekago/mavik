@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Breadcrumb } from '../../../global/entities/bradcrumbs';
+import { Breadcrumb } from '../../../global/entities/breadcrumbs.intarface';
 import { ProductService } from '../../product/services/product.service';
 
 @Injectable({

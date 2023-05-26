@@ -13,8 +13,6 @@ export class BreadcrumbsComponent implements OnInit {
 
 	ngOnInit() {
     this.breadcrumbs$ = this.breadcrumbsService.breadcrumbs$;
-    this.breadcrumbs$.subscribe(data => {
-      console.log(data)
-    })
+    this.breadcrumbs$.subscribe()
   }
 }

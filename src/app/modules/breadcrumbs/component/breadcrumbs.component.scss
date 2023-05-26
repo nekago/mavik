@@ -1,25 +1,37 @@
 @import "src/assets/scss/setting";
 
-//.breadcrumbs {
-//  font-family: $nunito_semibold;
-//  font-weight: 400;
-//  font-size: 18px;
-//  color: $dark_blue;
-//  margin-top: 30px;
-//}
-
-
 .breadcrumbs {
+  font-family: $nunito_semibold;
+  font-weight: 400;
+  font-size: 18px;
+  color: $dark_blue;
+  margin-top: 30px;
   list-style-type: none;
   padding: 0;
-  margin: 0;
 }
 
 .breadcrumbs li {
   display: inline-block;
-  margin-right: 5px;
+  position: relative;
+  line-height: 1;
+  margin-right: 30px;
+}
+
+
+
+.breadcrumbs li:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  left: -12px;
+  top: -7px;
+  width: 4px;
+  height: 8px;
+  background-image: url("../../../../assets/icons/breadcrumbs-icon.svg");
+  background-size: cover;
+  margin-top: 13px;
 }
 
 .breadcrumbs li:last-child {
-  font-weight: bold;
+  color: $textColor;
 }

@@ -58,9 +58,7 @@ export class FilterService {
         return "Статус товару"
       default:
         return ''
-
     }
-
   }
 
 	public setFilterState(filterState: FilterState) {
