@@ -39,11 +39,18 @@
 
         <div *ngFor="let filterGroup of filterState$ | async">
           <h2>{{filterGroup?.key}}</h2>
-          <ul>
-            <li *ngFor="let filterField of filterGroup?.value">
-              {{filterField}}
-            </li>
-          </ul>
+          <div *ngFor="let filterField of filterGroup?.values">
+            <label [for]="filterGroup.key + '_' + filterField.value">
+              <span [class.disabled]="!filterField.isActive">{{filterField.value}}</span>
+              <input
+                type="checkbox"
+                (input)="toggleFilterValue(filterGroup.key_en, filterField.value, $event)"
+                [id]="filterGroup.key + '_' + filterField.value"
+                [disabled]="!filterField.isActive"
+              >
+            </label>
+          </div>
+
         </div>
       </div>
       <div class="products">

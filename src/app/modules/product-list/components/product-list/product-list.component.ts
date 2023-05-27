@@ -68,6 +68,10 @@ export class ProductListComponent implements OnInit {
 			this.maxPriceValue = options.ceil || 0;
 			this.minPriceValue = options.floor || 0;
 		});
+
+    this.filterService.selectedFilters$.subscribe(data => {
+      console.log(data)
+    })
 	}
 
 
@@ -101,4 +105,9 @@ export class ProductListComponent implements OnInit {
 			this.pages.push(i + 1);
 		}
 	}
+
+  toggleFilterValue(key: string, filterField: string, $event: any = true) {
+    this.filterService.toggleSelectedFilterFieldValue(key, filterField, $event.target.checked)
+
+  }
 }

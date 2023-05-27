@@ -59,6 +59,18 @@ export class LocalizerService {
         return filterGroupName;
     }
   }
+  public getEngFieldGroupName(filterGroupName: string) {
+    switch (filterGroupName) {
+      case 'Країна':
+        return 'country';
+      case 'Виробник':
+        return 'brand';
+      case 'Статус товару':
+        return 'in_stock';
+      default:
+        return filterGroupName;
+    }
+  }
 
 }
 
