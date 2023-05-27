@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {OwlOptions} from "ngx-owl-carousel-o";
 import {Subject} from "rxjs";
-import {Categories, Category, CategoryNames} from "../../../global/entities/product.interface";
+import {Categories} from "../../../global/entities/product.interface";
 import {ActivatedRoute} from "@angular/router";
 import {MainPageService} from "../services/main-page.service";
+import {FilterService} from "../../product-list/services/filter.service";
 
 @Component({
   selector: 'app-main-page',
@@ -18,7 +19,8 @@ export class MainPageComponent  implements OnInit, OnDestroy{
 
   constructor(
     private mainPageService: MainPageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private filterService: FilterService
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +28,7 @@ export class MainPageComponent  implements OnInit, OnDestroy{
       console.log(data)
       this.categories = data;
     })
-
+  this.filterService.reset()
   }
 
   ngOnDestroy(): void {

@@ -30,9 +30,10 @@ export interface Product {
 	features: ProductFeatures;
 	brand: string;
 	country: string;
-	category: string;
+	category: CategoryNames;
 	name: string;
 	price: string;
+  sale_price: string,
 	image: string;
 	description: string;
 	in_stock: 1 | 0;

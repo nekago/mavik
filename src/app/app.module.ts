@@ -12,8 +12,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {PageNotFoundModule} from "./global/modules/page-not-found/page-not-found.module";
 import {FormsModule} from "@angular/forms";
-import {ProductComponent} from "./modules/product/components/product.component";
 import {ProductModule} from "./modules/product/product.module";
+import {ProductCardModule} from "./modules/product-card/product-card.module";
 
 @NgModule({
 	declarations: [AppComponent],
@@ -25,6 +25,7 @@ import {ProductModule} from "./modules/product/product.module";
 		MainPageModule,
 		ProductListModule,
     ProductModule,
+    ProductCardModule,
 		HeaderModule,
     FooterModule,
     HttpClientModule,

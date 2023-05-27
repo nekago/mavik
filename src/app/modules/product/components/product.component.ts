@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/product.service';
 
@@ -7,7 +7,7 @@ import { ProductService } from '../services/product.service';
 	templateUrl: 'product.component.html',
 	styleUrls: ['product.component.scss'],
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, OnDestroy {
 	count: number = 1;
 
 	constructor(
@@ -18,6 +18,10 @@ export class ProductComponent implements OnInit {
 	ngOnInit() {
 		this.productService.getProductFromCategoryById().subscribe();
 	}
+
+	ngOnDestroy() {
+    this.productService.reset()
+  }
 
 	plus() {
 		this.count = this.count < 1000 ? this.count + 1 : this.count;

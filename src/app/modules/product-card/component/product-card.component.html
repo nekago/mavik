@@ -1,0 +1,13 @@
+<div class="product-card">
+  <img class="product-card__img" [src]="product?.image" [alt]="product?.name" (click)="redirectToProductPage()">
+  <div class="product-card__name">{{product?.name}}</div>
+  <div class="product-card__price">
+    <div class="product-card__price-sale" *ngIf="product?.sale_price">{{product?.price}}</div>
+    <div class="product-card__price">{{product?.sale_price || product?.price}}</div>
+  </div>
+  <button class="product-card__btn">У кошик</button>
+  <div class="product-card__availability" *ngIf="product?.in_stock; else notInStock">в наявності</div>
+  <ng-template #notInStock>
+    <div class="product-card__availability">немає в наявності</div>
+  </ng-template>
+</div>

@@ -35,6 +35,8 @@
       <div class="product-list__filters">
         <h1>Фільтри</h1>
 
+        <ngx-slider [(value)]="minPriceValue" [(highValue)]="maxPriceValue" [options]="options"></ngx-slider>
+
         <div *ngFor="let filterGroup of filterState$ | async">
           <h2>{{filterGroup?.key}}</h2>
           <ul>
@@ -46,171 +48,19 @@
       </div>
       <div class="products">
         <div class="products__inner">
-
-
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-          <div class="products__card">
-            <img class="products__img" src="assets/images/test.jpg" alt="product">
-            <div class="products__name">Сыр чеддер Cesvaine Cheddar Red</div>
-            <div class="products__price">
-              <div class="products__price-sale">₴500.00</div>
-              <div class="products__price">₴500.00</div>
-            </div>
-            <button class="products__btn">У кошик</button>
-            <div class="products__availability">в наявності</div>
-          </div>
-        </div>
-        <div class="pagination">
-          <button class="pagination__page"><span><</span></button>
-          <button class="pagination__page"><span>1</span></button>
-          <button class="pagination__page"><span>2</span></button>
-          <button class="pagination__page"><span>3</span></button>
-          <button class="pagination__page"><span>></span></button>
+          <app-product-card *ngFor="let product of productList" [product]="product"></app-product-card>
         </div>
       </div>
 
     </div>
+    <div class="pagination">
+      <button class="pagination__page"><span><</span></button>
+      <button class="pagination__page"><span>1</span></button>
+      <button class="pagination__page"><span>2</span></button>
+      <button class="pagination__page"><span>3</span></button>
+      <button class="pagination__page"><span>></span></button>
+    </div>
 
   </div>
-
 </div>
 

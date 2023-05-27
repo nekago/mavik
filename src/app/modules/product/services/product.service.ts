@@ -31,4 +31,8 @@ export class ProductService {
 
 		return product
 	}
+
+  public reset() {
+    this.product.next({})
+  }
 }

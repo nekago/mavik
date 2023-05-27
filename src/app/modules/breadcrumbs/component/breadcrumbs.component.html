@@ -4,8 +4,8 @@
       <li>
         <a [routerLink]="'/main'">Головна</a>
       </li>
-      <li *ngFor="let breadcrumb of breadcrumbs$ | async">
-        <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
+      <li *ngFor="let breadcrumb of breadcrumbs$ | async" >
+        <a *ngIf="breadcrumb.label" [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
       </li>
     </ol>
   </div>

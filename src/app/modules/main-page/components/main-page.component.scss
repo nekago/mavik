@@ -53,6 +53,20 @@
   }
 }
 
+.bestseller {
+  margin-top: 52px;
+  &__title {
+    display: flex;
+    margin-bottom: 28px;
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
 
 .product {
   margin-top: 70px;

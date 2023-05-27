@@ -19,7 +19,7 @@
 
 
 
-.breadcrumbs li:not(:first-child)::before {
+.breadcrumbs li:not(:first-child) a::before {
   content: '';
   position: absolute;
   display: inline-block;

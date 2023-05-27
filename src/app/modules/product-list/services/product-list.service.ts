@@ -25,6 +25,8 @@ export class ProductListService {
 		return this.category.getValue().slug;
 	}
 
+
+
 	constructor(
 		private apiService: ApiService,
 		private mainPageService: MainPageService,
@@ -51,16 +53,16 @@ export class ProductListService {
 		if (!this.mainPageService.hasCategories) {
 			this.mainPageService.getCategories().subscribe();
 		}
-		this.mainPageService.categories$?.subscribe(categories => {
-			if (Object.keys(categories)?.length) {
-				const currentCategory = categories?.find(
-					category => category?.slug === slug
-				);
-				if (currentCategory) {
-					this.category.next(currentCategory);
-          this.filterService.initFilterState(currentCategory.filters)
-				}
-			}
-		});
-	}
+    this.apiService.get<Category>(`categories/${slug}/`).subscribe(category => {
+      const filters = category.filters
+      if (filters) {
+        this.category.next(category);
+        if (slug  !== this.filterService.filterStateCategory) {
+          this.filterService.reset()
+          this.filterService.initFilterState(filters, slug)
+        }
+      }
+    })
+
+  }
 }
