@@ -47,14 +47,20 @@ export class ProductListComponent implements OnInit {
 	ngOnInit() {
 		this.route.params.subscribe(params => {
 			const slug = params['categorySlug'];
-			this.productListService.getCategoryBySlug(slug).subscribe(res => {
+
+			this.productListService.getProductListBySlug(slug)
+
+			this.productListService.productList$.subscribe(res => {
 				this.productList = res.results;
-				this.pagesCount = Math.ceil(res.count / res.results.length);
+				this.pagesCount = Math.ceil(res.count / res.results?.length);
 				this.generatePages(this.pagesCount);
 				this.cdr.detectChanges();
 			});
 			this.productListService.setCurrentCategoryBySlug(slug);
-		});
+    });
+    this.route.queryParams.subscribe(() => {
+      this.productListService.getProductListBySlug(this.slugName)
+    })
 		this.productListService.category$.subscribe(data => {
 			this.categoryName = data.name;
 			this.slugName = data.slug;
@@ -69,9 +75,7 @@ export class ProductListComponent implements OnInit {
 			this.minPriceValue = options.floor || 0;
 		});
 
-    this.filterService.selectedFilters$.subscribe(data => {
-      console.log(data)
-    })
+    this.filterService.selectedFilters$.subscribe()
 	}
 
 
@@ -91,14 +95,10 @@ export class ProductListComponent implements OnInit {
 			}
 		}
 
-		this.setQueryParams({ ...this.params, page: this.currentPage });
+		this.filterService.setQueryParams({page: this.currentPage });
 	}
 
-	private setQueryParams(params: any) {
-		this.router.navigate([`/categories/${this.slugName}`], {
-			queryParams: params,
-		});
-	}
+
 
 	private generatePages(pagesNumber: number) {
 		for (let i = 0; i < pagesNumber; i++) {

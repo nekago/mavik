@@ -11,6 +11,7 @@ import {
 } from '../../../global/entities/product.interface';
 import { Options } from '@angular-slider/ngx-slider';
 import { LocalizerService } from '../../../global/services/localizer.service';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Injectable({
 	providedIn: 'root',
@@ -32,7 +33,19 @@ export class FilterService {
 
 	public filterStateCategory: CategorySlugNames | undefined;
 
-	constructor(private localizerService: LocalizerService) {}
+  public params: Record<string, string[]> = {}
+
+
+	constructor(private localizerService: LocalizerService, private router: Router, private activatedRoute: ActivatedRoute) {
+    activatedRoute.queryParams.subscribe(
+      query => {
+        this.params =  Object.entries(query).reduce((acc: Record<string, string[]>, elem) => {
+          acc[elem[0]] = elem[1].split(',')
+          return acc
+        }, {} )
+      }
+    )
+  }
 
 	public initFilterState(filters: Filters, slug: CategorySlugNames) {
 		this.filterStateCategory = slug;
@@ -101,6 +114,7 @@ export class FilterService {
 		isAdd: boolean
 	) {
 		const selectedFilters = this.selectedFilters.getValue();
+    value = value.split(' ').join('+')
 
     if(key === 'in_stock') {
       value = Number(value === 'В наявності').toString()
@@ -113,7 +127,7 @@ export class FilterService {
 		}
 
 		this.selectedFilters.next(selectedFilters);
-
+    this.setQueryParams(selectedFilters)
 	}
 
 	public addSelectedFilterFieldValue(
@@ -150,8 +164,31 @@ export class FilterService {
 		}
 	}
 
+  public setQueryParams(params: any) {
+    // for (const param in params) {
+    //   console.log(param)
+    //   if (this.params?.has(param)) {
+    //     this.params[param] = {...this.params[param], ...params[param]}
+    //   } else {
+    //     this.params[param] = params[param]
+    //   }
+    // }
+    this.params = {...this.params, ...params}
+    this.router.navigate([`/categories/${this.filterStateCategory}`], {
+      queryParams: this.queryParamsValueToString(this.params),
+    });
+  }
+
+  public queryParamsValueToString(params: Record<string, string[]>): Record<string, string> {
+    return Object.entries(params).reduce((acc: Record<string, string>, elem) => {
+      acc[elem[0]] = elem[1].join(',')
+      return acc
+    }, {} )
+  }
+
 	public reset() {
 		this.filterState.next([]);
 		this.filterStateCategory = undefined;
 	}
+
 }
