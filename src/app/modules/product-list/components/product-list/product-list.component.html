@@ -47,6 +47,7 @@
                 (input)="toggleFilterValue(filterGroup.key_en, filterField.value, $event)"
                 [id]="filterGroup.key + '_' + filterField.value"
                 [disabled]="!filterField.isActive"
+                [checked]="filterField.isChecked"
               >
             </label>
           </div>

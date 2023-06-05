@@ -52,10 +52,20 @@ export class FilterService {
 		const filterState: FilterState = [];
 		const filterFields: Array<[string, any]> = Object.entries(filters);
 
+    const fieldValueIsChecked = (value: string): boolean => {
+      for (const values of Object.values(this.params)) {
+        if (values.find(elem => elem === value)) {
+          return true
+        }
+      }
+      return false
+    }
+
 		const initFieldValue = (value: string): FilterFieldsGroupValue => {
 			return {
 				value,
 				isActive: true,
+        isChecked: fieldValueIsChecked(value)
 			};
 		};
 

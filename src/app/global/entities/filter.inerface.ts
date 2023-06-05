@@ -8,7 +8,8 @@ export interface FilterFieldsGroup {
 
 export interface FilterFieldsGroupValue {
   value: string,
-  isActive: boolean
+  isActive: boolean,
+  isChecked: boolean
 }
 
 export type SelectedFilters = Record<string, string[]>
