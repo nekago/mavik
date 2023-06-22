@@ -22,7 +22,7 @@
       <div class="product-list__info-name">Сири</div>
       <div class="product-list__info-count"> (20)</div>
       <div class="filter-tag" *ngIf="(filterTags$ | async)?.length">
-        <button class="filter-tag__reset">Очистити фільтри</button>
+        <button (click)="resetFilter()" class="filter-tag__reset">Очистити фільтри</button>
         <button (click)="deleteFilterTag(tag)" *ngFor="let tag of filterTags$ | async" class="filter-tag__close">{{tag[1]}}</button>
       </div>
     </div>
@@ -37,12 +37,12 @@
           <h2>{{filterGroup?.key}}</h2>
           <div *ngFor="let filterField of filterGroup?.values">
             <label [for]="filterGroup.key + '_' + filterField.value">
-              <span [class.disabled]="!filterField.isActive">{{filterField.value}}</span>
+              <span [class.disabled]="filterFieldIsDisable(filterField)">{{filterField.value}}</span>
               <input
                 type="checkbox"
-                (input)="toggleFilterValue(filterGroup.key_en, filterField.value, $event)"
+                (input)="toggleFilterValue(filterGroup.key_en, filterField, $event)"
                 [id]="filterGroup.key + '_' + filterField.value"
-                [disabled]="!filterField.isActive"
+                [disabled]="!filterField.isChecked && !filterField.isActive"
                 [checked]="filterField.isChecked"
               >
             </label>

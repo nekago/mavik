@@ -59,16 +59,17 @@ export class FilterService {
           return acc
         }, {})
         this.selectedFilters.next(this.params)
+      }
+    )
 
+    this.filterState.asObservable().subscribe(() => {
+      if (!this.filterTags.getValue().length) {
         for (const elem of Object.entries(this.params)) {
           elem[1].forEach((tag: string) => {
             this.addFilterTag(elem[0], tag)
           })
         }
       }
-    )
-
-    this.filterState.asObservable().subscribe(() => {
     })
   }
 
@@ -151,6 +152,7 @@ export class FilterService {
   public modifyFilterState(filters: Filters) {
     const filterState = this.filterState.getValue()
     const filterKeys = Object.keys(filters) as Array<FilterFields | 'price'>
+
     for (let i = 0; i < filterKeys.length; i++) {
       const key = filterKeys[i];
       this.priceSlider.next({
@@ -205,7 +207,7 @@ export class FilterService {
 
     if (key) {
       this.filterTags.next(filterTag)
-      console.log(arguments)
+
       const selectedFilters = this.selectedFilters.getValue()
       this.removeSelectedFilterFieldValue(key, tag, selectedFilters)
       this.selectedFilters.next(selectedFilters);
@@ -271,10 +273,23 @@ export class FilterService {
         field.splice(index, 1);
       }
     }
+    // @ts-ignore
+
+    const filterState = this.filterState.getValue()
+    const tmp = filterState
+      .filter(state => (state.key === key) || (state.key_en === key))?.[0].values
+      .filter(fieldValue => fieldValue.value === value)?.[0]
+
+    if (tmp?.isChecked) {
+      tmp.isChecked = false;
+    }
+
+
+    this.filterState.next(filterState)
   }
 
-  public setQueryParams(params: any) {
-    this.params = {...this.params, ...params}
+  public setQueryParams(params: any, isReset?: boolean) {
+    this.params = isReset ? {} : {...this.params, ...params}
     this.router.navigate([`/categories/${this.filterStateCategory}`], {
       queryParams: this.queryParamsValueToString(this.params),
     });
@@ -287,8 +302,20 @@ export class FilterService {
     }, {})
   }
 
+  public resetFilter() {
+    this.selectedFilters.next({});
+    this.setQueryParams({}, true);
+    this.filterTags.next([])
+    for (const value of Object.values(this.filterState.getValue())) {
+      for (const fieldValue of value.values) {
+        fieldValue.isChecked = false
+      }
+    }
+  }
+
   public reset() {
     this.filterState.next([]);
+    this.filterTags.next([])
     this.filterStateCategory = undefined;
   }
 

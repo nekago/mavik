@@ -5,7 +5,7 @@ import {
   CategoryNames, CategorySlugNames, FilterFields,
   Product,
 } from '../../../../global/entities/product.interface';
-import {FilterState, FilterTag} from '../../../../global/entities/filter.inerface';
+import {FilterFieldsGroupValue, FilterState, FilterTag} from '../../../../global/entities/filter.inerface';
 import {Observable} from 'rxjs';
 import {FilterService} from '../../services/filter.service';
 import {Options} from '@angular-slider/ngx-slider';
@@ -82,7 +82,9 @@ export class ProductListComponent implements OnInit {
       this.minPriceValue = options.floor || 0;
     });
 
-    this.filterService.selectedFilters$.subscribe();
+    this.filterService.selectedFilters$.subscribe(data => {
+      console.log(data)
+    });
 
     this.filterTags$ = this.filterService.filterTags$;
   }
@@ -106,14 +108,27 @@ export class ProductListComponent implements OnInit {
     this.filterService.setQueryParams({page: this.currentPage});
   }
 
-  public toggleFilterValue(key: string, filterField: string, $event: any = true) {
+  public toggleFilterValue(key: string, filterField: FilterFieldsGroupValue, $event: any = true) {
+    const isChecked = $event.target.checked
     this.filterService.selectedFilterGroup = key as FilterFields
-    this.filterService.toggleSelectedFilterFieldValue(key, filterField, $event.target.checked)
-    this.filterService.toggleFilterTag(key, filterField, $event.target.checked)
+    this.filterService.toggleSelectedFilterFieldValue(key, filterField.value, isChecked)
+    this.filterService.toggleFilterTag(key, filterField.value, isChecked)
+
+    filterField.isChecked = isChecked
+
   }
 
   public deleteFilterTag(elem: [string, string]) {
     this.filterService.removeFilterTag(elem[1], elem[0])
+  }
+
+  public filterFieldIsDisable(filterField: FilterFieldsGroupValue): boolean {
+    return !filterField.isChecked && !filterField.isActive;
+  }
+
+
+  public resetFilter() {
+    this.filterService.resetFilter();
   }
 
   private generatePages(pagesNumber: number) {
