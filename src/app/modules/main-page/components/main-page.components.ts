@@ -25,7 +25,6 @@ export class MainPageComponent  implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.mainPageService.getCategories().subscribe(data => {
-      console.log(data)
       this.categories = data;
     })
   this.filterService.reset()

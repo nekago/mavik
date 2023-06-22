@@ -44,6 +44,7 @@ export class ProductListService {
       this.filterService.queryParamsValueToString(this.filterService.params)
 		).subscribe(data => {
       this.productList.next(data)
+      this.filterService.modifyFilterState(data.filters, slug)
     });
 	}
 

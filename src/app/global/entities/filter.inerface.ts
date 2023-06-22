@@ -1,5 +1,8 @@
 export type FilterState = Array<FilterFieldsGroup>
 
+
+export type FilterTag = Array<[string, string]>
+
 export interface FilterFieldsGroup {
 	key: string;
 	key_en: string;

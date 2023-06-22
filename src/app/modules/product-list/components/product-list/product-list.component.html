@@ -1,16 +1,16 @@
-<ul>
-  <li *ngFor="let product of productList">
-    <a [routerLink]="product.id + ''">{{product.name}}</a>
-  </li>
-</ul>
+<!--<ul>-->
+<!--  <li *ngFor="let product of productList">-->
+<!--    <a [routerLink]="product.id + ''">{{product.name}}</a>-->
+<!--  </li>-->
+<!--</ul>-->
 
-<div>
-  <button (click)="changePage('first')" [disabled]="currentPage === 1">first</button>
-  <button (click)="changePage(page)" *ngFor="let page of pages" [class.active]="page === currentPage">
-    {{page}}
-  </button>
-  <button (click)="changePage('last')" [disabled]="currentPage === pagesCount">last</button>
-</div>
+<!--<div>-->
+<!--  <button (click)="changePage('first')" [disabled]="currentPage === 1">first</button>-->
+<!--  <button (click)="changePage(page)" *ngFor="let page of pages" [class.active]="page === currentPage">-->
+<!--    {{page}}-->
+<!--  </button>-->
+<!--  <button (click)="changePage('last')" [disabled]="currentPage === pagesCount">last</button>-->
+<!--</div>-->
 
 
 <app-breadcrumbs></app-breadcrumbs>
@@ -21,13 +21,9 @@
       <img class="product-list__info-img" src="assets/icons/product-list/cheese-icon.svg" alt="cheese-icon">
       <div class="product-list__info-name">Сири</div>
       <div class="product-list__info-count"> (20)</div>
-      <div class="filter-tag">
+      <div class="filter-tag" *ngIf="(filterTags$ | async)?.length">
         <button class="filter-tag__reset">Очистити фільтри</button>
-        <button class="filter-tag__close">М’який</button>
-        <button class="filter-tag__close">М’який</button>
-        <button class="filter-tag__close">М’який</button>
-        <button class="filter-tag__close">М’який</button>
-        <button class="filter-tag__close">М’який</button>
+        <button (click)="deleteFilterTag(tag)" *ngFor="let tag of filterTags$ | async" class="filter-tag__close">{{tag[1]}}</button>
       </div>
     </div>
 

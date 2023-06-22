@@ -8,7 +8,7 @@ export interface Category {
 	filters: Filters;
 }
 
-export type Filters = Record<FilterFields, string[]> & Record<'price', FilterPrice> & Record<'feature_types', FeatureTypes>
+export type Filters = Record<FilterFields, string[]> & Record<'price', FilterPrice>
 
 export interface FilterPrice {
 	min: number;
@@ -16,8 +16,6 @@ export interface FilterPrice {
 }
 
 export type FilterFields = 'brand' | 'country' | 'in_stock';
-
-export type FeatureTypes = Array<FeatureType>;
 
 export interface FeatureType {
 	id: number;
