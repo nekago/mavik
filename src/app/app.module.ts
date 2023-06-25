@@ -14,6 +14,7 @@ import {PageNotFoundModule} from "./global/modules/page-not-found/page-not-found
 import {FormsModule} from "@angular/forms";
 import {ProductModule} from "./modules/product/product.module";
 import {ProductCardModule} from "./modules/product-card/product-card.module";
+import {CartModule} from "./modules/cart/cart.module";
 
 @NgModule({
 	declarations: [AppComponent],
@@ -28,6 +29,7 @@ import {ProductCardModule} from "./modules/product-card/product-card.module";
     ProductCardModule,
 		HeaderModule,
     FooterModule,
+    CartModule,
     HttpClientModule,
     PageNotFoundModule,
     FormsModule
