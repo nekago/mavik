@@ -1,13 +1,6 @@
-import {CategoryNames} from './product.interface';
+import {Product} from './product.interface';
 
-export interface CartItem {
-  id: number;
-  category: CategoryNames;
-  name: string;
-  price: string;
-  sale_price: string,
-  image: string;
-  count: number
+export interface CartItem extends Product{
 }
 
 export type CartList = Array<CartItem>;

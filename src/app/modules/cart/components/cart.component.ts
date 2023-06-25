@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {CartService} from '../service/cart.service';
-import {Observable} from 'rxjs';
 import {CartList} from '../../../global/entities/cart.interface';
+import {Product} from '../../../global/entities/product.interface';
 
 @Component({
   selector: 'app-cart',
@@ -10,16 +10,24 @@ import {CartList} from '../../../global/entities/cart.interface';
 })
 export class CartComponent implements OnInit {
 
-  cartList$: Observable<CartList> = new Observable<CartList>();
+  cartList: CartList = [];
 
 
   constructor(
-    public cartService: CartService,
+    private cartService: CartService,
+    private cdr: ChangeDetectorRef,
   ) {
   }
 
   ngOnInit() {
-    this.cartList$ = this.cartService.cartList$;
+    this.cartService.cartList$.subscribe(list => {
+      this.cartList = list;
+      this.cdr.detectChanges();
+    })
+  }
+
+  public removeItemFormCart(product: Product) {
+    this.cartService.modifyCart(product, 'remove')
   }
 
 }
