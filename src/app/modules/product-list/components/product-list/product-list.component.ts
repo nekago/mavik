@@ -9,6 +9,7 @@ import {FilterFieldsGroupValue, FilterState, FilterTag} from '../../../../global
 import {Observable} from 'rxjs';
 import {FilterService} from '../../services/filter.service';
 import {Options} from '@angular-slider/ngx-slider';
+import {CartService} from '../../../cart/service/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -43,7 +44,8 @@ export class ProductListComponent implements OnInit {
     private productListService: ProductListService,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private filterService: FilterService
+    private filterService: FilterService,
+    private cartService: CartService,
   ) {
   }
 
@@ -90,6 +92,8 @@ export class ProductListComponent implements OnInit {
   }
 
 
+  // FILTER
+
   public changePage(action: 'first' | 'last' | number) {
     if (typeof action === 'number') {
       this.currentPage = action;
@@ -126,10 +130,12 @@ export class ProductListComponent implements OnInit {
     return !filterField.isChecked && !filterField.isActive;
   }
 
-
   public resetFilter() {
     this.filterService.resetFilter();
   }
+
+
+  // PAGINATION
 
   private generatePages(pagesNumber: number) {
     for (let i = 0; i < pagesNumber; i++) {

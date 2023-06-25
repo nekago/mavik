@@ -14,64 +14,63 @@ export class CartService {
   constructor() {
   }
 
-  modifyCart(product: Product, type: 'add' | 'remove' | 'edit', count: number | string = 1) {
+  public isProductInCart(cartList: CartList, id: number): number {
+    for (let i = 0; i < cartList.length; i++) {
+      const item = cartList[i];
+      if (item.id === id) {
+        return item.count;
+      }
+    }
+    return 0
+  }
+
+  public modifyCart(product: Product, type: 'add' | 'remove' | 'edit', count: number | string = 1) {
     const prevCartList = this.cartList.getValue();
 
     if (type === 'add') {
       this.cartList.next(
-        this.addProductToCart(prevCartList, product, Number(count))
+        CartService.addProductToCart(prevCartList, product, Number(count))
       );
     } else {
-      const id = prevCartList.findIndex(item => item.id === id);
+      const id = prevCartList.findIndex(item => item?.id === product.id);
 
       if (type === 'remove') {
         this.cartList.next(
-          this.removeProductFromCart(prevCartList, id)
+          CartService.removeProductFromCart(prevCartList, id)
         );
       } else {
         this.cartList.next(
-          this.editProductInCart(prevCartList, id, count)
+          CartService.editProductInCart(prevCartList, id, count)
         )
       }
     }
 
   }
 
-  public addProductToCart(
+  private static addProductToCart(
     prevCartList: CartList,
-    {
-      category,
-      id,
-      image,
-      name,
-      price,
-      sale_price,
-    }: Product, count: number): CartList {
+    product: Product,
+    count: number): CartList {
 
-    prevCartList.push({
-      category,
-      id,
-      image,
-      name,
-      price,
-      sale_price,
-      count
-    });
+    prevCartList.push({...product, count});
 
     return prevCartList;
   }
 
-  public removeProductFromCart(prevCartList: CartList, id: number): CartList {
+  private static removeProductFromCart(prevCartList: CartList, id: number): CartList {
     return prevCartList.splice(id, 1);
   }
 
-  public editProductInCart(prevCartList: CartList, id: number, count: number | string): CartList {
+  private static editProductInCart(prevCartList: CartList, id: number, count: number | string): CartList {
     const item = prevCartList[id];
     const modCount = Number(count);
 
     if (typeof count === 'string') {
       item.count += modCount;
     } else {
+      if (!item?.count) {
+        item.count = 0
+      }
       item.count = modCount;
     }
 

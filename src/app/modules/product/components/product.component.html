@@ -1,24 +1,24 @@
 <app-breadcrumbs></app-breadcrumbs>
 <div class="product">
   <div class="container">
-    <div class="product__inner">
+    <div class="product__inner" *ngIf="product">
 
 
       <div class="product__img"><img src="/assets/images/test.jpg" alt="test" class="product__img"></div>
       <div class="product__info">
-        <h1 class="product__title">Сыр Swiatowid Gouda, 400г</h1>
-        <div class="product__availability">в наявності</div>
+        <h1 class="product__title">{{product.name}}</h1>
+        <div class="product__availability">{{product.in_stock}}</div>
         <div class="product__price">
           <span class="product__price-text">Ціна:</span>
-          <div class="product__price-sale">₴500.00</div>
-          <div class="product__price-value">₴500.00</div>
+          <div class="product__price-sale">{{product.price}}</div>
+          <div class="product__price-value">{{product.sale_price}}</div>
         </div>
         <div class="product__count">
           <button class="product__count-minus" (click)="minus()">-</button>
           <input type="number" inputmode="numeric" [(ngModel)]="count" [min]="1" (change)="countValueValidator()">
           <button class="product__count-plus" (click)="plus()">+</button>
         </div>
-        <button class="product__btn">У кошик</button>
+        <app-product-in-cart-button [product]="product"></app-product-in-cart-button>
         <div class="details">
           <div class="detail__title">
             <div class="detail__title-desk"></div>

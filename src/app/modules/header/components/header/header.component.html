@@ -7,9 +7,9 @@
       </a>
       <app-menu *ngIf="!isHideAppMenu"></app-menu>
       <app-search [class.long]="isHideAppMenu"></app-search>
-      <button class="header__cart" type="submit">
+      <a routerLink="/cart" class="header__cart" type="submit">
         <img src="assets/icons/cart_icon.png" alt="cart-icon">
-      </button>
+      </a>
     </div>
   </div>
 </header>

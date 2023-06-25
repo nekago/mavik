@@ -35,7 +35,8 @@ export interface Product {
 	image: string;
 	description: string;
 	in_stock: 1 | 0;
-	in_card: 1 | 0;
+	in_cart: boolean;
+	count: number;
 }
 
 export type ProductFeatures = Array<ProductFeature>;
