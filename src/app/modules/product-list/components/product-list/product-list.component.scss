@@ -44,8 +44,13 @@
 }
 
 .filter-tag {
+  display: flex;
+
 
   &__reset {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 180px;
     height: 36px;
     padding: 8px 16px;
@@ -61,6 +66,9 @@
   }
 
   &__close {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 8px 16px;
     width: auto;
     height: 36px;
@@ -72,6 +80,11 @@
     font-weight: 400;
     font-size: 14px;
     margin-right: 5px;
+    cursor: pointer;
+
+    img {
+      margin-left: 10px;
+    }
   }
 }
 

@@ -22,8 +22,8 @@
       <div class="product-list__info-name">Сири</div>
       <div class="product-list__info-count"> (20)</div>
       <div class="filter-tag" *ngIf="(filterTags$ | async)?.length">
-        <button (click)="resetFilter()" class="filter-tag__reset">Очистити фільтри</button>
-        <button (click)="deleteFilterTag(tag)" *ngFor="let tag of filterTags$ | async" class="filter-tag__close">{{tag[1]}}</button>
+        <button (click)="resetFilter()" class="filter-tag__reset">Очистити фільтри <img src="assets/icons/btn-reset.svg" alt="btn-reset"></button>
+        <button (click)="deleteFilterTag(tag)" *ngFor="let tag of filterTags$ | async" class="filter-tag__close">{{tag[1]}} <img src="assets/icons/btn-close.svg" alt="btn-close"></button>
       </div>
     </div>
 

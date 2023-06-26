@@ -1,8 +1,12 @@
 <button
-  *ngIf="!product?.in_cart; else inCart"
+  *ngIf="!product?.in_cart; else inCart;"
+  [ngClass]=""
   class="product-card__btn"
   (click)="addProductToCart()"
->У кошик</button>
+  [disabled]="!product?.in_stock"
+>У кошик <img src="/assets/icons/cart-btn-icon.svg" alt="btn-icon"></button>
 <ng-template #inCart>
-  <button class="product-card__btn in-cart">У кошику</button>
+  <button class="product-card__btn in-cart">У кошику <img src="/assets/icons/cart-btn-in-icon.svg" alt="btn-icon"></button>
 </ng-template>
+
+

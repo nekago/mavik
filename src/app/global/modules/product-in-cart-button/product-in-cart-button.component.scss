@@ -1,7 +1,38 @@
+@import "../../../../assets/scss/setting";
+
 button {
-  background: tomato;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 36px;
+  padding: 10px;
+  background: $dark_blue;
+  border-radius: 7px;
+  font-family: $nunito_bold;
+  font-weight: 700;
+  font-size: 12px;
+  color: $white;
+  cursor: pointer;
+  border: none;
+
+  img {
+    width: 14px;
+    height: 14px;
+    margin-left: 5px;
+  }
+}
+
+button:disabled {
+  background: $textAdditional;
+
 }
 
 .in-cart {
-  background: lightgreen;
+  background: $white;
+  border: 1px solid #5EB935;
+  color: $textColor;
 }
+
+
+
