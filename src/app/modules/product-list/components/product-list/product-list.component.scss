@@ -28,20 +28,44 @@
   }
   &__inner {
     display: flex;
-    justify-content: flex-start;
     margin-top: 40px;
   }
 
 
 
-  &__filters{
+  &__filters {
     background: #F5F7FF;
-    width: 208px;
-    height: 800px;
+    max-width: 208px;
+    height: auto;
     padding: 24px 12px;
     margin-right: 30px;
+
+    &-title {
+      font-family: $nunito_bold;
+      font-weight: 700;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    &-head {
+      font-family: $nunito_bold;
+      font-weight: 700;
+      font-size: 14px;
+      margin: 15px 0 10px 0;
+    }
+
+    &-value {
+      font-family: $nunito_regular;
+      font-weight: 400;
+      font-size: 14px;
+      color: $textColor;
+    }
   }
+
 }
+
+
+
 
 .filter-tag {
   display: flex;
