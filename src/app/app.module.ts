@@ -15,6 +15,7 @@ import {FormsModule} from "@angular/forms";
 import {ProductModule} from "./modules/product/product.module";
 import {ProductCardModule} from "./modules/product-card/product-card.module";
 import {CartModule} from "./modules/cart/cart.module";
+import {CheckoutModule} from "./modules/checkout/checkout.module";
 
 @NgModule({
 	declarations: [AppComponent],
@@ -30,6 +31,7 @@ import {CartModule} from "./modules/cart/cart.module";
 		HeaderModule,
     FooterModule,
     CartModule,
+    CheckoutModule,
     HttpClientModule,
     PageNotFoundModule,
     FormsModule

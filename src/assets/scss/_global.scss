@@ -12,3 +12,25 @@ body {
   margin: auto;
   padding: 0 15px;
 }
+
+.btn {
+  width: 400px;
+  height: 64px;
+  padding: 10px 24px;
+  margin: 60px auto;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  background: $dark_blue;
+  border: none;
+  cursor: pointer;
+  font-family: $nunito_bold;
+  font-weight: 400;
+  font-size: 24px;
+  color: $white;
+}
+
+.btn:hover {
+  background: #161FD8;
+  transition: 0.3s;
+}
