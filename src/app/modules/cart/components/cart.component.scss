@@ -7,5 +7,109 @@
     margin-bottom: 28px;
   }
 
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    margin-top: 24px;
+    border: 1px solid #DDDCDF;
+    border-radius: 8px;
+
+    &-img {
+      width: 150px;
+      height: 150px;
+    }
+
+    &-name {
+      font-family: $nunito_regular;
+      font-weight: 400;
+      font-size: 32px;
+      margin-left: 20px;
+      color: $textColor;
+    }
+
+    &-btn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background-image: url("../../../../assets/icons/close-cart.svg");
+      background-color: inherit;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border: none;
+      cursor: pointer;
+      transition: background-image 0.3s ease;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: -25px;
+        right: 0;
+        top: -50px;
+        bottom: 0;
+        height: 140px;
+        width: 1px;
+        background-color: #B1B5BD;
+        border-radius: 4px;
+      }
+
+      &:hover {
+        background-image: url("../../../../assets/icons/close-cart-hover.svg");
+      }
+    }
+
+
+  }
+
+  &__controller {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+
+    &-back {
+      padding: 10px 24px;
+      border: 1px solid $dark_blue;
+      border-radius: 7px;
+      background-color: transparent;
+      color: $textColor;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $dark_blue;
+      }
+    }
+    &-sum {
+      font-family: $nunito_semibold;
+      font-weight: 400;
+      font-size: 36px;
+
+      span {
+        font-weight: bold;
+      }
+    }
+    &-issue {
+    }
+  }
+
+}
+
+.price-block {
+  &__sale {
+    font-family: $nunito_regular;
+    font-weight: 400;
+    font-size: 24px;
+    color: $textAdditional;
+    text-decoration: line-through;
+  }
+
+  &__price {
+    font-family: $nunito_semibold;
+    font-weight: 600;
+    font-size: 36px;
+    color: $textColor;
+  }
+
 
 }

@@ -21,16 +21,16 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 7px;
-  background: $dark_blue;
+  background-color: $dark_blue;
   border: none;
   cursor: pointer;
   font-family: $nunito_bold;
   font-weight: 400;
   font-size: 24px;
   color: $white;
+  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-  background: #161FD8;
-  transition: 0.3s;
+  background-color: #161FD8;
 }
