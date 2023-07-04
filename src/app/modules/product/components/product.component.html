@@ -4,10 +4,11 @@
     <div class="product__inner" *ngIf="product">
 
 
-      <div class="product__img"><img src="/assets/images/test.jpg" alt="test" class="product__img"></div>
+      <div class="product__img"><img [src]="product?.image" [alt]="product?.name" class="product__img"></div>
       <div class="product__info">
         <h1 class="product__title">{{product.name}}</h1>
-        <div class="product__availability">{{product.in_stock}}</div>
+        <div class="product__availability"><img src="assets/icons/availability.svg"
+                                                alt="availability">{{product.in_stock}}</div>
         <div class="product__price">
           <span class="product__price-text">Ціна:</span>
           <div class="product__price-sale">{{product.price}}</div>
@@ -18,12 +19,29 @@
           <input type="number" inputmode="numeric" [(ngModel)]="count" [min]="1" (change)="countValueValidator()">
           <button class="product__count-plus" (click)="plus()">+</button>
         </div>
-        <app-product-in-cart-button [product]="product"></app-product-in-cart-button>
+        <app-product-in-cart-button [product]="product" [isLargeButton]="true"></app-product-in-cart-button>
         <div class="details">
-          <div class="detail__title">
-            <div class="detail__title-desk"></div>
-            <div class="detail__title-characteristic"></div>
+          <div class="details__title">
+            <button class="details__title-desk" (click)="toggleTab('Опис')"
+                    [ngClass]="{'selected': selectedTab === 'Опис', 'not-selected': selectedTab !== 'Опис'}">Опис
+            </button>
+            <button class="details__title-characteristic" (click)="toggleTab('Характеристика')"
+                    [ngClass]="{'selected': selectedTab === 'Характеристика', 'not-selected': selectedTab !== 'Характеристика'}">
+              Характеристика
+            </button>
           </div>
+
+          <div *ngIf="selectedTab === 'Опис'" class="details__desk"
+          >
+            <div class="details__desk--text" [innerHTML]="product.description"></div>
+          </div>
+
+
+          <div *ngIf="selectedTab === 'Характеристика'" class="details__desk"
+          >
+            11111111
+          </div>
+
         </div>
       </div>
     </div>

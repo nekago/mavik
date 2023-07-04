@@ -1,13 +1,13 @@
 @import "../../../../assets/scss/setting";
 
-button {
+button.product-card__btn {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100px;
   height: 36px;
   padding: 10px;
-  background: $dark_blue;
+  background-color: $dark_blue;
   border-radius: 7px;
   font-family: $nunito_bold;
   font-weight: 700;
@@ -15,6 +15,7 @@ button {
   color: $white;
   cursor: pointer;
   border: none;
+  transition: background-color 0.3s ease;
 
   img {
     width: 14px;
@@ -23,16 +24,39 @@ button {
   }
 }
 
+button.product-card__btn:hover {
+  background-color: #161FD8;
+}
+
 button:disabled {
   background: $textAdditional;
 
 }
 
-.in-cart {
+button.in-cart {
   background: $white;
   border: 1px solid #5EB935;
   color: $textColor;
 }
+button.in-cart img{
+  margin-bottom: 3px;
+}
+
+button.product-card__btn--large {
+  width: 327px;
+  height: 64px;
+  margin-top: 32px;
+  padding: 10px 24px;
+  font-family: $nunito_bold;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+button.product-card__btn--large img{
+  width: 33px;
+  height: 33px;
+}
+
 
 
 

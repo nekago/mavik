@@ -4,12 +4,23 @@
 
   &__inner {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-top: 60px;
   }
 
   &__img {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    max-width: 700px;
+    height: auto;
+    overflow: hidden;
+  }
+
+  &__img img {
+    width: 100%;
+    height: auto;
     object-fit: cover;
   }
 
@@ -20,16 +31,25 @@
 
   &__title {
     font-family: $nunito_semibold;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 48px;
+    max-width: 563px;
   }
 
   &__availability {
+    display: flex;
+    align-items: center;
     font-family: $nunito_regular;
     font-weight: 400;
     font-size: 16px;
     color: #5EB935;
     margin-top: 8px;
+  }
+
+  &__availability img{
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
   }
 
   &__price {
@@ -75,6 +95,7 @@
 
       &[type="number"] {
         -moz-appearance: textfield;
+
         &::-webkit-inner-spin-button,
         &::-webkit-outer-spin-button {
           -webkit-appearance: none;
@@ -95,24 +116,77 @@
         color: $dark_blue;
       }
     }
+  }
+}
+
+.details {
+  max-width: 550px;
+  width: auto;
+  height: auto;
+  margin-top: 40px;
+  border: 1px solid $dark_white;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &__title {
+    max-height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: #F5F7FF;
+    padding: 10px 24px;
+    font-family: $nunito_semibold;
+    font-weight: 400;
+    font-size: 24px;
 
 
+    &-desk {
+      position: relative;
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-right: 48px;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: 90px;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 2px;
+        background-color: $textColor;
+        border-radius: 4px;
+      }
+
+    }
+    &-characteristic {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
   }
 
+  &__desk {
+    width: auto;
+    margin-top: 24px;
+    padding: 0 16px 16px 16px;
 
-&__btn {
-  width: 327px;
-  height: 64px;
-  margin-top: 32px;
-  padding: 10px 24px;
-  font-family: $nunito_bold;
-  font-size: 24px;
-  font-weight: 700;
-  color: $white;
-  background: $dark_blue;
-  border: none;
-  border-radius: 7px;
-  cursor: pointer;
+    &--text {
+      font-family: $nunito_regular;
+      font-weight: 400;
+      font-size: 16px;
+      color: $textColor;
+    }
+  }
 }
 
+.selected {
+  color: $textColor;
 }
+
+.not-selected {
+  color: #9BA6B8;
+}
+
+

@@ -10,6 +10,7 @@ import {CartService} from '../../../modules/cart/service/cart.service';
 export class ProductInCartButtonComponent implements OnInit {
 
   @Input() product!: Product;
+  @Input() isLargeButton: boolean = false;
 
   constructor(
     private cartService: CartService,

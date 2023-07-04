@@ -4,15 +4,19 @@ import {ProductService} from '../services/product.service';
 import {Product} from '../../../global/entities/product.interface';
 import {CartService} from '../../cart/service/cart.service';
 
+
 @Component({
   selector: 'app-product',
   templateUrl: 'product.component.html',
   styleUrls: ['product.component.scss'],
 })
 export class ProductComponent implements OnInit, OnDestroy {
-  public product!: Product;
 
-  count: number = 1;
+
+
+  public product!: Product;
+  public count: number = 1;
+  public selectedTab: string = 'Опис'
 
   constructor(
     private route: ActivatedRoute,
@@ -69,5 +73,9 @@ export class ProductComponent implements OnInit, OnDestroy {
     if (this.product.in_cart) {
       this.cartService.modifyCart(this.product, 'edit', this.count);
     }
+  }
+
+  public toggleTab(tab: string) {
+    this.selectedTab = tab
   }
 }
