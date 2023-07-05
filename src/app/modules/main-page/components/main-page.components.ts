@@ -1,10 +1,11 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {OwlOptions} from "ngx-owl-carousel-o";
-import {Subject} from "rxjs";
-import {Categories} from "../../../global/entities/product.interface";
-import {ActivatedRoute} from "@angular/router";
-import {MainPageService} from "../services/main-page.service";
-import {FilterService} from "../../product-list/services/filter.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {OwlOptions} from 'ngx-owl-carousel-o';
+import {map, Subject} from 'rxjs';
+import {Categories, Product} from '../../../global/entities/product.interface';
+import {ActivatedRoute} from '@angular/router';
+import {MainPageService} from '../services/main-page.service';
+import {FilterService} from '../../product-list/services/filter.service';
+import {BestSellerService} from '../services/best-seller.service';
 
 @Component({
   selector: 'app-main-page',
@@ -12,30 +13,40 @@ import {FilterService} from "../../product-list/services/filter.service";
   styleUrls: ['main-page.component.scss']
 })
 
-export class MainPageComponent  implements OnInit, OnDestroy{
+export class MainPageComponent implements OnInit, OnDestroy {
+  public categories!: Categories;
+  public bestSellers: Product[] = [];
 
   private ngDestroy$ = new Subject<void>();
-  public categories!: Categories;
+
 
   constructor(
     private mainPageService: MainPageService,
+    private bestSellerService: BestSellerService,
     private route: ActivatedRoute,
-    private filterService: FilterService
-  ) {}
+    private filterService: FilterService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.mainPageService.getCategories().subscribe(data => {
       this.categories = data;
-    })
-  this.filterService.reset()
+    });
+    this.bestSellerService.bestSellers$().pipe(
+      map(data => {
+        return data.results;
+      }),
+    )
+      .subscribe(data => {
+        this.bestSellers = data;
+      });
+    this.filterService.reset();
   }
 
   ngOnDestroy(): void {
     this.ngDestroy$.next();
     this.ngDestroy$.complete();
   }
-
-
 
 
   slides: Array<{
@@ -45,21 +56,21 @@ export class MainPageComponent  implements OnInit, OnDestroy{
     isSelect: boolean
   }> = [
     {
-      src: "assets/icons/review_icon.png",
-      text: "Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu. Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu.",
-      name: "Dmitriy Ivanov",
+      src: 'assets/icons/review_icon.png',
+      text: 'Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu. Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu.',
+      name: 'Dmitriy Ivanov',
       isSelect: true
     },
     {
-      src: "assets/icons/review_icon.png",
-      text: "Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu. Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu.",
-      name: "Dmitriy Ivanov",
+      src: 'assets/icons/review_icon.png',
+      text: 'Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu. Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu.',
+      name: 'Dmitriy Ivanov',
       isSelect: false
     },
     {
-      src: "assets/icons/review_icon.png",
-      text: "Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu. Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu.",
-      name: "Dmitriy Ivanov",
+      src: 'assets/icons/review_icon.png',
+      text: 'Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu. Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu.',
+      name: 'Dmitriy Ivanov',
       isSelect: false
     },
   ]

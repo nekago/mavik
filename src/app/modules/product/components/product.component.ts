@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ProductService} from '../services/product.service';
 import {Product} from '../../../global/entities/product.interface';
 import {CartService} from '../../cart/service/cart.service';
+import {LocalizerService} from '../../../global/services/localizer.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import {CartService} from '../../cart/service/cart.service';
   styleUrls: ['product.component.scss'],
 })
 export class ProductComponent implements OnInit, OnDestroy {
-
+  private readonly productCharacteristicsField: Array<string> = ['brand', 'country']
 
 
   public product!: Product;
@@ -22,6 +23,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
+    private localizerService: LocalizerService
   ) {
   }
 
@@ -77,5 +79,23 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   public toggleTab(tab: string) {
     this.selectedTab = tab
+  }
+
+  public productCharacteristics(): Array<[any, any]> {
+    const productCharacteristics: Array<[any, any]> = []
+
+    for (const key in this.product) {
+
+      if (this.productCharacteristicsField.includes(key)) {
+        productCharacteristics.push([this.localizerService.productCharacteristicsFieldToUkr(key), this.product[key as keyof Product]])
+      }
+
+    }
+
+    for (const feature of this.product.features) {
+      productCharacteristics.push([feature.type, feature.value]);
+    }
+
+    return productCharacteristics
   }
 }

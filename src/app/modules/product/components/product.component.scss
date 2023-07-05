@@ -44,7 +44,31 @@
     font-size: 16px;
     color: #5EB935;
     margin-top: 8px;
+
+    img {
+      width: 10px;
+      height: 10px;
+      margin-right: 3px;
+    }
+
+    &-not {
+      color: #F44336;
+      display: flex;
+      align-items: center;
+      font-family: $nunito_regular;
+      font-weight: 400;
+      font-size: 16px;
+      width: auto;
+      margin-top: 8px;
+
+      img {
+        max-width: 10px;
+        max-height: 10px;
+        margin-right: 3px;
+      }
+    }
   }
+
 
   &__availability img{
     width: 16px;
@@ -177,6 +201,28 @@
       font-weight: 400;
       font-size: 16px;
       color: $textColor;
+    }
+  }
+}
+
+.characteristic {
+
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      width: 50%;
+      text-align: left;
+    }
+
+    &:nth-child(odd) {
+      background: tomato;
+    }
+
+    &:nth-child(even) {
+      background: lightgreen;
     }
   }
 }

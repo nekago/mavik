@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Breadcrumb } from '../../../global/entities/breadcrumbs.intarface';
-import { ProductService } from '../../product/services/product.service';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Breadcrumb} from '../../../global/entities/breadcrumbs.intarface';
+import {ProductService} from '../../product/services/product.service';
+import {LocalizerService} from '../../../global/services/localizer.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,13 @@ export class BreadcrumbsService {
   private breadcrumbs: BehaviorSubject<Breadcrumb[]> = new BehaviorSubject<Breadcrumb[]>([]);
   public breadcrumbs$: Observable<Breadcrumb[]> = this.breadcrumbs.asObservable();
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private productService: ProductService) { }
-
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService,
+    private localizerService: LocalizerService,
+  ) {
+  }
 
 
   generateBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: Breadcrumb[] = []): any {
@@ -42,11 +48,13 @@ export class BreadcrumbsService {
           })
           breadcrumbs.push(breadcrumb)
         } else {
+          breadcrumb.label = this.localizerService.breadcrumbsToUkr(breadcrumb.label)
           breadcrumbs.push(breadcrumb);
           this.generateBreadcrumbs(child, url, breadcrumbs);
-          }
-        this.breadcrumbs.next(breadcrumbs);
+        }
       }
+
+      this.breadcrumbs.next(breadcrumbs);
     }
   }
 }

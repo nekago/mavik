@@ -25,7 +25,12 @@
       <h1 class="title title-one">Хіт продажів</h1>
     </div>
     <div class="bestseller__inner">
-        <app-product-card></app-product-card>
+      <div class="bestseller__list" *ngIf="bestSellers.length; else loader">
+        <app-product-card *ngFor="let bestSeller of bestSellers" [product]="bestSeller"></app-product-card>
+      </div>
+      <ng-template #loader>
+        <app-loader></app-loader>
+      </ng-template>
     </div>
   </div>
 </section>
@@ -148,5 +153,3 @@
     </div>
   </div>
 </section>
-
-

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component} from "@angular/core";
 import {NavigationEnd, Router} from "@angular/router";
 import {filter, map} from "rxjs";
+import {CartService} from '../../../cart/service/cart.service';
 
 @Component({
 	selector: 'app-header',
@@ -14,9 +15,14 @@ export class HeaderComponent implements AfterViewInit {
     }
   }
 
+  cartCounter = 0
+
   public isHideAppMenu = true
 
-	constructor(private router: Router) {}
+	constructor(
+    private router: Router,
+    private cartService: CartService,
+  ) {}
 
 	ngAfterViewInit() {
     this.router.events.pipe(
@@ -27,6 +33,10 @@ export class HeaderComponent implements AfterViewInit {
       const pages = url.split('/')
       const page = pages[pages.length - 1]
       this.isHideAppMenu = !this.headerConfig.pagesToHideBlocks.appMenu.includes(page)
+    })
+
+    this.cartService.cartList$.subscribe(data => {
+      this.cartCounter = data.length;
     })
   }
 

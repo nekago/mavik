@@ -4,9 +4,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {ProductCardModule} from "../product-card/product-card.module";
+import {LoaderModule} from '../../global/modules/loader/loader.module';
 
 @NgModule({
 	declarations: [MainPageComponent],
-	imports: [CarouselModule, CommonModule, RouterModule, ProductCardModule],
+    imports: [CarouselModule, CommonModule, RouterModule, ProductCardModule, LoaderModule],
 })
 export class MainPageModule {}

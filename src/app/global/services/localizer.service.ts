@@ -28,20 +28,20 @@ export class LocalizerService {
 	}
 
 
-	public engCategoryToUkr(category: CategoryNames): CategorySlugNames {
+	public engCategoryToUkr(category: CategorySlugNames): CategoryNames {
 		switch (category) {
-			case 'Сир':
-				return 'cheese';
-			case 'Молочні вироби':
-				return 'milk';
-			case 'М`ясні вироби':
-				return 'meat';
-			case 'Масло':
-				return 'butter';
-			case 'Бакалія':
-				return 'grocery';
-			case 'Снеки':
-				return 'snacks';
+			case 'cheese':
+				return 'Сир';
+			case 'milk':
+				return 'Молочні вироби';
+			case 'meat':
+				return 'М`ясні вироби';
+			case 'butter':
+				return 'Масло';
+			case 'grocery':
+				return 'Бакалія';
+			case 'snacks':
+				return 'Снеки';
 			default:
 				return category;
 		}
@@ -59,6 +59,7 @@ export class LocalizerService {
         return filterGroupName;
     }
   }
+
   public getEngFieldGroupName(filterGroupName: string) {
     switch (filterGroupName) {
       case 'Країна':
@@ -69,6 +70,30 @@ export class LocalizerService {
         return 'in_stock';
       default:
         return filterGroupName;
+    }
+  }
+
+  public productCharacteristicsFieldToUkr(field: string): string {
+    switch (field) {
+      case 'brand':
+        return 'Виробник';
+
+      case 'country':
+        return 'Країна';
+
+      default:
+        return field;
+    }
+  }
+
+  public breadcrumbsToUkr(str: string) {
+    switch (str) {
+      case 'cart':
+        return 'Кошик';
+      case 'checkout':
+        return 'Оформлення замовлення';
+      default:
+        return this.engCategoryToUkr(str as CategorySlugNames)
     }
   }
 

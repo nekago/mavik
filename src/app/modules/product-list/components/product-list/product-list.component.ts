@@ -9,7 +9,6 @@ import {FilterFieldsGroupValue, FilterState, FilterTag} from '../../../../global
 import {Observable} from 'rxjs';
 import {FilterService} from '../../services/filter.service';
 import {Options} from '@angular-slider/ngx-slider';
-import {CartService} from '../../../cart/service/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -45,15 +44,13 @@ export class ProductListComponent implements OnInit {
     private router: Router,
     private cdr: ChangeDetectorRef,
     private filterService: FilterService,
-    private cartService: CartService,
   ) {
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       const slug = params['categorySlug'];
-
-      this.productListService.getProductListBySlug(slug)
+      this.slugName = slug;
 
       this.productListService.productList$.subscribe(res => {
         this.productList = res.results;
