@@ -1,0 +1,51 @@
+@import "src/assets/scss/setting";
+
+.footer {
+  background-color: #F5F7FF;
+  padding: 20px 0;
+  margin-top: 70px;
+
+}
+
+.footer__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__logo {
+  width: 92px;
+  height: 92px;
+  object-fit: cover;
+  justify-content: flex-start;
+}
+
+
+
+
+.footer__social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__social a {
+  color: $dark_blue;
+  margin-left: 10px;
+  font-family: $nunito_regular;
+  font-size: 26px;
+}
+
+.footer__social i {
+  font-size: 30px;
+  transition: transform 0.3s ease;
+}
+.footer__social i:hover {
+  transform: scale(1.4);
+}
+
+.footer__bottom {
+  text-align: center;
+  margin-top: 20px;
+  color: $dark_white;
+}
