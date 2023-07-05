@@ -5,12 +5,14 @@
     display: flex;
     margin-top: 25px;
     align-items: center;
-    &-img{
+
+    &-img {
       max-width: 45px;
       max-height: 55px;
       object-fit: cover;
       margin-right: 16px;
     }
+
     &-name {
       font-family: $nunito_regular, sans-serif;
       font-weight: 400;
@@ -18,6 +20,7 @@
       color: $textColor;
       margin-right: 5px;
     }
+
     &-count {
       font-family: $nunito_regular, sans-serif;
       font-weight: 400;
@@ -26,11 +29,11 @@
       margin-right: 44px;
     }
   }
+
   &__inner {
     display: flex;
     margin-top: 40px;
   }
-
 
 
   &__filters {
@@ -65,8 +68,6 @@
 }
 
 
-
-
 .filter-tag {
   display: flex;
 
@@ -87,6 +88,10 @@
     font-size: 14px;
     color: $dark_blue;
     margin-right: 10px;
+
+    &:hover {
+      background-color: #DEE5FF;
+    }
   }
 
   &__close {
@@ -108,6 +113,10 @@
 
     img {
       margin-left: 10px;
+    }
+
+    &:hover {
+      background-color: #DEE5FF;
     }
   }
 }
@@ -145,6 +154,7 @@ span.disabled {
     background: none;
 
     cursor: pointer;
+
     span {
       font-family: $nunito_light, sans-serif;
       font-weight: 300;
