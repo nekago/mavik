@@ -1,0 +1,5 @@
+<div class="product__count">
+  <button class="product__count-minus" (click)="minus()">-</button>
+  <input type="number" inputmode="numeric" [(ngModel)]="count" [min]="1" (change)="countValueValidator()">
+  <button class="product__count-plus" (click)="plus()">+</button>
+</div>

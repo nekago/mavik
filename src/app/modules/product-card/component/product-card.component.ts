@@ -1,17 +1,19 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Product} from '../../../global/entities/product.interface';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LocalizerService} from '../../../global/services/localizer.service';
 import {CartService} from '../../cart/service/cart.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-product-card',
   templateUrl: 'product-card.component.html',
   styleUrls: ['product-card.component.scss'],
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent implements OnInit, OnDestroy {
   @Input() product!: Product;
 
+  private subscription: Subscription = new Subscription();
 
   constructor(
     private router: Router,
@@ -22,12 +24,14 @@ export class ProductCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cartService.cartList$.subscribe((cartList) => {
-      if (this.product?.count) {
-        this.product.count = this.cartService.isProductInCart(cartList, this.product?.id)
-        this.product.in_cart = !!this.cartService.isProductInCart(cartList, this.product?.id)
-      }
-    });
+    this.subscription.add(this.cartService.cartList$.subscribe((cartList) => {
+      this.product.count = this.cartService.isProductInCart(cartList, this.product?.id)
+      this.product.in_cart = !!this.cartService.isProductInCart(cartList, this.product?.id)
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
   }
 
   public redirectToProductPage() {

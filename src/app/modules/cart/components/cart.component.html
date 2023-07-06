@@ -12,9 +12,12 @@
         <div class="cart__item-name">{{item.name}}</div>
         <div class="cart__item-count">{{item.count}}</div>
         <div class="price-block">
-          <div class="price-block__sale"><i class="fas fa-hryvnia"></i>{{item.sale_price}}</div>
-          <div class="price-block__price"><i class="fas fa-hryvnia"></i>{{item.price}}</div>
+          <div class="price-block__sale" *ngIf="item?.sale_price"><i class="fas fa-hryvnia"></i>{{item?.price}}
+          </div>
+          <div class="price-block__price"><i class="fas fa-hryvnia"></i>{{item?.sale_price || item?.price}}
+          </div>
         </div>
+        <app-product-counter [isDelete]="true" [product]="item" [count]="item.count"></app-product-counter>
         <button class="cart__item-btn" (click)="removeItemFormCart(item)">
         </button>
       </div>
@@ -22,8 +25,8 @@
 
     <div class="cart__controller">
       <button class="cart__controller-back btn">Повернутися до покупок</button>
-      <div class="cart__controller-sum">Разом: <span><i class="fas fa-hryvnia"></i>1 798.00</span></div>
-      <button class="cart__controller-issue btn">Оформити замовлення</button>
+      <div class="cart__controller-sum">Разом: <span><i class="fas fa-hryvnia"></i>{{totalPrice}}</span></div>
+      <button class="cart__controller-issue btn"><a routerLink="/checkout">Оформити замовлення</a></button>
     </div>
   </div>
 

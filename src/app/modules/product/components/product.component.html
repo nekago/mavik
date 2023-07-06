@@ -22,11 +22,7 @@
           <div class="product__price-value"><i class="fas fa-hryvnia"></i>{{product?.sale_price || product?.price}}
           </div>
         </div>
-        <div class="product__count">
-          <button class="product__count-minus" (click)="minus()">-</button>
-          <input type="number" inputmode="numeric" [(ngModel)]="count" [min]="1" (change)="countValueValidator()">
-          <button class="product__count-plus" (click)="plus()">+</button>
-        </div>
+        <app-product-counter [isDelete]="true" [product]="product" [count]="count"></app-product-counter>
         <app-product-in-cart-button [product]="product" [isLargeButton]="true"></app-product-in-cart-button>
         <div class="details">
           <div class="details__title">

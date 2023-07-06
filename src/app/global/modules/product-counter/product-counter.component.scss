@@ -1,0 +1,41 @@
+@import "src/assets/scss/setting";
+
+.product__count {
+  display: flex;
+  max-width: 210px;
+  height: 60px;
+  margin-top: 34px;
+
+  > input {
+    width: 80px;
+    background: #F5F7FF;
+    font-family: $nunito_semibold;
+    font-weight: 600;
+    font-size: 42px;
+    text-align: center;
+    border: 1px solid #DDDCDF;
+
+    &[type="number"] {
+      -moz-appearance: textfield;
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+  }
+
+  &-plus, &-minus {
+    width: 65px;
+    border: 1px solid #DDDCDF;
+    background: $white;
+    cursor: pointer;
+    color: #DDDCDF;
+
+    &:hover {
+      transition: 0.2s;
+      color: $dark_blue;
+    }
+  }
+}

@@ -14,6 +14,28 @@ export class CartService {
   constructor() {
   }
 
+  public getCartList(): CartList {
+    return this.cartList.getValue();
+  }
+
+  public getTotalPrice(cartList?: CartList): number {
+    cartList = cartList || this.getCartList();
+    let totalPrice = 0;
+
+    for (let i = 0; i < cartList.length; i++) {
+      const item = cartList[i];
+      const sum = item.count * (+item.sale_price || +item.price)
+      totalPrice += sum
+    }
+
+    return totalPrice;
+  }
+
+  public setCartListFromLocalStorage() {
+    const cartList = JSON.parse(window.localStorage.getItem('cartList') || '');
+    this.cartList.next(cartList)
+  }
+
   public isProductInCart(cartList: CartList, id: number): number {
     for (let i = 0; i < cartList.length; i++) {
       const item = cartList[i];
@@ -35,6 +57,7 @@ export class CartService {
       const id = prevCartList.findIndex(item => item?.id === product.id);
 
       if (type === 'remove') {
+
         this.cartList.next(
           CartService.removeProductFromCart(prevCartList, id)
         );
@@ -45,6 +68,7 @@ export class CartService {
       }
     }
 
+    window.localStorage.setItem('cartList', JSON.stringify(this.cartList.value))
   }
 
   private static addProductToCart(
@@ -52,13 +76,14 @@ export class CartService {
     product: Product,
     count: number): CartList {
 
-    prevCartList.push({...product, count});
+    prevCartList.push({...product, in_cart: true, count: count || 1});
 
     return prevCartList;
   }
 
   private static removeProductFromCart(prevCartList: CartList, id: number): CartList {
-    return prevCartList.splice(id, 1);
+    prevCartList.splice(id, 1);
+    return prevCartList;
   }
 
   private static editProductInCart(prevCartList: CartList, id: number, count: number | string): CartList {
@@ -69,7 +94,7 @@ export class CartService {
       item.count += modCount;
     } else {
       if (!item?.count) {
-        item.count = 0
+        item.count = 0;
       }
       item.count = modCount;
     }

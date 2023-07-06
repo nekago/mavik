@@ -44,39 +44,6 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.productService.reset()
   }
 
-  plus() {
-    this.count = this.count < 1000 ? this.count + 1 : this.count;
-    this.product.count = this.count
-    this.toggleProductInCart();
-  }
-
-  minus() {
-    this.count = this.count > 1 ? this.count - 1 : this.count;
-    this.product.count = this.count
-    this.toggleProductInCart();
-  }
-
-  countValueValidator() {
-    if (this.count < 1) {
-      this.count = 1;
-      return;
-    }
-
-    if (this.count > 999) {
-      this.count = 999;
-    }
-
-    this.product.count = this.count
-
-    this.toggleProductInCart();
-  }
-
-  private toggleProductInCart() {
-    if (this.product.in_cart) {
-      this.cartService.modifyCart(this.product, 'edit', this.count);
-    }
-  }
-
   public toggleTab(tab: string) {
     this.selectedTab = tab
   }

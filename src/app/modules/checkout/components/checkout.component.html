@@ -9,48 +9,51 @@
 
     <div class="checkout__wrapper">
       <div class="form">
-        <form action="#" id="form" class="form__body">
+        <form action="#" id="form" class="form__body" [formGroup]="form">
           <div class="form__row">
             <div class="form__item">
               <label for="formName" class="form__label">Ім’я*</label>
-              <input id="formName" type="text" class="form__input">
+              <input id="formName" formControlName="name" type="text" class="form__input">
+              <span *ngIf="showErrorForFormControl('name') && minLengthError('name')">length</span>
+              <span *ngIf="showErrorForFormControl('name') && !minLengthError('name')">required</span>
             </div>
             <div class="form__item">
               <label for="formSerName" class="form__label">Прізвище*</label>
-              <input id="formSerName" type="text" class="form__input">
+              <input id="formSerName" formControlName="surname" type="text" class="form__input">
+              <span *ngIf="showErrorForFormControl('surname')">required</span>
             </div>
           </div>
           <div class="form__row">
             <div class="form__item">
               <label for="formCity" class="form__label">Місто*</label>
-              <input id="formCity" type="text" class="form__input">
+              <input id="formCity" formControlName="city" type="text" class="form__input">
             </div>
           </div>
           <div class="form__row">
             <div class="form__item">
               <label for="formEmail" class="form__label">Пошта*</label>
-              <input id="formEmail" type="text" class="form__input">
+              <input id="formEmail" formControlName="email" type="text" class="form__input">
             </div>
           </div>
           <div class="form__row">
             <div class="form__item">
               <label for="formPhone" class="form__label">Телефон</label>
-              <input id="formPhone" type="text" class="form__input">
+              <input id="formPhone" formControlName="phoneNumber" type="text" class="form__input">
             </div>
             <div class="form__item">
               <label for="formTelegram" class="form__label">Телеграм</label>
-              <input id="formTelegram" type="text" class="form__input">
+              <input id="formTelegram" formControlName="telegram" type="text" class="form__input">
             </div>
           </div>
 
           <div class="form__row">
             <div class="form__item">
               <label for="formMessage" class="form__label">Коментар</label>
-              <textarea name="message" id="formMessage" class="form__input"></textarea>
+              <textarea name="message" formControlName="comment" id="formMessage" class="form__input"></textarea>
             </div>
           </div>
           <div class="form__row">
-            <button class="form__button btn" type="submit">Оформити замовлення</button>
+            <button class="form__button btn" type="submit" [disabled]="!form.valid">Оформити замовлення</button>
           </div>
         </form>
       </div>
@@ -58,23 +61,18 @@
         <div class="cart__inner">
           <div class="cart__control">
             <div class="cart__control-name"><img src="assets/icons/title-icon/cart-icon.svg" alt="cart-icon">Кошик</div>
-            <button class="cart__control-btn">Редагувати замовлення</button>
+            <button class="cart__control-btn"><a routerLink="/cart">Редагувати замовлення</a></button>
           </div>
           <div class="cart__items">
-            <div class="cart__item">
-              <div class="cart__item-name">Сир Swiatowi Gouda</div>
-              <div class="cart__item-sum">х2</div>
-              <div class="cart__item-price">₴798.00</div>
+            <div *ngFor="let item of cartList" class="cart__item">
+              <div class="cart__item-name" [title]="item.name">{{item.name}}</div>
+              <div class="cart__item-sum">x{{item.count}}</div>
+              <div class="cart__item-price">₴{{item.sale_price || item.price}}</div>
             </div>
-            <div class="cart__item">
-              <div class="cart__item-name">Сир Swiatowi Gouda</div>
-              <div class="cart__item-sum">х2</div>
-              <div class="cart__item-price">₴798.00</div>
-            </div>
-            <div class="cart__item">
-              <div class="cart__item-name">Сир Swiatowi Gouda</div>
-              <div class="cart__item-sum">х2</div>
-              <div class="cart__item-price">₴798.00</div>
+            <div  class="cart__item">
+              <div class="cart__item-name">Разом: </div>
+              <div class="cart__item-sum"></div>
+              <div class="cart__item-price">₴{{totalPrice}}</div>
             </div>
           </div>
         </div>

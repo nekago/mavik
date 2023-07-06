@@ -10,7 +10,9 @@ import {Product} from '../../../global/entities/product.interface';
 })
 export class CartComponent implements OnInit {
 
-  cartList: CartList = [];
+  public cartList: CartList = [];
+
+  public totalPrice = 0;
 
 
   constructor(
@@ -22,6 +24,7 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.cartService.cartList$.subscribe(list => {
       this.cartList = list;
+      this.totalPrice = this.cartService.getTotalPrice(list);
       this.cdr.detectChanges();
     })
   }

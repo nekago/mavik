@@ -44,6 +44,10 @@
   &:nth-child(4) {
     grid-template-columns: 1fr 1fr;
   }
+
+  .form__button:disabled {
+    opacity: .3;
+  }
 }
 
 .form__item {
