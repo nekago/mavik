@@ -1,6 +1,6 @@
-<app-breadcrumbs></app-breadcrumbs>
+<section class="checkout" *ngIf="!isFormSubmitted; else formSubmitted">
+  <app-breadcrumbs></app-breadcrumbs>
 
-<section class="checkout">
   <div class="container">
     <div class="checkout__title">
       <img src="assets/icons/checkout-icons.svg" alt="checkout-icon">
@@ -9,17 +9,17 @@
 
     <div class="checkout__wrapper">
       <div class="form">
-        <form action="#" id="form" class="form__body" [formGroup]="form">
+        <form action="#" id="form" class="form__body" (submit)="submitForm()" [formGroup]="form">
           <div class="form__row">
             <div class="form__item">
               <label for="formName" class="form__label">Ім’я*</label>
-              <input id="formName" formControlName="name" type="text" class="form__input">
+              <input id="formName" formControlName="first_name" type="text" class="form__input">
               <span *ngIf="showErrorForFormControl('name') && minLengthError('name')">length</span>
               <span *ngIf="showErrorForFormControl('name') && !minLengthError('name')">required</span>
             </div>
             <div class="form__item">
               <label for="formSerName" class="form__label">Прізвище*</label>
-              <input id="formSerName" formControlName="surname" type="text" class="form__input">
+              <input id="formSerName" formControlName="last_name" type="text" class="form__input">
               <span *ngIf="showErrorForFormControl('surname')">required</span>
             </div>
           </div>
@@ -38,7 +38,7 @@
           <div class="form__row">
             <div class="form__item">
               <label for="formPhone" class="form__label">Телефон</label>
-              <input id="formPhone" formControlName="phoneNumber" type="text" class="form__input">
+              <input id="formPhone" formControlName="phone_number" type="text" class="form__input">
             </div>
             <div class="form__item">
               <label for="formTelegram" class="form__label">Телеграм</label>
@@ -80,3 +80,13 @@
     </div>
   </div>
 </section>
+
+<ng-template #formSubmitted>
+  <h1>form Submitted</h1>
+  <h1>form Submitted</h1>
+  <h1>form Submitted</h1>
+  <h1>form Submitted</h1>
+  <h1>form Submitted</h1>
+  <h1>form Submitted</h1>
+  <h1>form Submitted</h1>
+</ng-template>

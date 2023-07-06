@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {CartService} from '../../cart/service/cart.service';
 import {CartList} from '../../../global/entities/cart.interface';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ApiService} from '../../../global/services/api.services';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -17,18 +19,21 @@ export class CheckoutComponent implements OnInit {
 
   public form: FormGroup = new FormGroup<any>(
     {
-      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      surname: new FormControl('', [Validators.required, Validators.minLength(1)]),
+      first_name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      last_name: new FormControl('', [Validators.required, Validators.minLength(1)]),
       city: new FormControl('', [Validators.required, Validators.minLength(1)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      phoneNumber: new FormControl('', Validators.pattern("[0-9]{10}")),
+      phone_number: new FormControl('', Validators.pattern('[0-9]{10}')),
       telegram: new FormControl(''),
       comment: new FormControl(''),
     }
   )
+  isFormSubmitted: boolean = false;
 
   constructor(
     private cartService: CartService,
+    private apiService: ApiService,
+    private router: Router,
   ) {
     this.cartList = this.cartService.getCartList();
     this.totalPrice = this.cartService.getTotalPrice();
@@ -36,8 +41,27 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     this.form.valueChanges.subscribe(data => {
-      console.log(data);
-      console.log(this.form);
+      // console.log(data);
+      // console.log(this.form);
+    })
+  }
+
+  public submitForm() {
+    const form = this.form.value;
+    this.apiService.post('order/', {
+      ...form,
+      products: this.cartList.map(elem => ({
+        product: elem.id,
+        quantity: elem.count,
+      }))
+    }).subscribe(() => {
+      this.resetForm();
+      this.isFormSubmitted = true;
+      this.cartService.resetCart();
+
+      setTimeout(() => {
+        this.router.navigateByUrl('/main')
+      }, 1500)
     })
   }
 
@@ -50,5 +74,9 @@ export class CheckoutComponent implements OnInit {
       return false
     }
     return !this.form.controls?.[field]?.errors?.['minLength']
+  }
+
+  private resetForm() {
+    this.form.reset();
   }
 }

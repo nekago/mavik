@@ -14,6 +14,11 @@ export class CartService {
   constructor() {
   }
 
+  public resetCart() {
+    this.cartList.next([])
+    window.localStorage.removeItem('cartList')
+  }
+
   public getCartList(): CartList {
     return this.cartList.getValue();
   }
