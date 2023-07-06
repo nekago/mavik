@@ -24,7 +24,8 @@
       <div class="filter-tag" *ngIf="(filterTags$ | async)?.length">
         <button (click)="resetFilter()" class="filter-tag__reset">Очистити фільтри
           <img src="assets/icons/btn-reset.svg" alt="btn-reset"></button>
-        <button (click)="deleteFilterTag(tag)" *ngFor="let tag of filterTags$ | async" class="filter-tag__close">{{tag[1]}}
+        <button (click)="deleteFilterTag(tag)" *ngFor="let tag of filterTags$ | async"
+                class="filter-tag__close">{{tag[1]}}
           <img src="assets/icons/btn-close.svg" alt="btn-close"></button>
       </div>
     </div>
@@ -38,17 +39,31 @@
         <div *ngFor="let filterGroup of filterState$ | async">
           <h2 class="product-list__filters-head">{{filterGroup?.key}}</h2>
           <div class="product-list__filters-value" *ngFor="let filterField of filterGroup?.values">
-            <label class="checkbox-label" [for]="filterGroup.key + '_' + filterField.value">
-              <span [class.disabled]="filterFieldIsDisable(filterField)">{{filterField.value}}</span>
+            <label class="container1" [for]="filterGroup.key + '_' + filterField.value">
+              {{filterField.value || 'test'}}
               <input
-                class="styled-checkbox"
                 type="checkbox"
+                checked="checked"
                 (input)="toggleFilterValue(filterGroup.key_en, filterField, $event)"
                 [id]="filterGroup.key + '_' + filterField.value"
                 [disabled]="!filterField.isChecked && !filterField.isActive"
                 [checked]="filterField.isChecked"
               >
+              <span class="checkmark" [class.disabled]="filterFieldIsDisable(filterField)"></span>
             </label>
+
+            <!--            <label class="container1">-->
+            <!--              {{filterField.value || 'test'}}-->
+            <!--              <input-->
+            <!--                (input)="toggleFilterValue(filterGroup.key_en, filterField, $event)"-->
+            <!--                [id]="filterGroup.key + '_' + filterField.value"-->
+            <!--                [disabled]="!filterField.isChecked && !filterField.isActive"-->
+            <!--                [checked]="filterField.isChecked"-->
+            <!--                type="checkbox"-->
+            <!--                checked="checked"-->
+            <!--              >-->
+            <!--              <span class="checkmark" [class.disabled]="filterFieldIsDisable(filterField)"></span>-->
+            <!--            </label>-->
           </div>
 
         </div>
