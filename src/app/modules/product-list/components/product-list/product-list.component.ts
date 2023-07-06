@@ -31,6 +31,7 @@ export class ProductListComponent implements OnInit {
 
   public filterTags$: Observable<FilterTag> = new Observable<FilterTag>();
 
+
   minPriceValue: number = 40;
   maxPriceValue: number = 60;
   options: Options = {
@@ -68,6 +69,7 @@ export class ProductListComponent implements OnInit {
     this.productListService.category$.subscribe(data => {
       this.categoryName = data.name;
       this.slugName = data.slug;
+
     });
 
     this.filterState$ = this.filterService.filterState$;
@@ -130,6 +132,8 @@ export class ProductListComponent implements OnInit {
   public resetFilter() {
     this.filterService.resetFilter();
   }
+
+
 
 
   // PAGINATION

@@ -14,6 +14,8 @@ import { FilterService } from './filter.service';
 	providedIn: 'root',
 })
 export class ProductListService {
+  public static readonly defaultPageSize: number = 15
+
 	private category: BehaviorSubject<Category> = new BehaviorSubject<Category>(
 		{} as Category
 	);
@@ -23,6 +25,7 @@ export class ProductListService {
 		new BehaviorSubject<ProductListInterface>({} as ProductListInterface);
 	public productList$: Observable<ProductListInterface> =
 		this.productList.asObservable();
+
 
 
 	public get categorySlug(): CategorySlugNames {
@@ -41,10 +44,17 @@ export class ProductListService {
 	) {
 		this.apiService.get<ProductListInterface>(
 			`categories/${slug}/products/`,
-      this.filterService.queryParamsValueToString(this.filterService.params)
+      this.filterService.queryParamsValueToString({
+        ... this.filterService.params,
+        page_size: [
+          `${ProductListService.defaultPageSize}`
+        ]
+      })
 		).subscribe(data => {
+      data.pages = Math.floor(data.count / ProductListService.defaultPageSize) + 1
       this.productList.next(data)
       this.filterService.modifyFilterState(data.filters)
+      console.log(data)
     });
 	}
 
