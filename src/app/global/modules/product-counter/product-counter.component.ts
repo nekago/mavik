@@ -18,7 +18,6 @@ export class ProductCounterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.product)
   }
 
   public plus() {

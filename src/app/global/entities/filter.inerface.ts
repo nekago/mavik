@@ -17,3 +17,7 @@ export interface FilterFieldsGroupValue {
 
 export type SelectedFilters = Record<string, string[]>
 
+export interface PriceRange {
+  min: number,
+  max: number,
+}

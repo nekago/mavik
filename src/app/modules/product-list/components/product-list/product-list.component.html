@@ -20,13 +20,15 @@
     <div class="product-list__info">
       <img class="product-list__info-img" src="assets/icons/product-list/{{slugName}}-icon.svg" alt="{{slugName}}-icon">
       <div class="product-list__info-name">{{categoryName}}</div>
-      <div class="product-list__info-count"> {{20}}</div>
+      <div class="product-list__info-count"> ({{cheese20}})</div>
       <div class="filter-tag" *ngIf="(filterTags$ | async)?.length">
         <button (click)="resetFilter()" class="filter-tag__reset">Очистити фільтри
           <img src="assets/icons/btn-reset.svg" alt="btn-reset"></button>
-        <button (click)="deleteFilterTag(tag)" *ngFor="let tag of filterTags$ | async"
-                class="filter-tag__close">{{tag[1]}}
-          <img src="assets/icons/btn-close.svg" alt="btn-close"></button>
+        <div *ngFor="let tag of filterTags$ | async">
+          <button (click)="deleteFilterTag(tag)"
+                  class="filter-tag__close">{{tag[1]}}
+            <img src="assets/icons/btn-close.svg" alt="btn-close"></button>
+        </div>
       </div>
     </div>
 
@@ -36,7 +38,13 @@
 
         <div>
           <h2 class="product-list__filters-head">Ціна</h2>
-            <ngx-slider [(value)]="minPriceValue" [(highValue)]="maxPriceValue" [options]="options"></ngx-slider>
+            <ngx-slider
+              [(value)]="minPriceValue"
+              [(highValue)]="maxPriceValue"
+              [options]="options"
+              (valueChange)="setPriceRange($event, 'min')"
+              (highValueChange)="setPriceRange($event, 'max')"
+          ></ngx-slider>
         </div>
 
 

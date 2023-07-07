@@ -3,7 +3,7 @@
     <button type="submit" class="search__form-button">
       <img src="assets/icons/search_icon.png" alt="icon-search">
     </button>
-    <input class="search__form-input" type="text" name="form[]" placeholder="Пошук товарів">
+    <input [(ngModel)]="searchValue" (ngModelChange)="search($event)" class="search__form-input" name="search" type="text" placeholder="Пошук товарів">
   </form>
 </div>
 

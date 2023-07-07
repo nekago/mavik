@@ -5,6 +5,7 @@ import {SubHeaderComponent} from "./components/sub-header/sub-header.component";
 import {MenuComponent} from "./components/menu/menu.component";
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
 	exports: [HeaderComponent],
@@ -14,6 +15,6 @@ import {CommonModule} from "@angular/common";
 		SubHeaderComponent,
 		MenuComponent,
 	],
-	imports: [RouterModule, CommonModule],
+    imports: [RouterModule, CommonModule, FormsModule],
 })
 export class HeaderModule {}

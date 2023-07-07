@@ -20,24 +20,40 @@ export class ProductListComponent implements OnInit {
   public slugName: CategorySlugNames = 'cheese';
   public productList: Array<Product> = [];
 
+  public pages: Array<number> = [];
   public pagesCount: number = 1;
   public currentPage: number = 1;
 
   public params: any = {};
 
-  public pages: Array<number> = [];
-
   public filterState$: Observable<FilterState> = new Observable<FilterState>();
-
   public filterTags$: Observable<FilterTag> = new Observable<FilterTag>();
 
+  public cheese20 = 15;
 
-  minPriceValue: number = 40;
-  maxPriceValue: number = 60;
-  options: Options = {
+  public minPriceValue: number = 40;
+  public maxPriceValue: number = 60;
+
+  public options: Options = {
     floor: 0,
     ceil: 100,
   };
+
+  private price = {
+    min: 0,
+    max: 0,
+  }
+
+  private isSliderInit = false
+
+  private priceRangeTimeOut!: NodeJS.Timeout;
+
+  private get priceRange() {
+    return {
+      price_min: [String(this.price.min)],
+      price_max: [String(this.price.max)],
+    }
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -57,6 +73,7 @@ export class ProductListComponent implements OnInit {
         this.productList = res.results;
         this.pagesCount = Math.ceil(res.count / res.results?.length);
         this.generatePages(this.pagesCount);
+        this.cheese20 = res.count;
         this.cdr.detectChanges();
       });
       this.productListService.setCurrentCategoryBySlug(slug);
@@ -69,22 +86,29 @@ export class ProductListComponent implements OnInit {
     this.productListService.category$.subscribe(data => {
       this.categoryName = data.name;
       this.slugName = data.slug;
-
     });
 
     this.filterState$ = this.filterService.filterState$;
 
     this.filterService.priceSlider$.subscribe(options => {
-      this.options = {
-        ...this.options,
-        ...options,
-      };
-      this.maxPriceValue = options.ceil || 0;
-      this.minPriceValue = options.floor || 0;
+      if (!this.isSliderInit && options?.floor && options?.floor) {
+        this.options = {
+          ...this.options,
+          ...options,
+        };
+
+        const {min, max} = this.filterService.priceRange
+
+        this.minPriceValue = min || options.floor || 0;
+        this.maxPriceValue = max || options.ceil || 0;
+        this.price.min = this.minPriceValue;
+        this.price.max = this.maxPriceValue;
+
+        this.isSliderInit = true;
+      }
     });
 
-    this.filterService.selectedFilters$.subscribe(data => {
-      console.log(data)
+    this.filterService.selectedFilters$.subscribe(() => {
     });
 
     this.filterTags$ = this.filterService.filterTags$;
@@ -92,6 +116,40 @@ export class ProductListComponent implements OnInit {
 
 
   // FILTER
+
+  public toggleFilterValue(key: string, filterField: FilterFieldsGroupValue, $event: any = true) {
+    delete this.filterService.params?.['price_min'];
+    delete this.filterService.params?.['price_max'];
+
+    const isChecked = $event.target.checked;
+    this.filterService.selectedFilterGroup = key as FilterFields;
+    this.filterService.toggleSelectedFilterFieldValue(key, filterField.value, isChecked);
+    this.filterService.toggleFilterTag(key, filterField.value, isChecked);
+
+    this.isSliderInit = false;
+    filterField.isChecked = isChecked;
+  }
+
+  public deleteFilterTag(elem: [string, string]) {
+    this.filterService.removeFilterTag(elem[1], elem[0])
+  }
+
+  public filterFieldIsDisable(filterField: FilterFieldsGroupValue): boolean {
+    return !filterField.isChecked && !filterField.isActive;
+  }
+
+  public resetFilter() {
+    this.filterService.resetFilter();
+  }
+
+
+  // PAGINATION
+
+  private generatePages(pagesNumber: number) {
+    for (let i = 0; i < pagesNumber; i++) {
+      this.pages.push(i + 1);
+    }
+  }
 
   public changePage(action: 'first' | 'last' | number) {
     if (typeof action === 'number') {
@@ -111,36 +169,24 @@ export class ProductListComponent implements OnInit {
     this.filterService.setQueryParams({page: this.currentPage});
   }
 
-  public toggleFilterValue(key: string, filterField: FilterFieldsGroupValue, $event: any = true) {
-    const isChecked = $event.target.checked
-    this.filterService.selectedFilterGroup = key as FilterFields
-    this.filterService.toggleSelectedFilterFieldValue(key, filterField.value, isChecked)
-    this.filterService.toggleFilterTag(key, filterField.value, isChecked)
 
-    filterField.isChecked = isChecked
+  // PRICE RANGE
 
-  }
+  public setPriceRange($event: number, priceType: 'min' | 'max') {
+    if (priceType === 'min') {
+      this.price.min = $event;
+    } else {
+      this.price.max = $event;
+    }
 
-  public deleteFilterTag(elem: [string, string]) {
-    this.filterService.removeFilterTag(elem[1], elem[0])
-  }
+    if (this.isSliderInit) {
+      if (this.priceRangeTimeOut) {
+        clearTimeout(this.priceRangeTimeOut);
+      }
 
-  public filterFieldIsDisable(filterField: FilterFieldsGroupValue): boolean {
-    return !filterField.isChecked && !filterField.isActive;
-  }
-
-  public resetFilter() {
-    this.filterService.resetFilter();
-  }
-
-
-
-
-  // PAGINATION
-
-  private generatePages(pagesNumber: number) {
-    for (let i = 0; i < pagesNumber; i++) {
-      this.pages.push(i + 1);
+      this.priceRangeTimeOut = setTimeout(() => {
+        this.filterService.setQueryParams(this.priceRange);
+      }, 400)
     }
   }
 }

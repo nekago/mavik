@@ -45,7 +45,7 @@ export class ProductListService {
 		this.apiService.get<ProductListInterface>(
 			`categories/${slug}/products/`,
       this.filterService.queryParamsValueToString({
-        ... this.filterService.params,
+        ...this.filterService.params,
         page_size: [
           `${ProductListService.defaultPageSize}`
         ]
@@ -54,7 +54,6 @@ export class ProductListService {
       data.pages = Math.floor(data.count / ProductListService.defaultPageSize) + 1
       this.productList.next(data)
       this.filterService.modifyFilterState(data.filters)
-      console.log(data)
     });
 	}
 

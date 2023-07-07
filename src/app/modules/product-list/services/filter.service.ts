@@ -3,7 +3,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {
   FilterFieldsGroupValue,
   FilterState,
-  FilterTag,
+  FilterTag, PriceRange,
   SelectedFilters,
 } from '../../../global/entities/filter.inerface';
 import {
@@ -24,9 +24,13 @@ export class FilterService {
     new BehaviorSubject<FilterState>([]);
   private selectedFilters: BehaviorSubject<SelectedFilters> =
     new BehaviorSubject<SelectedFilters>({});
+  private selectedPriceRange: BehaviorSubject<PriceRange> =
+    new BehaviorSubject<PriceRange>({} as PriceRange);
   private priceSlider: BehaviorSubject<Options> = new BehaviorSubject<Options>(
     {}
   );
+
+  tmp: any = {}
 
   private lastSelectedFilterGroup: FilterFields = 'brand'
 
@@ -44,20 +48,39 @@ export class FilterService {
     this.filterTags.asObservable();
   public selectedFilters$: Observable<SelectedFilters> =
     this.selectedFilters.asObservable();
+  public selectedPriceRange$: Observable<PriceRange> =
+    this.selectedPriceRange.asObservable();
   public priceSlider$: Observable<Options> = this.priceSlider.asObservable();
 
   public filterStateCategory: CategorySlugNames | undefined;
 
   public params: Record<string, string[]> = {}
 
+  get priceRange(): PriceRange {
+    return this.selectedPriceRange.getValue();
+  }
 
   constructor(private localizerService: LocalizerService, private router: Router, private activatedRoute: ActivatedRoute) {
     activatedRoute.queryParams.subscribe(
       query => {
+        const priceRage: PriceRange = {
+          min: 0,
+          max: 0,
+        }
+
         this.params = Object.entries(query).reduce((acc: Record<string, string[]>, elem) => {
+          if (elem[0] === 'price_min') {
+            priceRage.min = elem[1];
+          }
+
+          if (elem[0] === 'price_max') {
+            priceRage.max = elem[1];
+          }
+
           acc[elem[0]] = elem[1].split(',')
           return acc
         }, {})
+        this.selectedPriceRange.next(priceRage)
         this.selectedFilters.next(this.params)
       }
     )
@@ -66,7 +89,9 @@ export class FilterService {
       if (!this.filterTags.getValue().length) {
         for (const elem of Object.entries(this.params)) {
           elem[1].forEach((tag: string) => {
-            this.addFilterTag(elem[0], tag)
+            if (!Number(tag)) {
+              this.addFilterTag(elem[0], tag)
+            }
           })
         }
       }
@@ -120,23 +145,7 @@ export class FilterService {
           ceil: filterFields[i][1].max,
         });
       } else if (filterFields[i][0] === 'in_stock') {
-        const values: Array<FilterFieldsGroupValue> = [];
-        if (filterFields[i][1].length === 1) {
-          values.push(
-            filterFields[i][1][0]
-              ? initFieldValue('В наявності')
-              : initFieldValue('Немає в наявності')
-          );
-        } else {
-          values.push(initFieldValue('В наявності'));
-          values.push(initFieldValue('Немає в наявності'));
-        }
 
-        filterState.push({
-          key: this.localizerService.getUkrFieldGroupName(filterFields[i][0]),
-          key_en: filterFields[i][0],
-          values,
-        });
       } else {
         filterState.push({
           key: this.localizerService.getUkrFieldGroupName(filterFields[i][0]),
@@ -155,10 +164,13 @@ export class FilterService {
 
     for (let i = 0; i < filterKeys.length; i++) {
       const key = filterKeys[i];
-      this.priceSlider.next({
-        floor: filters['price'].min,
-        ceil: filters['price'].max,
-      });
+
+      if (key === 'price') {
+        this.priceSlider.next({
+          floor: filters['price'].min,
+          ceil: filters['price'].max,
+        });
+      }
 
       filterState.filter(filterGroup => filterGroup.key_en === key || filterGroup.key === key).forEach(elem => {
         for (const value of elem.values) {
@@ -290,6 +302,7 @@ export class FilterService {
 
   public setQueryParams(params: any, isReset?: boolean) {
     this.params = isReset ? {} : {...this.params, ...params}
+    this.tmp = params;
     this.router.navigate([`/categories/${this.filterStateCategory}`], {
       queryParams: this.queryParamsValueToString(this.params),
     });
@@ -297,6 +310,17 @@ export class FilterService {
 
   public queryParamsValueToString(params: Record<string, string[]>): Record<string, string> {
     return Object.entries(params).reduce((acc: Record<string, string>, elem) => {
+
+      if (elem[0] === 'price_min') {
+        acc[elem[0]] = String(elem[1]);
+        return acc;
+      }
+
+      if (elem[0] === 'price_max') {
+        acc[elem[0]] = String(elem[1]);
+        return acc;
+      }
+
       acc[elem[0]] = elem[1].join(',')
       return acc
     }, {})
