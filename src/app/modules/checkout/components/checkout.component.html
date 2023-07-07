@@ -66,13 +66,14 @@
           <div class="cart__items">
             <div *ngFor="let item of cartList" class="cart__item">
               <div class="cart__item-name" [title]="item.name">{{item.name}}</div>
-              <div class="cart__item-sum">x{{item.count}}</div>
-              <div class="cart__item-price">₴{{item.sale_price || item.price}}</div>
+              <div class="cart__item-wrapper">
+                <div class="cart__item-sum">x{{item.count}}</div>
+                <div class="cart__item-price"><i class="fas fa-hryvnia"></i>{{item.sale_price || item.price}}</div>
+              </div>
             </div>
-            <div  class="cart__item">
-              <div class="cart__item-name">Разом: </div>
-              <div class="cart__item-sum"></div>
-              <div class="cart__item-price">₴{{totalPrice}}</div>
+            <div  class="total-price">
+              <div class="cart__item-name ">Разом: </div>
+              <div class="cart__item-price"><i class="fas fa-hryvnia"></i>{{totalPrice + '.00'}}</div>
             </div>
           </div>
         </div>
@@ -82,11 +83,11 @@
 </section>
 
 <ng-template #formSubmitted>
-  <h1>form Submitted</h1>
-  <h1>form Submitted</h1>
-  <h1>form Submitted</h1>
-  <h1>form Submitted</h1>
-  <h1>form Submitted</h1>
-  <h1>form Submitted</h1>
-  <h1>form Submitted</h1>
+  <div class="submitted-container">
+    <div class="form__submitted">
+      <i class="fas fa-check white-check"></i>
+    </div>
+    <h1 class="form__submitted-title">Ваше замовлення успішно оформлено!</h1>
+  </div>
+
 </ng-template>

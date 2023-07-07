@@ -61,7 +61,7 @@ export class CheckoutComponent implements OnInit {
 
       setTimeout(() => {
         this.router.navigateByUrl('/main')
-      }, 1500)
+      }, 2000)
     })
   }
 

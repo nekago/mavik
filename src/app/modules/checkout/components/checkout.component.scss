@@ -8,6 +8,7 @@
   }
 
 }
+
 .checkout__wrapper {
   display: flex;
   justify-content: space-between;
@@ -111,7 +112,8 @@ textarea.form__input {
         margin-right: 10px;
       }
     }
-    &-btn{
+
+    &-btn {
       font-size: 18px;
       font-family: $nunito_regular;
       font-weight: 600;
@@ -140,20 +142,81 @@ textarea.form__input {
     font-family: $nunito_semibold;
     font-size: 24px;
     color: $textColor;
+
+
+
     &-name {
-      max-width: 360px;
+      max-width: 370px;
+      width: 50%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
     }
+
+    &-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: 50%;
+      text-align: left;
+    }
+
+
 
     &-sum {
-      margin-left: 90px;
+      margin: 0 auto;
     }
 
-    &-price{
+    &-price {
+      width: 50%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
       font-size: 32px;
       font-weight: bold;
-      margin-left: 26px;
+
+      i {
+        margin-right: 3px;
+        font-size: 24px;
+      }
     }
 
+  }
+}
+
+.total-price {
+  margin-top: 20px;
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+}
+
+.submitted-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.form__submitted {
+  background-color: green;
+  display: inline-block;
+  padding: 10px;
+
+  i {
+    color: white;
+    font-size: 88px;
+  }
+
+  &-title {
+    margin-top: 50px;
+    font-family: $nunito_bold;
+    font-size: 30px;
+    font-weight: 700;
+    color: $textColor;
   }
 }
 

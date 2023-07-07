@@ -81,6 +81,7 @@
     justify-content: flex-start;
     align-items: center;
     margin-top: 8px;
+    margin-bottom: 40px;
     font-family: $nunito_regular;
     font-weight: 400;
 
@@ -206,11 +207,21 @@
 }
 
 .characteristic {
+  font-family: $nunito_regular;
+  font-weight: 400;
+  font-size: 16px;
+
+  &__list {
+    margin-top: 24px;
+    padding: 0 16px 16px 16px;
+  }
 
 
   &__item {
     display: flex;
     justify-content: space-between;
+    padding: 10px 24px;
+    border-radius: 4px;
 
     div {
       width: 50%;
@@ -218,11 +229,11 @@
     }
 
     &:nth-child(odd) {
-      background: tomato;
+      background: #F5F7FF;
     }
 
     &:nth-child(even) {
-      background: lightgreen;
+      background: $white;
     }
   }
 }

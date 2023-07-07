@@ -10,7 +10,6 @@
       <div class="cart__item" *ngFor="let item of cartList">
         <img class="cart__item-img" [src]="item?.image" [alt]="item?.name">
         <div class="cart__item-name">{{item.name}}</div>
-        <div class="cart__item-count">{{item.count}}</div>
         <div class="price-block">
           <div class="price-block__sale" *ngIf="item?.sale_price"><i class="fas fa-hryvnia"></i>{{item?.price}}
           </div>
@@ -25,7 +24,7 @@
 
     <div class="cart__controller">
       <button class="cart__controller-back btn">Повернутися до покупок</button>
-      <div class="cart__controller-sum">Разом: <span><i class="fas fa-hryvnia"></i>{{totalPrice}}</span></div>
+      <div class="cart__controller-sum">Разом: <span><i class="fas fa-hryvnia"></i>{{totalPrice + '.00'}}</span></div>
       <button class="cart__controller-issue btn" routerLink="/checkout">Оформити замовлення</button>
     </div>
   </div>

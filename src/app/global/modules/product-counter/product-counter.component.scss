@@ -4,7 +4,6 @@
   display: flex;
   max-width: 210px;
   height: 60px;
-  margin-top: 34px;
 
   > input {
     width: 80px;
@@ -32,6 +31,7 @@
     background: $white;
     cursor: pointer;
     color: #DDDCDF;
+    font-size: 30px;
 
     &:hover {
       transition: 0.2s;
