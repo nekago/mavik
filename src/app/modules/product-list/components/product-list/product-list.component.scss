@@ -98,10 +98,6 @@
       margin-left: 10px;
     }
 
-    .disabled {
-      // Стилизация отключенного текста
-      color: #ccc;
-    }
 
     input:checked :before {
       // Стилизация отмеченного чекбокса
@@ -120,10 +116,13 @@
   .container1 {
     display: block;
     position: relative;
-    padding-left: 35px;
+    padding-left: 28px;
     margin-bottom: 12px;
     cursor: pointer;
-    font-size: 22px;
+    font-family: $nunito_regular;
+    font-weight: 400;
+    color: $textColor;
+    font-size: 14px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -139,19 +138,27 @@
     width: 0;
   }
 
-  /* Create a custom checkbox */
+  .container1:hover {
+    background-color: #DEE5FF;
+    color: $dark_blue;
+  }
+
+    /* Create a custom checkbox */
   .checkmark {
     position: absolute;
     top: 0;
     left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
+    height: 18px;
+    width: 18px;
+    background-color: $white;
+    border: 1px solid #DDDCDF;
+    border-radius: 3px;
+    transition: border 0.3s ease;
   }
 
   /* On mouse-over, add a grey background color */
   .container1:hover input ~ .checkmark {
-    background-color: #ccc;
+    border: 1px solid #4C9AFF;
   }
 
   /* When the checkbox is checked, add a blue background */
@@ -170,14 +177,17 @@
   .container1 input:checked ~ .checkmark:after {
     display: block;
   }
+  .container1 input:checked ~ .label {
+    color: $dark_blue;
+  }
 
   /* Style the checkmark/indicator */
   .container1 .checkmark:after {
-    left: 9px;
-    top: 5px;
+    left: 6px;
+    top: 3px;
     width: 5px;
     height: 10px;
-    border: solid red;
+    border: solid $white;
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
