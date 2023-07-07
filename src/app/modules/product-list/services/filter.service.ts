@@ -28,6 +28,8 @@ export class FilterService {
 		new BehaviorSubject<SelectedFilters>({});
 	private selectedPriceRange: BehaviorSubject<PriceRange> =
 		new BehaviorSubject<PriceRange>({} as PriceRange);
+	private searchQuery: BehaviorSubject<string> =
+		new BehaviorSubject<string>('');
 	private priceSlider: BehaviorSubject<Options> = new BehaviorSubject<Options>(
 		{}
 	);
@@ -51,6 +53,8 @@ export class FilterService {
 		this.selectedFilters.asObservable();
 	public selectedPriceRange$: Observable<PriceRange> =
 		this.selectedPriceRange.asObservable();
+  public searchQuery$: Observable<string> =
+    this.searchQuery.asObservable()
 	public priceSlider$: Observable<Options> = this.priceSlider.asObservable();
 
 	public filterStateCategory: CategorySlugNames | undefined;
@@ -82,12 +86,17 @@ export class FilterService {
 						priceRage.max = elem[1];
 					}
 
-					acc[elem[0]] = elem[1].split(',');
+					if (elem[0] === 'searchQuery') {
+						this.setSearchQuery(elem[1]);
+            return acc;
+					}
+
+					acc[elem[0]] = elem[1]?.split(',');
 					return acc;
 				},
 				{}
 			);
-			this.selectedPriceRange.next(priceRage);
+			this.setPriceRange(priceRage.min || -1, priceRage.max || -1);
 			this.selectedFilters.next(this.params);
 		});
 
@@ -95,7 +104,8 @@ export class FilterService {
 			if (!this.filterTags.getValue().length) {
 				for (const elem of Object.entries(this.params)) {
 					elem[1].forEach((tag: string) => {
-						if (!Number(tag)) {
+            console.log(tag)
+						if (!Number(tag) && Number(tag) !== 0) {
 							this.addFilterTag(elem[0], tag);
 						}
 					});
@@ -103,6 +113,34 @@ export class FilterService {
 			}
 		});
 	}
+
+  public setSearchQuery(value: string) {
+    this.searchQuery.next(value)
+
+    this.setQueryParams({search_query: [value]})
+  }
+
+  public getSearchQuery(): [string] {
+    return [this.searchQuery.getValue()];
+  }
+
+  public setPriceRange(min: number, max: number){
+    this.selectedPriceRange.next({
+      min,
+      max,
+    })
+  }
+
+  public getPriceRange(): {
+    price_min: [string];
+    price_max: [string];
+  } {
+    const {min, max} = this.selectedPriceRange.getValue();
+    return {
+      price_min: [String(min)],
+      price_max: [String(max)],
+    };
+  }
 
 	public initFilterState(filters: Filters, slug: CategorySlugNames) {
 		this.filterStateCategory = slug;
@@ -243,7 +281,7 @@ export class FilterService {
 		isAdd: boolean
 	) {
 		const selectedFilters = this.selectedFilters.getValue();
-		value = value.split(' ').join('+');
+		value = value.split(' ').join(' ');
 
 		if (key === 'in_stock') {
 			value = Number(value === 'В наявності').toString();
@@ -343,6 +381,11 @@ export class FilterService {
 				fieldValue.isChecked = false;
 			}
 		}
+    this.searchQuery.next('');
+    this.selectedPriceRange.next({
+      min: -1,
+      max: -1,
+    })
 	}
 
 	public reset() {

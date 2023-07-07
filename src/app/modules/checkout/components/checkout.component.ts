@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {CartService} from '../../cart/service/cart.service';
-import {CartList} from '../../../global/entities/cart.interface';
+import {CartItem, CartList} from '../../../global/entities/cart.interface';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ApiService} from '../../../global/services/api.services';
 import {Router} from '@angular/router';
+import {LocalizerService} from '../../../global/services/localizer.service';
 
 @Component({
   selector: 'app-checkout',
@@ -34,6 +35,7 @@ export class CheckoutComponent implements OnInit {
     private cartService: CartService,
     private apiService: ApiService,
     private router: Router,
+    private localizerService: LocalizerService,
   ) {
     this.cartList = this.cartService.getCartList();
     this.totalPrice = this.cartService.getTotalPrice();
@@ -74,6 +76,10 @@ export class CheckoutComponent implements OnInit {
       return false
     }
     return !this.form.controls?.[field]?.errors?.['minLength']
+  }
+
+  goToProduct(item: CartItem) {
+    this.router.navigateByUrl(`categories/${this.localizerService.ukrCategoryToEng(item.category)}/${item.id}`);
   }
 
   private resetForm() {

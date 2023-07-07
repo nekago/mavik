@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from '@angular/core';
 import {FilterService} from '../../../product-list/services/filter.service';
 
 @Component({
@@ -7,7 +7,7 @@ import {FilterService} from '../../../product-list/services/filter.service';
   styleUrls: ['search.component.scss']
 })
 
-export class SearchComponent {
+export class SearchComponent implements OnInit {
   searchValue!: string;
 
   private searchTimeOut!: NodeJS.Timeout;
@@ -17,13 +17,19 @@ export class SearchComponent {
   ) {
   }
 
+  ngOnInit() {
+    this.filterService.searchQuery$.subscribe(data => {
+      this.searchValue = data;
+    })
+  }
+
   public search($event: any) {
     if (this.searchTimeOut) {
       clearTimeout(this.searchTimeOut);
     }
 
     this.searchTimeOut = setTimeout(() => {
-      // this.filterService.setQueryParams()
+      this.filterService.setSearchQuery($event);
     }, 400);
   }
 }

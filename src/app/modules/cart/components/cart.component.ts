@@ -1,7 +1,9 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {CartService} from '../service/cart.service';
-import {CartList} from '../../../global/entities/cart.interface';
+import {CartItem, CartList} from '../../../global/entities/cart.interface';
 import {Product} from '../../../global/entities/product.interface';
+import {Router} from '@angular/router';
+import {LocalizerService} from '../../../global/services/localizer.service';
 
 @Component({
   selector: 'app-cart',
@@ -18,6 +20,8 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private cdr: ChangeDetectorRef,
+    private router: Router,
+    private localizerService: LocalizerService,
   ) {
   }
 
@@ -33,4 +37,7 @@ export class CartComponent implements OnInit {
     this.cartService.modifyCart(product, 'remove')
   }
 
+  goToProduct(item: CartItem) {
+    this.router.navigateByUrl(`categories/${this.localizerService.ukrCategoryToEng(item.category)}/${item.id}`);
+  }
 }

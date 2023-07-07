@@ -91,13 +91,17 @@ export class ProductListComponent implements OnInit {
     this.filterState$ = this.filterService.filterState$;
 
     this.filterService.priceSlider$.subscribe(options => {
-      if (!this.isSliderInit && options?.floor && options?.floor) {
+      let {min, max} = this.filterService.priceRange
+      if ((!this.isSliderInit && options?.floor && options?.floor) || (min === -1 && max === -1)) {
         this.options = {
           ...this.options,
           ...options,
         };
 
-        const {min, max} = this.filterService.priceRange
+        if (min === -1 && max === -1) {
+          min = options.floor || 0;
+          max = options.ceil || 0;
+        }
 
         this.minPriceValue = min || options.floor || 0;
         this.maxPriceValue = max || options.ceil || 0;

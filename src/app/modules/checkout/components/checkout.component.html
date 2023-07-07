@@ -65,7 +65,7 @@
           </div>
           <div class="cart__items">
             <div *ngFor="let item of cartList" class="cart__item">
-              <div class="cart__item-name" [title]="item.name">{{item.name}}</div>
+              <div class="cart__item-name" (click)="goToProduct(item)" [title]="item.name">{{item.name}}</div>
               <div class="cart__item-wrapper">
                 <div class="cart__item-sum">x{{item.count}}</div>
                 <div class="cart__item-price"><i class="fas fa-hryvnia"></i>{{item.sale_price || item.price}}</div>
