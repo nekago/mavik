@@ -5,9 +5,17 @@ import {CommonModule} from "@angular/common";
 import {BreadcrumbsModule} from "../breadcrumbs/breadcrumbs.module";
 import {ProductCardModule} from "../product-card/product-card.module";
 import {NgxSliderModule} from "@angular-slider/ngx-slider";
+import {LoaderModule} from "../../global/modules/loader/loader.module";
 
 @NgModule({
 	declarations: [ProductListComponent],
-	imports: [RouterModule, CommonModule, BreadcrumbsModule, ProductCardModule, NgxSliderModule],
+	imports: [
+		RouterModule,
+		CommonModule,
+		BreadcrumbsModule,
+		ProductCardModule,
+		NgxSliderModule,
+		LoaderModule,
+	],
 })
 export class ProductListModule {}

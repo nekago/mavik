@@ -61,7 +61,6 @@
       }
     }
 
-
   }
 
   &__controller {
@@ -96,6 +95,23 @@
     &-issue {
 
       margin: 0;
+    }
+  }
+
+  &__empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+
+    &-text {
+      font-family: $nunito_semibold;
+      font-weight: 700;
+      font-size: 30px;
+      color: $textColor;
+      text-align: center;
+      margin-top: 10px;
     }
   }
 

@@ -287,7 +287,7 @@ export class FilterService {
 			value = Number(value === 'В наявності').toString();
 		}
 		if (isAdd) {
-			this.addSelectedFilterFieldValue(key, value, selectedFilters);
+			FilterService.addSelectedFilterFieldValue(key, value, selectedFilters);
 		} else {
 			this.removeSelectedFilterFieldValue(key, value, selectedFilters);
 		}
@@ -296,7 +296,7 @@ export class FilterService {
 		this.setQueryParams(selectedFilters);
 	}
 
-	private addSelectedFilterFieldValue(
+	private static addSelectedFilterFieldValue(
 		key: string,
 		value: string,
 		selectedFilters: SelectedFilters

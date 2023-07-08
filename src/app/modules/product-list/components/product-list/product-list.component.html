@@ -15,7 +15,7 @@
 
 <app-breadcrumbs></app-breadcrumbs>
 
-<div class="product-list">
+<div class="product-list" *ngIf="productList; else loader" >
   <div class="container">
     <div class="product-list__info">
       <img class="product-list__info-img" src="assets/icons/product-list/{{slugName}}-icon.svg" alt="{{slugName}}-icon">
@@ -98,3 +98,6 @@
   </div>
 </div>
 
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
