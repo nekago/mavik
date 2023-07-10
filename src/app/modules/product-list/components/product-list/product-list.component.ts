@@ -34,6 +34,8 @@ export class ProductListComponent implements OnInit {
   public minPriceValue: number = 40;
   public maxPriceValue: number = 60;
 
+
+
   public options: Options = {
     floor: 0,
     ceil: 100,
@@ -75,6 +77,7 @@ export class ProductListComponent implements OnInit {
         this.generatePages(this.pagesCount);
         this.cheese20 = res.count;
         this.cdr.detectChanges();
+
       });
       this.productListService.setCurrentCategoryBySlug(slug);
     });

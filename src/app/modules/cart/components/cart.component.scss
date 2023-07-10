@@ -103,7 +103,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 10%;
 
     &-text {
       font-family: $nunito_semibold;
@@ -111,8 +111,13 @@
       font-size: 30px;
       color: $textColor;
       text-align: center;
-      margin-top: 10px;
+      margin-top: 5%;
     }
+  }
+
+  i {
+    font-size: 180px;
+    color: $dark_blue;
   }
 
 }

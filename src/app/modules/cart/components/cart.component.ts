@@ -37,7 +37,7 @@ export class CartComponent implements OnInit {
     this.cartService.modifyCart(product, 'remove')
   }
 
-  goToProduct(item: CartItem) {
+  public goToProduct(item: CartItem) {
     this.router.navigateByUrl(`categories/${this.localizerService.ukrCategoryToEng(item.category)}/${item.id}`);
   }
 }
