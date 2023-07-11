@@ -13,7 +13,7 @@ import {Subscription} from 'rxjs';
 export class ProductCardComponent implements OnInit, OnDestroy {
   @Input() product!: Product;
 
-  private subscription: Subscription = new Subscription();
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private router: Router,
@@ -24,23 +24,23 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription.add(this.cartService.cartList$.subscribe((cartList) => {
+    this.subscriptions.add(this.cartService.cartList$.subscribe((cartList) => {
       this.product.count = this.cartService.isProductInCart(cartList, this.product?.id)
       this.product.in_cart = !!this.cartService.isProductInCart(cartList, this.product?.id)
     }));
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.subscriptions.unsubscribe()
   }
 
   public redirectToProductPage() {
-    this.activatedRoute.params.subscribe(params => {
+    this.subscriptions.add(this.activatedRoute.params.subscribe(params => {
       const slug =
         params['categorySlug'] ||
         this.localizerService.ukrCategoryToEng(this.product.category);
 
       this.router.navigateByUrl(`categories/${slug}/${this.product.id}`);
-    });
+    }))
   }
 }

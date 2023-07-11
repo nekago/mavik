@@ -70,6 +70,7 @@ export class FilterService {
 		private router: Router,
 		private activatedRoute: ActivatedRoute
 	) {
+    // TODO:
 		activatedRoute.queryParams.subscribe(query => {
 			const priceRage: PriceRange = {
 				min: 0,

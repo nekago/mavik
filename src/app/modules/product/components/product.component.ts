@@ -4,6 +4,7 @@ import {ProductService} from '../services/product.service';
 import {Product} from '../../../global/entities/product.interface';
 import {CartService} from '../../cart/service/cart.service';
 import {LocalizerService} from '../../../global/services/localizer.service';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -19,29 +20,32 @@ export class ProductComponent implements OnInit, OnDestroy {
   public count: number = 1;
   public selectedTab: string = 'Опис'
 
+  private subscriptions: Subscription = new Subscription();
+
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
-    private localizerService: LocalizerService
+    private localizerService: LocalizerService,
   ) {
   }
 
   ngOnInit() {
-    this.productService.getProductFromCategoryById().subscribe(product => {
+    // TODO: cartService.getCartList()
+    this.subscriptions.add(this.productService.getProductFromCategoryById().subscribe(product => {
       this.product = product;
 
-      this.cartService.cartList$.subscribe((cartList) => {
+      this.subscriptions.add(this.cartService.cartList$.subscribe((cartList) => {
         this.product.count = this.cartService.isProductInCart(cartList, this.product.id)
         this.product.in_cart = !!this.cartService.isProductInCart(cartList, this.product.id)
         this.count = this.product.count || 1
-      });
-    })
-
+      }))
+    }))
   }
 
   ngOnDestroy() {
     this.productService.reset()
+    this.subscriptions.unsubscribe();
   }
 
   public toggleTab(tab: string) {

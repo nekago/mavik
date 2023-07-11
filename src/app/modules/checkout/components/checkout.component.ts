@@ -42,10 +42,10 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.form.valueChanges.subscribe(data => {
-      // console.log(data);
-      // console.log(this.form);
-    })
+    // this.form.valueChanges.subscribe(data => {
+    //   console.log(data);
+    //   console.log(this.form);
+    // })
   }
 
   public submitForm() {

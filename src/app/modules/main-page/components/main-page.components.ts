@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OwlOptions} from 'ngx-owl-carousel-o';
-import {map, Subject} from 'rxjs';
+import {map, Subscription} from 'rxjs';
 import {Categories, Product} from '../../../global/entities/product.interface';
 import {ActivatedRoute} from '@angular/router';
 import {MainPageService} from '../services/main-page.service';
@@ -17,8 +17,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   public categories!: Categories;
   public bestSellers: Product[] = [];
 
-  private ngDestroy$ = new Subject<void>();
-
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private mainPageService: MainPageService,
@@ -29,23 +28,26 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.mainPageService.getCategories().subscribe(data => {
+    this.subscriptions.add(this.mainPageService.getCategories().subscribe(data => {
       this.categories = data;
-    });
-    this.bestSellerService.bestSellers$().pipe(
-      map(data => {
-        return data.results;
-      }),
-    )
+    }));
+
+    this.subscriptions.add(this.bestSellerService.bestSellers$()
+      .pipe(
+        map(data => {
+          return data.results;
+        }),
+      )
       .subscribe(data => {
         this.bestSellers = data;
-      });
+      })
+  )
+
     this.filterService.reset();
   }
 
   ngOnDestroy(): void {
-    this.ngDestroy$.next();
-    this.ngDestroy$.complete();
+    this.subscriptions.unsubscribe();
   }
 
 

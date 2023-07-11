@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductListService} from '../../services/product-list.service';
 import {
@@ -6,7 +6,7 @@ import {
   Product,
 } from '../../../../global/entities/product.interface';
 import {FilterFieldsGroupValue, FilterState, FilterTag} from '../../../../global/entities/filter.inerface';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {FilterService} from '../../services/filter.service';
 import {ChangeContext, Options} from '@angular-slider/ngx-slider';
 
@@ -15,7 +15,7 @@ import {ChangeContext, Options} from '@angular-slider/ngx-slider';
   templateUrl: 'product-list.component.html',
   styleUrls: ['product-list.component.scss'],
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
   public categoryName: CategoryNames = 'Сир';
   public slugName: CategorySlugNames = 'cheese';
   public productList: Array<Product> = [];
@@ -35,8 +35,6 @@ export class ProductListComponent implements OnInit {
   public minPriceValue: number = 40;
   public maxPriceValue: number = 60;
 
-
-
   public options: Options = {
     floor: 0,
     ceil: 100,
@@ -50,6 +48,8 @@ export class ProductListComponent implements OnInit {
   private isSliderInit = false
 
   private priceRangeTimeOut!: NodeJS.Timeout;
+
+  private subscriptions: Subscription = new Subscription();
 
   private get priceRange() {
     return {
@@ -68,33 +68,31 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.subscriptions.add(this.route.params.subscribe(params => {
       const slug = params['categorySlug'];
       this.slugName = slug;
-
-      this.productListService.productList$.subscribe(res => {
-        this.productList = res.results;
-        this.pagesCount = Math.ceil(res.count / res.results?.length);
-        this.generatePages(this.pagesCount);
-        this.cheese20 = res.count;
-        this.cdr.detectChanges();
-
-      });
       this.productListService.setCurrentCategoryBySlug(slug);
-    });
+    }));
 
-    this.route.queryParams.subscribe(() => {
+    this.subscriptions.add(this.productListService.productList$.subscribe(res => {
+      this.productList = res.results;
+      this.pagesCount = Math.ceil(res.count / res.results?.length);
+      this.generatePages(this.pagesCount);
+      this.cheese20 = res.count;
+      this.cdr.detectChanges();
+
+    }));
+
+    this.subscriptions.add(this.route.queryParams.subscribe(() => {
       this.productListService.getProductListBySlug(this.slugName)
-    })
+    }))
 
-    this.productListService.category$.subscribe(data => {
+    this.subscriptions.add(this.productListService.category$.subscribe(data => {
       this.categoryName = data.name;
       this.slugName = data.slug;
-    });
+    }));
 
-    this.filterState$ = this.filterService.filterState$;
-
-    this.filterService.priceSlider$.subscribe(options => {
+    this.subscriptions.add(this.filterService.priceSlider$.subscribe(options => {
       let {min, max} = this.filterService.priceRange
 
       if ((!this.isSliderInit && options?.floor && options?.floor) || (min === -1 && max === -1)) {
@@ -115,13 +113,17 @@ export class ProductListComponent implements OnInit {
         this.price.min = this.minPriceValue;
         this.price.max = this.maxPriceValue;
       }
-    });
+    }));
 
-    this.filterService.selectedFilters$.subscribe(() => {
-    });
+    this.subscriptions.add(this.filterService.selectedFilters$.subscribe(() => {}));
 
+    this.filterState$ = this.filterService.filterState$;
     this.filterTags$ = this.filterService.filterTags$;
     this.isLoadingProductList$ = this.productListService.isLoadingProductList$;
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
 

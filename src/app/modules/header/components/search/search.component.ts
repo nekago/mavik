@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FilterService} from '../../../product-list/services/filter.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -7,10 +8,12 @@ import {FilterService} from '../../../product-list/services/filter.service';
   styleUrls: ['search.component.scss']
 })
 
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
   searchValue!: string;
 
   private searchTimeOut!: NodeJS.Timeout;
+
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private filterService: FilterService,
@@ -18,9 +21,13 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.filterService.searchQuery$.subscribe(data => {
+    this.subscriptions.add(this.filterService.searchQuery$.subscribe(data => {
       this.searchValue = data;
-    })
+    }))
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   public search($event: any) {
