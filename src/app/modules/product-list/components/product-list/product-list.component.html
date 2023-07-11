@@ -17,6 +17,9 @@
 
 <div class="product-list" *ngIf="productList; else loader" >
   <div class="container">
+    <div class="container-loader" *ngIf="isLoadingProductList$ | async">
+      <app-loader></app-loader>
+    </div>
     <div class="product-list__info">
       <img class="product-list__info-img" src="assets/icons/product-list/{{slugName}}-icon.svg" alt="{{slugName}}-icon">
       <div class="product-list__info-name">{{categoryName}}</div>
@@ -42,8 +45,8 @@
               [(value)]="minPriceValue"
               [(highValue)]="maxPriceValue"
               [options]="options"
-              (valueChange)="setPriceRange($event, 'min')"
-              (highValueChange)="setPriceRange($event, 'max')"
+              (userChangeStart)="setPriceRange($event,'min')"
+              (userChangeEnd)="setPriceRange($event, 'max')"
           ></ngx-slider>
         </div>
 

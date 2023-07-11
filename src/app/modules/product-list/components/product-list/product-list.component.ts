@@ -8,7 +8,7 @@ import {
 import {FilterFieldsGroupValue, FilterState, FilterTag} from '../../../../global/entities/filter.inerface';
 import {Observable} from 'rxjs';
 import {FilterService} from '../../services/filter.service';
-import {Options} from '@angular-slider/ngx-slider';
+import {ChangeContext, Options} from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-product-list',
@@ -19,6 +19,7 @@ export class ProductListComponent implements OnInit {
   public categoryName: CategoryNames = 'Сир';
   public slugName: CategorySlugNames = 'cheese';
   public productList: Array<Product> = [];
+  public isLoadingProductList$: Observable<boolean> = new Observable<boolean>()
 
   public pages: Array<number> = [];
   public pagesCount: number = 1;
@@ -95,6 +96,7 @@ export class ProductListComponent implements OnInit {
 
     this.filterService.priceSlider$.subscribe(options => {
       let {min, max} = this.filterService.priceRange
+
       if ((!this.isSliderInit && options?.floor && options?.floor) || (min === -1 && max === -1)) {
         this.options = {
           ...this.options,
@@ -106,12 +108,12 @@ export class ProductListComponent implements OnInit {
           max = options.ceil || 0;
         }
 
+        this.isSliderInit = true;
+
         this.minPriceValue = min || options.floor || 0;
         this.maxPriceValue = max || options.ceil || 0;
         this.price.min = this.minPriceValue;
         this.price.max = this.maxPriceValue;
-
-        this.isSliderInit = true;
       }
     });
 
@@ -119,6 +121,7 @@ export class ProductListComponent implements OnInit {
     });
 
     this.filterTags$ = this.filterService.filterTags$;
+    this.isLoadingProductList$ = this.productListService.isLoadingProductList$;
   }
 
 
@@ -179,11 +182,12 @@ export class ProductListComponent implements OnInit {
 
   // PRICE RANGE
 
-  public setPriceRange($event: number, priceType: 'min' | 'max') {
+  public setPriceRange($event: ChangeContext, priceType: 'min' | 'max') {
+    console.log($event)
     if (priceType === 'min') {
-      this.price.min = $event;
+      this.price.min = $event.value;
     } else {
-      this.price.max = $event;
+      this.price.max = $event?.highValue ? $event.highValue : 0;
     }
 
     if (this.isSliderInit) {

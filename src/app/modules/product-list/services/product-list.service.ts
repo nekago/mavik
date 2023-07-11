@@ -26,6 +26,12 @@ export class ProductListService {
   public productList$: Observable<ProductListInterface> =
     this.productList.asObservable();
 
+  private isLoadingProductList: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
+
+  public isLoadingProductList$: Observable<boolean> =
+    this.isLoadingProductList.asObservable();
+
 
   public get categorySlug(): CategorySlugNames {
     return this.category.getValue().slug;
@@ -42,6 +48,7 @@ export class ProductListService {
   public getProductListBySlug(
     slug: CategorySlugNames
   ) {
+    this.isLoadingProductList.next(true)
     const params: Record<string, any[]> = {
       ...this.filterService.params,
       // ...this.filterService.getPriceRange(),
@@ -58,6 +65,7 @@ export class ProductListService {
       `categories/${slug}/products/`,
       this.filterService.queryParamsValueToString(params)
     ).subscribe(data => {
+      this.isLoadingProductList.next(false)
       data.pages = Math.floor(data.count / ProductListService.defaultPageSize) + 1
       this.productList.next(data)
       this.filterService.modifyFilterState(data.filters)
