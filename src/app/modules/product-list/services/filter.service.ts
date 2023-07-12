@@ -153,7 +153,7 @@ export class FilterService {
   }
 
   public getCurrentPage() {
-    return [this.currentPage.getValue()];
+    return [this.currentPage.getValue() || 1];
   }
 
 	public initFilterState(filters: Filters, slug: CategorySlugNames) {

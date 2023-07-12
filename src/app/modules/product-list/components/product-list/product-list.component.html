@@ -5,11 +5,9 @@
 <!--</ul>-->
 
 
-
-
 <app-breadcrumbs></app-breadcrumbs>
 
-<div class="product-list" *ngIf="productList; else loader" >
+<div class="product-list" *ngIf="productList; else loader">
   <div class="container">
     <div class="container-loader" *ngIf="isLoadingProductList$ | async">
       <app-loader></app-loader>
@@ -35,12 +33,12 @@
 
         <div>
           <h2 class="product-list__filters-head">Ціна</h2>
-            <ngx-slider
-              [(value)]="minPriceValue"
-              [(highValue)]="maxPriceValue"
-              [options]="options"
-              (userChangeStart)="setPriceRange($event,'min')"
-              (userChangeEnd)="setPriceRange($event, 'max')"
+          <ngx-slider
+            [(value)]="minPriceValue"
+            [(highValue)]="maxPriceValue"
+            [options]="options"
+            (userChangeStart)="setPriceRange($event,'min')"
+            (userChangeEnd)="setPriceRange($event, 'max')"
           ></ngx-slider>
         </div>
 
@@ -85,11 +83,12 @@
 
     </div>
     <div class="pagination">
-      {{currentPage}}
+
       <button class="pagination__page" (click)="changePage('first')" [disabled]="currentPage === 1"><<</button>
       <div [ngSwitch]="paginationState()">
         <div *ngSwitchCase="'start'">
-          <button class="pagination__page" (click)="changePage(page)" *ngFor="let page of pages | slice:0:4" [class.active]="page === currentPage">
+          <button class="pagination__page" (click)="changePage(page)" *ngFor="let page of pages | slice:0:4"
+                  [class.active]="page === +currentPage">
             {{page}}
           </button>
           <button class="pagination__page">
@@ -107,7 +106,9 @@
           <button class="pagination__page">
             ...
           </button>
-          <button class="pagination__page" (click)="changePage(page)" *ngFor="let page of pages | slice:currentPage - 2: currentPage + 1" [class.active]="page === currentPage">
+          <button class="pagination__page" (click)="changePage(page)"
+                  *ngFor="let page of pages | slice:currentPage - 2: +currentPage + 1"
+                  [class.active]="page === +currentPage">
             {{page}}
           </button>
           <button class="pagination__page">
@@ -125,15 +126,20 @@
           <button class="pagination__page">
             ...
           </button>
-          <button class="pagination__page" (click)="changePage(page)" *ngFor="let page of pages | slice:pagesCount - 4" [class.active]="page === currentPage">
+          <button class="pagination__page" (click)="changePage(page)" *ngFor="let page of pages | slice:pagesCount - 4"
+                  [class.active]="page === +currentPage">
+            {{page}}
+          </button>
+        </div>
+
+        <div *ngSwitchCase="'all'">
+          <button class="pagination__page" (click)="changePage(page)" *ngFor="let page of pages"
+                  [class.active]="page === +currentPage">
             {{page}}
           </button>
         </div>
 
       </div>
-<!--      <button class="pagination__page" (click)="changePage(page)" *ngFor="let page of pages" [class.active]="page === currentPage">-->
-<!--        {{page}}-->
-<!--      </button>-->
       <button class="pagination__page" (click)="changePage('last')" [disabled]="currentPage === pagesCount">>></button>
     </div>
 

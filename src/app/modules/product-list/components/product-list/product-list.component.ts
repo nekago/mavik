@@ -77,10 +77,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.productListService.productList$.subscribe(res => {
       this.productList = res.results;
       this.pagesCount = Math.ceil(res.count / res.results?.length);
-      this.generatePages(this.pagesCount);
+      this.pages = this.generatePages(this.pagesCount);
       this.cheese20 = res.count;
       this.cdr.detectChanges();
-
     }));
 
     this.subscriptions.add(this.route.queryParams.subscribe(() => {
@@ -121,7 +120,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.filterService.currentPage$.subscribe(currentPage => {
       if (currentPage) {
         this.currentPage = currentPage;
-
       }
     }))
 
@@ -183,7 +181,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.filterService.setQueryParams({page: [this.currentPage]});
   }
 
-  public paginationState(): 'start' | 'middle' | 'end' {
+  public paginationState(): 'start' | 'middle' | 'end' | 'all' {
+    if (this.pages.length <= 5) {
+      return 'all'
+    }
     if (this.currentPage < 4) {
       return 'start'
     } else if (this.currentPage >= 4 && this.currentPage <= this.pagesCount - 3) {
@@ -192,10 +193,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
     return 'end'
   }
 
-  private generatePages(pagesNumber: number) {
+  private generatePages(pagesNumber: number): number[] {
+    const pages = []
     for (let i = 0; i < pagesNumber; i++) {
-      this.pages.push(i + 1);
+      pages.push(i + 1);
     }
+    return pages
   }
 
 

@@ -14,7 +14,7 @@ import {FilterService} from './filter.service';
   providedIn: 'root',
 })
 export class ProductListService {
-  public static readonly defaultPageSize: number = 2
+  public static readonly defaultPageSize: number = 15
 
   private category: BehaviorSubject<Category> = new BehaviorSubject<Category>(
     {} as Category
