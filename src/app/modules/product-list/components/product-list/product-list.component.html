@@ -46,7 +46,7 @@
         <div *ngFor="let filterGroup of filterState$ | async">
           <h2 class="product-list__filters-head">{{filterGroup?.key}}</h2>
           <div class="product-list__filters-value" *ngFor="let filterField of filterGroup?.values">
-            <label class="filter__container" [for]="filterGroup.key + '_' + filterField.value">
+            <label class="filter__container" [class.disabled]="!filterField.isChecked && !filterField.isActive" [for]="filterGroup.key + '_' + filterField.value">
               {{filterField.value || 'test'}}
               <input
                 type="checkbox"

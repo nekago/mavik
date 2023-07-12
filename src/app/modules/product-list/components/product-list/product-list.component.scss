@@ -144,6 +144,15 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    &.disabled {
+      color: $textAdditional;
+
+      &:hover {
+        color: $textAdditional;
+        background: none;
+      }
+    }
   }
 
   /* Hide the browser's default checkbox */

@@ -76,7 +76,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(this.productListService.productList$.subscribe(res => {
       this.productList = res.results;
-      this.pagesCount = Math.ceil(res.count / res.results?.length);
+      this.pagesCount = Math.ceil(res.count / ProductListService.defaultPageSize);
       this.pages = this.generatePages(this.pagesCount);
       this.cheese20 = res.count;
       this.cdr.detectChanges();
