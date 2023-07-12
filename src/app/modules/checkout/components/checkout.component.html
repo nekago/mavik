@@ -12,37 +12,42 @@
         <form action="#" id="form" class="form__body" (submit)="submitForm()" [formGroup]="form">
           <div class="form__row">
             <div class="form__item">
-              <label for="formName" class="form__label">Ім’я*</label>
-              <input id="formName" formControlName="first_name" type="text" class="form__input">
-              <span *ngIf="showErrorForFormControl('name') && minLengthError('name')">length</span>
-              <span *ngIf="showErrorForFormControl('name') && !minLengthError('name')">required</span>
+              <label for="formName" class="form__label">Ім’я<span>*</span></label>
+              <input id="formName" formControlName="first_name" type="text" class="form__input" placeholder="Введіть ім’я">
+              <span class="form__notification" *ngIf="showErrorForFormControl('first_name') && minLengthError('first_name')">Заповніть поле</span>
+              <span class="form__notification" *ngIf="showErrorForFormControl('first_name') && !minLengthError('first_name')">Обов'язкове поле</span>
             </div>
             <div class="form__item">
-              <label for="formSerName" class="form__label">Прізвище*</label>
-              <input id="formSerName" formControlName="last_name" type="text" class="form__input">
-              <span *ngIf="showErrorForFormControl('surname')">required</span>
-            </div>
-          </div>
-          <div class="form__row">
-            <div class="form__item">
-              <label for="formCity" class="form__label">Місто*</label>
-              <input id="formCity" formControlName="city" type="text" class="form__input">
+              <label for="formSerName" class="form__label">Прізвище<span>*</span></label>
+              <input id="formSerName" formControlName="last_name" type="text" class="form__input" placeholder="Введіть прізвище">
+              <span class="form__notification" *ngIf="showErrorForFormControl('last_name')">Обов'язкове поле</span>
             </div>
           </div>
           <div class="form__row">
             <div class="form__item">
-              <label for="formEmail" class="form__label">Пошта*</label>
-              <input id="formEmail" formControlName="email" type="text" class="form__input">
+              <label for="formCity" class="form__label">Місто<span>*</span></label>
+              <input id="formCity" formControlName="city" type="text" class="form__input" placeholder="Введіть місто">
+              <span class="form__notification" *ngIf="showErrorForFormControl('last_name')">Обов'язкове поле</span>
             </div>
           </div>
           <div class="form__row">
             <div class="form__item">
-              <label for="formPhone" class="form__label">Телефон</label>
-              <input id="formPhone" formControlName="phone_number" type="text" class="form__input">
+              <label for="formEmail" class="form__label">Пошта<span>*</span></label>
+              <input id="formEmail" formControlName="email" type="text" class="form__input" placeholder="example@gmail.com">
+              <span class="form__notification" *ngIf="showErrorForFormControl('email') && minLengthError('email')">Неправильний формат</span>
+              <span class="form__notification" *ngIf="showErrorForFormControl('email') && !minLengthError('email')">Обов'язкове поле</span>
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="form__item">
+              <label for="formPhone" class="form__label">Телефон<span>*</span></label>
+              <input id="formPhone" formControlName="phone_number" type="text" class="form__input" placeholder="(095)-11-22-333">
+              <span class="form__notification" *ngIf="showErrorForFormControl('phone_number')">Неправильний формат</span>
+              <span class="form__notification" *ngIf="showErrorForFormControl('phone_number') && !minLengthError('phone_number')">Обов'язкове поле</span>
             </div>
             <div class="form__item">
               <label for="formTelegram" class="form__label">Телеграм</label>
-              <input id="formTelegram" formControlName="telegram" type="text" class="form__input">
+              <input id="formTelegram" formControlName="telegram" type="text" class="form__input" placeholder="@example">
             </div>
           </div>
 
