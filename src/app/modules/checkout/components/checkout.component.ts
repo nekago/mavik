@@ -24,12 +24,14 @@ export class CheckoutComponent implements OnInit {
       last_name: new FormControl('', [Validators.required, Validators.minLength(1)]),
       city: new FormControl('', [Validators.required, Validators.minLength(1)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      phone_number: new FormControl('', Validators.pattern('[0-9]{10}')),
+      phone_number: new FormControl('', Validators.pattern(/^\+?380\d{9}$|^\d{10,12}$/)),
       telegram: new FormControl(''),
       comment: new FormControl(''),
     }
-  )
-  isFormSubmitted: boolean = false;
+  );
+
+  public isFormSubmitting: boolean = false;
+  public isFormSubmitted: boolean = false;
 
   constructor(
     private cartService: CartService,
@@ -50,6 +52,7 @@ export class CheckoutComponent implements OnInit {
 
   public submitForm() {
     const form = this.form.value;
+    this.isFormSubmitting = true;
     this.apiService.post('order/', {
       ...form,
       products: this.cartList.map(elem => ({
@@ -60,6 +63,8 @@ export class CheckoutComponent implements OnInit {
       this.resetForm();
       this.isFormSubmitted = true;
       this.cartService.resetCart();
+
+      this.isFormSubmitted = true;
 
       setTimeout(() => {
         this.router.navigateByUrl('/main')

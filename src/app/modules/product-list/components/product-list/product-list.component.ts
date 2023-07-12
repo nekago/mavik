@@ -74,6 +74,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
       this.productListService.setCurrentCategoryBySlug(slug);
     }));
 
+    this.subscriptions.add(this.route.queryParams.subscribe(() => {
+      this.productListService.getProductListBySlug(this.slugName)
+    }))
+
     this.subscriptions.add(this.productListService.productList$.subscribe(res => {
       this.productList = res.results;
       this.pagesCount = Math.ceil(res.count / ProductListService.defaultPageSize);
@@ -81,10 +85,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
       this.cheese20 = res.count;
       this.cdr.detectChanges();
     }));
-
-    this.subscriptions.add(this.route.queryParams.subscribe(() => {
-      this.productListService.getProductListBySlug(this.slugName)
-    }))
 
     this.subscriptions.add(this.productListService.category$.subscribe(data => {
       this.categoryName = data.name;
@@ -130,6 +130,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+    this.productListService.reset();
   }
 
 
@@ -177,6 +178,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
           break;
       }
     }
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
 
     this.filterService.setQueryParams({page: [this.currentPage]});
   }

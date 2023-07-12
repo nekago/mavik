@@ -1,7 +1,7 @@
 <app-breadcrumbs></app-breadcrumbs>
 <div class="product">
   <div class="container">
-    <div class="product__inner" *ngIf="product">
+    <div class="product__inner" *ngIf="product; else isLoad">
 
 
       <div class="product__img"><img [src]="product?.image" [alt]="product?.name" class="product__img"></div>
@@ -56,4 +56,8 @@
     </div>
   </div>
 </div>
+
+<ng-template #isLoad>
+  <app-loader></app-loader>
+</ng-template>
 

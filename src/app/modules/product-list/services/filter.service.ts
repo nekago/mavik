@@ -405,6 +405,7 @@ export class FilterService {
 	public reset() {
 		this.filterState.next([]);
 		this.filterTags.next([]);
+		this.currentPage.next(1);
 		this.filterStateCategory = undefined;
 	}
 }

@@ -4,7 +4,6 @@
 <!--  </li>-->
 <!--</ul>-->
 
-
 <app-breadcrumbs></app-breadcrumbs>
 
 <div class="product-list" *ngIf="productList; else loader">
@@ -14,7 +13,7 @@
     </div>
     <div class="product-list__info">
       <img class="product-list__info-img" src="assets/icons/product-list/{{slugName}}-icon.svg" alt="{{slugName}}-icon">
-      <div class="product-list__info-name">{{categoryName}}</div>
+      <div class="product-list__info-name" >{{categoryName}}</div>
       <div class="product-list__info-count"> ({{cheese20}})</div>
       <div class="filter-tag" *ngIf="(filterTags$ | async)?.length">
         <button (click)="resetFilter()" class="filter-tag__reset">Очистити фільтри
@@ -46,7 +45,8 @@
         <div *ngFor="let filterGroup of filterState$ | async">
           <h2 class="product-list__filters-head">{{filterGroup?.key}}</h2>
           <div class="product-list__filters-value" *ngFor="let filterField of filterGroup?.values">
-            <label class="filter__container" [class.disabled]="!filterField.isChecked && !filterField.isActive" [for]="filterGroup.key + '_' + filterField.value">
+            <label class="filter__container" [class.disabled]="!filterField.isChecked && !filterField.isActive"
+                   [for]="filterGroup.key + '_' + filterField.value">
               {{filterField.value || 'test'}}
               <input
                 type="checkbox"

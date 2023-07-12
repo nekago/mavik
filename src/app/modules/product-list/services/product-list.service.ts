@@ -45,6 +45,11 @@ export class ProductListService {
   ) {
   }
 
+  public reset() {
+    this.productList.next({} as ProductListInterface);
+    this.isLoadingProductList.next(false);
+  }
+
   public getProductListBySlug(
     slug: CategorySlugNames
   ) {

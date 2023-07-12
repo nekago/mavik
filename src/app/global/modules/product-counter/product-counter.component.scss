@@ -13,16 +13,6 @@
     font-size: 42px;
     text-align: center;
     border: 1px solid #DDDCDF;
-
-    &[type="number"] {
-      -moz-appearance: textfield;
-
-      &::-webkit-inner-spin-button,
-      &::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-    }
   }
 
   &-plus, &-minus {

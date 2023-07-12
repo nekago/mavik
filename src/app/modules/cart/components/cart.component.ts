@@ -1,10 +1,11 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {CartService} from '../service/cart.service';
 import {CartItem, CartList} from '../../../global/entities/cart.interface';
-import {Product} from '../../../global/entities/product.interface';
+import {CategorySlugNames, Product} from '../../../global/entities/product.interface';
 import {Router} from '@angular/router';
 import {LocalizerService} from '../../../global/services/localizer.service';
 import {Subscription} from 'rxjs';
+import {ProductListService} from '../../product-list/services/product-list.service';
 
 @Component({
   selector: 'app-cart',
@@ -18,12 +19,18 @@ export class CartComponent implements OnInit, OnDestroy {
   public totalPrice = 0;
 
   private subscriptions: Subscription = new Subscription();
+  private categorySlug: CategorySlugNames = 'cheese';
+
+  get backToShoppingLink(): string {
+    return `/categories/${this.categorySlug}`
+  }
 
   constructor(
     private cartService: CartService,
     private cdr: ChangeDetectorRef,
     private router: Router,
     private localizerService: LocalizerService,
+    private productListService: ProductListService,
   ) {
   }
 
@@ -32,7 +39,9 @@ export class CartComponent implements OnInit, OnDestroy {
       this.cartList = list;
       this.totalPrice = this.cartService.getTotalPrice(list);
       this.cdr.detectChanges();
-    }))
+    }));
+
+    this.categorySlug = this.productListService.categorySlug || 'cheese';
   }
 
   ngOnDestroy() {

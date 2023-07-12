@@ -3,7 +3,7 @@
   <div class="product-card__name" (click)="redirectToProductPage()">{{product?.name}}</div>
   <div class="product-card__price">
     <div class="product-card__price-sale" *ngIf="product?.sale_price"><i class="fas fa-hryvnia"></i>{{product?.price}}</div>
-    <div class="product-card__price"><i class="fas fa-hryvnia"></i>{{product?.sale_price || product?.price}}</div>
+    <div class="product-card__price-price"><i class="fas fa-hryvnia"></i>{{product?.sale_price || product?.price}}</div>
   </div>
   <app-product-in-cart-button [product]="product"></app-product-in-cart-button>
   <div class="product-card__availability" *ngIf="this.product?.in_stock; else notInStock">

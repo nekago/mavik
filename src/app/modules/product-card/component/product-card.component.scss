@@ -38,18 +38,26 @@
   }
 
   &__price {
-    font-family: $nunito_semibold;
-    font-weight: 600;
-    font-size: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     margin-top: auto;
 
-     i {
-       font-size: 16px;
-     }
+    &-price {
+      font-family: $nunito_semibold;
+      font-weight: 600;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+
+      i {
+        font-size: 16px;
+      }
+    }
+
     &-sale {
       align-items: center;
       font-family: $nunito_regular;

@@ -1,6 +1,10 @@
 <section class="checkout" *ngIf="!isFormSubmitted; else formSubmitted">
   <app-breadcrumbs></app-breadcrumbs>
 
+  <div class="container-loader" *ngIf="isFormSubmitting">
+    <app-loader></app-loader>
+  </div>
+
   <div class="container">
     <div class="checkout__title">
       <img src="assets/icons/checkout-icons.svg" alt="checkout-icon">
@@ -13,13 +17,17 @@
           <div class="form__row">
             <div class="form__item">
               <label for="formName" class="form__label">Ім’я<span>*</span></label>
-              <input id="formName" formControlName="first_name" type="text" class="form__input" placeholder="Введіть ім’я">
-              <span class="form__notification" *ngIf="showErrorForFormControl('first_name') && minLengthError('first_name')">Заповніть поле</span>
-              <span class="form__notification" *ngIf="showErrorForFormControl('first_name') && !minLengthError('first_name')">Обов'язкове поле</span>
+              <input id="formName" formControlName="first_name" type="text" class="form__input"
+                     placeholder="Введіть ім’я">
+              <span class="form__notification"
+                    *ngIf="showErrorForFormControl('first_name') && minLengthError('first_name')">Заповніть поле</span>
+              <span class="form__notification"
+                    *ngIf="showErrorForFormControl('first_name') && !minLengthError('first_name')">Обов'язкове поле</span>
             </div>
             <div class="form__item">
               <label for="formSerName" class="form__label">Прізвище<span>*</span></label>
-              <input id="formSerName" formControlName="last_name" type="text" class="form__input" placeholder="Введіть прізвище">
+              <input id="formSerName" formControlName="last_name" type="text" class="form__input"
+                     placeholder="Введіть прізвище">
               <span class="form__notification" *ngIf="showErrorForFormControl('last_name')">Обов'язкове поле</span>
             </div>
           </div>
@@ -33,7 +41,8 @@
           <div class="form__row">
             <div class="form__item">
               <label for="formEmail" class="form__label">Пошта<span>*</span></label>
-              <input id="formEmail" formControlName="email" type="text" class="form__input" placeholder="example@gmail.com">
+              <input id="formEmail" formControlName="email" type="text" class="form__input"
+                     placeholder="example@gmail.com">
               <span class="form__notification" *ngIf="showErrorForFormControl('email') && minLengthError('email')">Неправильний формат</span>
               <span class="form__notification" *ngIf="showErrorForFormControl('email') && !minLengthError('email')">Обов'язкове поле</span>
             </div>
@@ -41,13 +50,17 @@
           <div class="form__row">
             <div class="form__item">
               <label for="formPhone" class="form__label">Телефон<span>*</span></label>
-              <input id="formPhone" formControlName="phone_number" type="text" class="form__input" placeholder="(095)-11-22-333">
-              <span class="form__notification" *ngIf="showErrorForFormControl('phone_number')">Неправильний формат</span>
-              <span class="form__notification" *ngIf="showErrorForFormControl('phone_number') && !minLengthError('phone_number')">Обов'язкове поле</span>
+              <input id="formPhone" formControlName="phone_number" type="number" class="form__input"
+                     placeholder="(095)-11-22-333">
+              <span class="form__notification"
+                    *ngIf="showErrorForFormControl('phone_number')">Неправильний формат</span>
+              <span class="form__notification"
+                    *ngIf="showErrorForFormControl('phone_number') && !minLengthError('phone_number')">Обов'язкове поле</span>
             </div>
             <div class="form__item">
               <label for="formTelegram" class="form__label">Телеграм</label>
-              <input id="formTelegram" formControlName="telegram" type="text" class="form__input" placeholder="@example">
+              <input id="formTelegram" formControlName="telegram" type="text" class="form__input"
+                     placeholder="@example">
             </div>
           </div>
 
@@ -76,8 +89,8 @@
                 <div class="cart__item-price"><i class="fas fa-hryvnia"></i>{{item.sale_price || item.price}}</div>
               </div>
             </div>
-            <div  class="total-price">
-              <div class="cart__item-name ">Разом: </div>
+            <div class="total-price">
+              <div class="cart__item-name ">Разом:</div>
               <div class="cart__item-price"><i class="fas fa-hryvnia"></i>{{totalPrice + '.00'}}</div>
             </div>
           </div>
@@ -94,5 +107,5 @@
     </div>
     <h1 class="form__submitted-title">Ваше замовлення успішно оформлено!</h1>
   </div>
-
 </ng-template>
+
