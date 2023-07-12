@@ -30,11 +30,13 @@ export class FilterService {
 		new BehaviorSubject<PriceRange>({} as PriceRange);
 	private searchQuery: BehaviorSubject<string> =
 		new BehaviorSubject<string>('');
-	private priceSlider: BehaviorSubject<Options> = new BehaviorSubject<Options>(
-		{}
-	);
+	private priceSlider: BehaviorSubject<Options> =
+    new BehaviorSubject<Options>({});
+  private currentPage: BehaviorSubject<number> =
+    new BehaviorSubject<number>(0)
 
-	tmp: any = {};
+
+    tmp: any = {};
 
 	private lastSelectedFilterGroup: FilterFields = 'brand';
 
@@ -55,7 +57,10 @@ export class FilterService {
 		this.selectedPriceRange.asObservable();
   public searchQuery$: Observable<string> =
     this.searchQuery.asObservable()
-	public priceSlider$: Observable<Options> = this.priceSlider.asObservable();
+	public priceSlider$: Observable<Options> =
+    this.priceSlider.asObservable();
+  public currentPage$: Observable<number> =
+    this.currentPage.asObservable();
 
 	public filterStateCategory: CategorySlugNames | undefined;
 
@@ -92,6 +97,11 @@ export class FilterService {
             return acc;
 					}
 
+					if (elem[0] === 'page') {
+						this.currentPage.next(elem[1])
+            return acc;
+					}
+
 					acc[elem[0]] = elem[1]?.split(',');
 					return acc;
 				},
@@ -105,7 +115,6 @@ export class FilterService {
 			if (!this.filterTags.getValue().length) {
 				for (const elem of Object.entries(this.params)) {
 					elem[1].forEach((tag: string) => {
-            console.log(tag)
 						if (!Number(tag) && Number(tag) !== 0) {
 							this.addFilterTag(elem[0], tag);
 						}
@@ -141,6 +150,10 @@ export class FilterService {
       price_min: [String(min)],
       price_max: [String(max)],
     };
+  }
+
+  public getCurrentPage() {
+    return [this.currentPage.getValue()];
   }
 
 	public initFilterState(filters: Filters, slug: CategorySlugNames) {

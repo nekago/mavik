@@ -156,7 +156,7 @@
   }
 
   .filter__container:hover {
-    background-color: #DEE5FF;
+    background-color: $light_blue;
     color: $dark_blue;
   }
 
@@ -239,7 +239,7 @@
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #DEE5FF;
+      background-color: $light_blue;
     }
   }
 
@@ -266,7 +266,7 @@
     }
 
     &:hover {
-      background-color: #DEE5FF;
+      background-color: $light_blue;
     }
   }
 }
@@ -300,6 +300,13 @@ span.disabled {
     background: none;
 
     cursor: pointer;
+
+    &.active {
+      background: $light_blue;
+      color: $dark_blue;
+
+      border: none;
+    }
 
     span {
       font-family: $nunito_light, sans-serif;

@@ -14,7 +14,7 @@ import {FilterService} from './filter.service';
   providedIn: 'root',
 })
 export class ProductListService {
-  public static readonly defaultPageSize: number = 15
+  public static readonly defaultPageSize: number = 2
 
   private category: BehaviorSubject<Category> = new BehaviorSubject<Category>(
     {} as Category
@@ -54,7 +54,8 @@ export class ProductListService {
       // ...this.filterService.getPriceRange(),
       page_size: [
         `${ProductListService.defaultPageSize}`
-      ]
+      ],
+      page: this.filterService.getCurrentPage(),
     }
     const searchQuery = this.filterService.getSearchQuery()
     if (searchQuery[0].length) {

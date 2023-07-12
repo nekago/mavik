@@ -115,7 +115,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
       }
     }));
 
-    this.subscriptions.add(this.filterService.selectedFilters$.subscribe(() => {}));
+    this.subscriptions.add(this.filterService.selectedFilters$.subscribe(() => {
+    }));
+
+    this.subscriptions.add(this.filterService.currentPage$.subscribe(currentPage => {
+      if (currentPage) {
+        this.currentPage = currentPage;
+
+      }
+    }))
 
     this.filterState$ = this.filterService.filterState$;
     this.filterTags$ = this.filterService.filterTags$;
@@ -157,12 +165,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   // PAGINATION
 
-  private generatePages(pagesNumber: number) {
-    for (let i = 0; i < pagesNumber; i++) {
-      this.pages.push(i + 1);
-    }
-  }
-
   public changePage(action: 'first' | 'last' | number) {
     if (typeof action === 'number') {
       this.currentPage = action;
@@ -170,15 +172,30 @@ export class ProductListComponent implements OnInit, OnDestroy {
       switch (action) {
         case 'first':
           this.currentPage = 1;
-          return;
+          break;
 
         case 'last':
           this.currentPage = this.pagesCount;
-          return;
+          break;
       }
     }
 
-    this.filterService.setQueryParams({page: this.currentPage});
+    this.filterService.setQueryParams({page: [this.currentPage]});
+  }
+
+  public paginationState(): 'start' | 'middle' | 'end' {
+    if (this.currentPage < 4) {
+      return 'start'
+    } else if (this.currentPage >= 4 && this.currentPage <= this.pagesCount - 3) {
+      return 'middle'
+    }
+    return 'end'
+  }
+
+  private generatePages(pagesNumber: number) {
+    for (let i = 0; i < pagesNumber; i++) {
+      this.pages.push(i + 1);
+    }
   }
 
 
