@@ -24,7 +24,7 @@ export class CheckoutComponent implements OnInit {
       last_name: new FormControl('', [Validators.required, Validators.minLength(1)]),
       city: new FormControl('', [Validators.required, Validators.minLength(1)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      phone_number: new FormControl('', Validators.pattern(/^\+?380\d{9}$|^\d{10,12}$/)),
+      phone_number: new FormControl('', Validators.pattern(/^\+?380\d{9}$|^\d{9,11}$/)),
       telegram: new FormControl(''),
       comment: new FormControl(''),
     }

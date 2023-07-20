@@ -299,6 +299,14 @@ span.disabled {
   align-items: center;
   margin-top: 20px;
 
+  font-family: $nunito_light, sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  text-align: center;
+  color: $textAdditional;
+
+
+
   &__page {
     margin-right: 12px;
     width: 37px;
@@ -310,6 +318,12 @@ span.disabled {
 
     cursor: pointer;
 
+    transition: background-color 0.3s ease;
+
+    i  {
+      font-size: 12px;
+    }
+
     &.active {
       background: $light_blue;
       color: $dark_blue;
@@ -317,16 +331,14 @@ span.disabled {
       border: none;
     }
 
-    span {
-      font-family: $nunito_light, sans-serif;
-      font-weight: 300;
-      font-size: 13px;
-      text-align: center;
-      color: $textAdditional;
-
+    &:hover {
+      background-color: $light_blue;
+      color: $dark_blue;
     }
-
+    
   }
+
+
 }
 
 

@@ -212,35 +212,35 @@ textarea.form__input {
     justify-content: space-between;
   }
 
-  .submitted-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-  }
 
-  .form__submitted {
-    background-color: green;
-    display: inline-block;
-    padding: 10px;
-
-    i {
-      color: white;
-      font-size: 88px;
-    }
-
-    &-title {
-      margin-top: 50px;
-      font-family: $nunito_bold;
-      font-size: 30px;
-      font-weight: 700;
-      color: $textColor;
-    }
-  }
 }
 
+.submitted-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
 
+.form__submitted {
+  background-color: green;
+  display: inline-block;
+  padding: 10px;
+
+  i {
+    color: white;
+    font-size: 88px;
+  }
+
+  &-title {
+    margin-top: 50px;
+    font-family: $nunito_bold;
+    font-size: 30px;
+    font-weight: 700;
+    color: $textColor;
+  }
+}
 
 
 

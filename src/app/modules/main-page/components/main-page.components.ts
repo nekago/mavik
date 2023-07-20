@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {OwlOptions} from 'ngx-owl-carousel-o';
 import {map, Subscription} from 'rxjs';
 import {Categories, Product} from '../../../global/entities/product.interface';
@@ -18,6 +18,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
   public bestSellers: Product[] = [];
 
   private subscriptions: Subscription = new Subscription();
+
+  public displayCount: number = 6;
 
   constructor(
     private mainPageService: MainPageService,
@@ -85,7 +87,23 @@ export class MainPageComponent implements OnInit, OnDestroy {
     dots: true,
     navSpeed: 700,
     items: 1,
-    nav: false
+    nav: false,
+    responsive: {
+      0: {
+        items: 1,
+      }
   }
+}
 
+  @HostListener('window:resize', ['$event'])
+  public onResize(event: any) {
+    const width = event.target.innerWidth;
+    if (width <= 600) {
+      this.displayCount = 2;
+    } else if (width <= 1024) {
+      this.displayCount = 3;
+    } else {
+      this.displayCount = 6;
+    }
+  }
 }

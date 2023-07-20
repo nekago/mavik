@@ -58,19 +58,6 @@
               >
               <span class="checkmark" [class.disabled]="filterFieldIsDisable(filterField)"></span>
             </label>
-
-            <!--            <label class="container1">-->
-            <!--              {{filterField.value || 'test'}}-->
-            <!--              <input-->
-            <!--                (input)="toggleFilterValue(filterGroup.key_en, filterField, $event)"-->
-            <!--                [id]="filterGroup.key + '_' + filterField.value"-->
-            <!--                [disabled]="!filterField.isChecked && !filterField.isActive"-->
-            <!--                [checked]="filterField.isChecked"-->
-            <!--                type="checkbox"-->
-            <!--                checked="checked"-->
-            <!--              >-->
-            <!--              <span class="checkmark" [class.disabled]="filterFieldIsDisable(filterField)"></span>-->
-            <!--            </label>-->
           </div>
 
         </div>
@@ -84,7 +71,7 @@
     </div>
     <div class="pagination">
 
-      <button class="pagination__page" (click)="changePage('first')" [disabled]="currentPage === 1"><<</button>
+      <button class="pagination__page" (click)="changePage('first')" [disabled]="currentPage === 1"><i class="fas fa-angles-left"></i></button>
       <div [ngSwitch]="paginationState()">
         <div *ngSwitchCase="'start'">
           <button class="pagination__page" (click)="changePage(page)" *ngFor="let page of pages | slice:0:4"
@@ -140,7 +127,7 @@
         </div>
 
       </div>
-      <button class="pagination__page" (click)="changePage('last')" [disabled]="currentPage === pagesCount">>></button>
+      <button class="pagination__page" (click)="changePage('last')" [disabled]="currentPage === pagesCount"><i class="fas fa-angles-right"></i></button>
     </div>
 
   </div>
