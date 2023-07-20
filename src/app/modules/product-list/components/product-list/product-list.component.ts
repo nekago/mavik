@@ -81,7 +81,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.productListService.productList$.subscribe(res => {
       this.productList = res.results;
       this.pagesCount = Math.ceil(res.count / ProductListService.defaultPageSize);
-      this.pages = this.generatePages(this.pagesCount);
+      this.pages = ProductListComponent.generatePages(this.pagesCount);
       this.cheese20 = res.count;
       this.cdr.detectChanges();
     }));
@@ -165,6 +165,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   // PAGINATION
 
   public changePage(action: 'first' | 'last' | number) {
+    this.filterService.isPageChanged = true;
+
     if (typeof action === 'number') {
       this.currentPage = action;
     } else {
@@ -199,7 +201,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     return 'end'
   }
 
-  private generatePages(pagesNumber: number): number[] {
+  private static generatePages(pagesNumber: number): number[] {
     const pages = []
     for (let i = 0; i < pagesNumber; i++) {
       pages.push(i + 1);

@@ -16,6 +16,12 @@
   margin-bottom: 30px;
   margin-right: 20px;
 
+  transition: 0.5s;
+
+  &:hover {
+    box-shadow: 0 0 8px 2px #e8e6e6;
+  }
+
   &__img {
     width: 150px;
     height: 150px;
