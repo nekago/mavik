@@ -1,4 +1,4 @@
-@import 'src/assets/scss/setting';
+@import '../../../../../assets/scss/setting';
 
 .menu {
   font-family: $nunito_bold;
@@ -21,6 +21,14 @@
         transition-delay: 0.2s;
       }
     }
+  }
+
+  @media screen and (max-width: 960px) {
+
+    &__list {
+      flex-direction: column;
+    }
+
   }
 }
 
