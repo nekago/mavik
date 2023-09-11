@@ -14,6 +14,13 @@
     margin-top: 20px;
     display: flex;
     margin-bottom: 28px;
+
+    @media screen and (max-width: 600px) {
+      img {
+        width: 24px;
+        height: auto;
+      }
+    }
   }
 
 }
@@ -21,13 +28,23 @@
 .checkout__wrapper {
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: 1290px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .form {
   max-width: 680px;
+  width: 100%;
   font-family: $nunito_semibold;
   font-size: 24px;
   font-weight: 400;
+
+  @media screen and (max-width: 600px) {
+    max-width: 100%;
+  }
 }
 
 .form__notification {
@@ -41,6 +58,9 @@
 .form__body {
   display: grid;
   grid-gap: 10px;
+  @media screen and (max-width: 600px) {
+    grid-gap: 10px;
+  }
 }
 
 .form__row {
@@ -50,6 +70,10 @@
 
   &:nth-child(1) {
     grid-template-columns: 1fr 1fr;
+
+    @media screen and (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &:nth-child(2),
@@ -61,6 +85,9 @@
 
   &:nth-child(4) {
     grid-template-columns: 1fr 1fr;
+    @media screen and (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .form__button:disabled {
@@ -72,10 +99,18 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 5px;
+
+  @media screen and (max-width: 600px) {
+    font-size: 16px;
+  }
 }
 
 .form__label {
   font-weight: bold;
+
+  @media screen and (max-width: 600px) {
+    font-size: 16px;
+  }
 
   span {
     color: #FF1515;
@@ -90,11 +125,24 @@
   background: var(--bg, #F5F7FF);
   border-radius: 4px;
   font-weight: 400;
+
+  @media screen and (max-width: 600px) {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+  }
 }
 
 textarea.form__input {
   max-width: 680px;
   min-height: 180px;
+
+  @media screen and (max-width: 600px) {
+    max-width: 100vh;
+    min-height: 60px;
+    height: auto;
+  }
 }
 
 
@@ -107,11 +155,18 @@ textarea.form__input {
 
 .cart {
   max-width: 670px;
+  width: 100%;
   height: fit-content;
   padding: 24px 32px;
   border: 1px solid #D9D9D9;
   border-radius: 8px;
   margin-top: 58px;
+
+  @media screen and (max-width: 600px) {
+    padding: 12px 16px;
+    margin-top: 24px;
+  }
+
 
   &__control {
     display: flex;
@@ -127,10 +182,19 @@ textarea.form__input {
       font-size: 32px;
       color: $textColor;
 
+      @media screen and (max-width: 600px) {
+        font-size: 24px;
+      }
+
       img {
         width: 32px;
         height: 32px;
         margin-right: 10px;
+
+        @media screen and (max-width: 600px) {
+          width: 24px;
+          height: 24px;
+        }
       }
     }
 
@@ -144,6 +208,11 @@ textarea.form__input {
       background: inherit;
       cursor: pointer;
       transition: 0.8s;
+
+      @media screen and (max-width: 600px) {
+        font-size: 14px;
+        max-width: 50%;
+      }
 
       &:hover {
         transition-delay: 0.8s;
@@ -164,6 +233,10 @@ textarea.form__input {
     font-size: 24px;
     color: $textColor;
 
+    @media screen and (max-width: 600px) {
+      font-size: 16px;
+    }
+
 
     &-name {
       max-width: 370px;
@@ -171,6 +244,10 @@ textarea.form__input {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+
+      @media screen and (max-width: 600px) {
+        max-width: 195px;
+      }
 
     }
 
@@ -180,6 +257,8 @@ textarea.form__input {
       align-items: center;
       width: 50%;
       text-align: left;
+
+
     }
 
 
@@ -195,9 +274,17 @@ textarea.form__input {
       font-size: 32px;
       font-weight: bold;
 
+      @media screen and (max-width: 600px) {
+        font-size: 16px;
+      }
+
       i {
         margin-right: 3px;
         font-size: 24px;
+
+        @media screen and (max-width: 600px) {
+          font-size: 16px;
+        }
       }
     }
 
@@ -210,6 +297,10 @@ textarea.form__input {
     font-weight: 700;
     display: flex;
     justify-content: space-between;
+
+    @media screen and (max-width: 600px) {
+      font-size: 18px;
+    }
   }
 
 
@@ -231,6 +322,7 @@ textarea.form__input {
   i {
     color: white;
     font-size: 88px;
+
   }
 
   &-title {
@@ -239,6 +331,10 @@ textarea.form__input {
     font-size: 30px;
     font-weight: 700;
     color: $textColor;
+
+    @media (max-width: 600px) {
+      font-size: 16px;
+    }
   }
 }
 

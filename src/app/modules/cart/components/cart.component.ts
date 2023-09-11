@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {LocalizerService} from '../../../global/services/localizer.service';
 import {Subscription} from 'rxjs';
 import {ProductListService} from '../../product-list/services/product-list.service';
+import {MobileService} from "../../../global/services/mobile.service";
 
 @Component({
   selector: 'app-cart',
@@ -20,6 +21,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription = new Subscription();
   private categorySlug: CategorySlugNames = 'cheese';
+  public isMobile!: boolean
 
   get backToShoppingLink(): string {
     return `/categories/${this.categorySlug}`
@@ -31,6 +33,8 @@ export class CartComponent implements OnInit, OnDestroy {
     private router: Router,
     private localizerService: LocalizerService,
     private productListService: ProductListService,
+    private mobileService: MobileService,
+
   ) {
   }
 
@@ -40,6 +44,13 @@ export class CartComponent implements OnInit, OnDestroy {
       this.totalPrice = this.cartService.getTotalPrice(list);
       this.cdr.detectChanges();
     }));
+
+    this.subscriptions.add(
+      this.mobileService.isMobile$.subscribe(data => {
+        this.isMobile = data;
+        this.cdr.detectChanges();
+      })
+    )
 
     this.categorySlug = this.productListService.categorySlug || 'cheese';
   }

@@ -1,3 +1,7 @@
+<section  *ngIf="isMobile">
+  <app-menu class="mobile__menu" [class.show]="!(isBurgerClose$ | async)"></app-menu>
+</section>
+
 <section class="banner">
   <div class="container">
     <div class="banner__inner">
@@ -26,7 +30,7 @@
     </div>
     <div class="bestseller__inner">
       <div class="bestseller__list" *ngIf="bestSellers.length; else loader">
-        <app-product-card *ngFor="let bestSeller of bestSellers | slice:0:displayCount" [product]="bestSeller"></app-product-card>
+        <app-product-card *ngFor="let bestSeller of bestSellers" [product]="bestSeller"></app-product-card>
       </div>
       <ng-template #loader>
         <app-loader></app-loader>

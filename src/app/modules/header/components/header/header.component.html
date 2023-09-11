@@ -3,14 +3,27 @@
   <div class="container">
     <div class="header__inner">
       <a routerLink="/" class="header__logo">
-        <img class="header__logo-img" src="assets/images/logo.png" alt="logo" >
+        <img class="header__logo-img" src="assets/images/logo.png" alt="logo">
       </a>
-      <app-menu *ngIf="!isHideAppMenu"></app-menu>
-      <app-search [class.long]="isHideAppMenu"></app-search>
+
+      <!--    burger -->
+      <div class="header__burger" *ngIf="isMobile && !isHideAppMenu" [class.open]="!burgerIsClose" (click)="toggleBurger()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+        <app-menu *ngIf="!isHideAppMenu && !isMobile"></app-menu>
+        <app-search class="hide" [class.long]="isHideAppMenu" [isDisabled]="!isHideAppMenu"></app-search>
       <a routerLink="/cart" class="header__cart" type="submit">
         <div *ngIf="cartCounter">{{cartCounter}}</div>
         <img src="assets/icons/cart_icon.png" alt="cart-icon">
       </a>
     </div>
+
+
+
+
+
   </div>
 </header>

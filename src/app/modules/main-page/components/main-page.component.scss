@@ -7,8 +7,8 @@
 
   &__inner {
     padding: 50px;
-    background: rgb(255, 255, 255);
-    background: radial-gradient(circle, rgba(255, 255, 255, 1) 55%, rgba(63, 146, 250, 1) 100%);
+    background: rgb(63,146,250);
+    background: linear-gradient(13deg, rgba(63,146,250,1) 1%, rgba(255,255,255,1) 29%);
   }
 
   &__title {
@@ -136,28 +136,8 @@
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    @media (max-width: 600px) {
+    overflow-x: auto;
 
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Показываем 2 карточки в ряду */
-
-    }
-
-
-    @media (min-width: 601px) and (max-width: 1024px) {
-
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-
-    }
-
-    /* Для ширины экрана больше 1024 пикселей */
-    @media (min-width: 1025px) {
-
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-
-    }
   }
 }
 
@@ -611,6 +591,20 @@
       width: 100%;
       height: 600px;
     }
+  }
+}
+
+.mobile__menu {
+  position: fixed;
+  top: 112px;
+  background-color: $white;
+  min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 100px);
+  width: 100vw;
+  z-index: 999;
+  transition: all 0.5s;
+  transform: translateX(-960px);
+  &.show {
+    transform: translateX(0);
   }
 }
 

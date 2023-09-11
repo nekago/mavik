@@ -8,6 +8,15 @@
 .header {
   background-color: $white;
 
+
+  &__logo {
+    img {
+      min-width: 92px;
+      height: 92px;
+    }
+
+  }
+
   &__inner{
     display: flex;
     justify-content: space-between;
@@ -15,6 +24,96 @@
     padding-block: 10px;
     position: relative;
     overflow: hidden;
+  }
+
+  app-menu {
+    display: flex;
+    align-items: center;
+    @media screen and (max-width: 960px) {
+      width: 100vw;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: -15px;
+      right: 0;
+      height: 100%;
+    }
+  }
+
+  &__burger {
+    display: block;
+    width: 60px;
+    height: 30px;
+    position: relative;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+
+
+
+    span {
+      display: block;
+      position: absolute;
+      height: 5px;
+      width: 100%;
+      background: $textColor;
+      border-radius: 9px;
+      opacity: 1;
+      left: 0;
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+      -webkit-transition: .25s ease-in-out;
+      -moz-transition: .25s ease-in-out;
+      -o-transition: .25s ease-in-out;
+      transition: .25s ease-in-out;
+    }
+
+    span:nth-child(1) {
+      top: 0px;
+    }
+
+    span:nth-child(2), & span:nth-child(3) {
+      top: 18px;
+    }
+
+    span:nth-child(4) {
+      top: 36px;
+    }
+
+    &.open span:nth-child(1) {
+      top: 18px;
+      width: 0%;
+      left: 50%;
+    }
+
+    &.open span:nth-child(2) {
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    &.open span:nth-child(3) {
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+
+    &.open span:nth-child(4) {
+      top: 18px;
+      width: 0;
+      left: 50%;
+    }
   }
 
   &__cart {
@@ -52,13 +151,30 @@
       font-weight: bold;
     }
   }
+  .hide {
+    opacity: 0;
+    pointer-events: none;
+  }
 
   .long {
     max-width: 1100px;
-
+    opacity: 1;
+    pointer-events: unset;
   }
+
+
 }
 
 .search {
   min-width: 550px;
 }
+
+
+
+  @media  screen and (max-width: 960px) {
+    .header__logo {
+      display: none;
+    }
+
+
+  }

@@ -29,6 +29,10 @@
       margin-left: 20px;
       color: $textColor;
       text-align: left;
+
+      @media screen and (max-width: 1300px) {
+        width: 340px;
+      }
     }
 
     &-btn {
@@ -54,6 +58,10 @@
         width: 1px;
         background-color: #B1B5BD;
         border-radius: 4px;
+
+        @media screen and (max-width: 1090px) {
+          left: -15px;
+        }
       }
 
       &:hover {
@@ -83,6 +91,7 @@
         color: $dark_blue;
       }
     }
+
     &-sum {
       font-family: $nunito_semibold;
       font-weight: 400;
@@ -91,9 +100,16 @@
       span {
         font-weight: bold;
       }
-    }
-    &-issue {
 
+      @media screen and (max-width: 1110px) {
+        display: flex;
+        flex-direction: column;
+        font-size: 28px;
+      }
+
+    }
+
+    &-issue {
       margin: 0;
     }
   }
@@ -104,30 +120,50 @@
     align-items: center;
     flex-direction: column;
     margin-top: 10%;
+
+    @media screen and (max-width: 960px) {
+      margin-top: 140px;
+    }
+
     i {
       font-size: 180px;
       color: $dark_blue;
+
+      @media screen and (max-width: 960px) {
+        font-size: 100px;
+      }
     }
 
     &-text {
       font-family: $nunito_semibold;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 30px;
       color: $textColor;
       text-align: center;
       margin-top: 5%;
+
+      @media screen and (max-width: 960px) {
+        font-size: 24px;
+      }
+      @media screen and (max-width: 420px) {
+        font-size: 20px;
+      }
     }
   }
 
 }
 
 .price-block {
+
   &__sale {
     font-family: $nunito_regular;
     font-weight: 400;
     font-size: 24px;
     color: $textAdditional;
     text-decoration: line-through;
+    @media screen and (max-width: 960px) {
+      font-size: 24px;
+    }
   }
 
   &__price {
@@ -135,7 +171,127 @@
     font-weight: 600;
     font-size: 36px;
     color: $textColor;
+    @media screen and (max-width: 960px) {
+      font-size: 24px;
+    }
   }
 
-
 }
+
+
+
+
+.mobile-cart {
+  &__title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__controller-back {
+    max-width: 196px;
+    border: 1px solid $dark_blue;
+    border-radius: 7px;
+    background-color: transparent;
+    color: $textColor;
+    transition: color 0.3s ease;
+    margin: 0 auto;
+    font-size: 14px;
+    font-family: $nunito_semibold;
+
+
+    &:hover {
+      color: $dark_blue;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__item {
+    max-width: 343px;
+    margin-top: 20px;
+    padding: 12px;
+    border: 1px solid var(--stroke-main, #DDDCDF);
+    border-radius: 8px;
+
+
+    &-img {
+      max-width: 74px;
+      max-height: 74px;
+      object-fit: cover;
+
+    }
+
+    &-name {
+      font-family: $nunito_regular;
+      font-size: 16px;
+      font-weight: 400;
+      color: $textColor;
+      width: 183px;
+      text-overflow: ellipsis;
+      margin-left: 16px;
+    }
+
+    &-btn {
+      width: 36px;
+      height: 36px;
+      background-image: url("../../../../assets/icons/close-cart.svg");
+      background-color: inherit;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border: none;
+      cursor: pointer;
+      transition: background-image 0.3s ease;
+
+      &:hover {
+        background-image: url("../../../../assets/icons/close-cart-hover.svg");
+      }
+    }
+
+
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 307px;
+    width: 100%;
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+  }
+
+  &__controller {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+    padding: 12px 0;
+
+    &-sum {
+      font-family: $nunito_semibold;
+      font-weight: 400;
+      font-size: 22px;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+
+
+

@@ -1,6 +1,6 @@
 <app-breadcrumbs></app-breadcrumbs>
 
-<section class="cart">
+<section class="cart" *ngIf="!isMobile">
   <div class="container" *ngIf="cartList.length; else emptyCart">
     <div class="cart__title">
       <img src="assets/icons/title-icon/cart-icon.svg" alt="cart-icon">
@@ -29,19 +29,55 @@
     </div>
   </div>
 
-  <ng-template #emptyCart>
-    <div class="container">
-      <div class="cart__empty">
-        <i class="fas fa-shopping-cart"></i>
-        <div class="cart__empty-text">
-          У вашому кошику немає товарів
+</section>
+
+<section class="mobile-cart" *ngIf="isMobile">
+  <div class="container" *ngIf="cartList.length; else emptyCart">
+    <div class="mobile-cart__title">
+      <img src="assets/icons/title-icon/cart-icon.svg" alt="cart-icon">
+      <h1 class="title title-one">Кошик</h1>
+      <button class="mobile-cart__controller-back btn" [routerLink]="backToShoppingLink">Повернутися до покупок</button>
+    </div>
+    <div class="mobile-cart__inner" >
+
+      <div class="mobile-cart__item" *ngFor="let item of cartList">
+        <div class="mobile-cart__top">
+          <img class="mobile-cart__item-img" [src]="item?.image" [alt]="item?.name">
+          <div class="mobile-cart__item-name" (click)="goToProduct(item)">{{item.name}}</div>
+          <button class="mobile-cart__item-btn" (click)="removeItemFormCart(item)"></button>
         </div>
-        <button class="btn" [routerLink]="backToShoppingLink">Повернутися до покупок</button>
+
+        <div class="mobile-cart__bottom">
+          <app-product-counter [isDelete]="true" [product]="item" [count]="item.count"></app-product-counter>
+          <div class="price-block">
+            <div class="price-block__sale" *ngIf="item?.sale_price"><i class="fas fa-hryvnia"></i>{{item?.price}}
+            </div>
+            <div class="price-block__price"><i class="fas fa-hryvnia"></i>{{item?.sale_price || item?.price}}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </ng-template>
+
+    <div class="mobile-cart__controller">
+      <div class="mobile-cart__controller-sum">Разом: <span><i class="fas fa-hryvnia"></i>{{totalPrice + '.00'}}</span></div>
+      <button class="mobile-cart__controller-issue btn" routerLink="/checkout">Оформити замовлення</button>
+    </div>
+  </div>
 
 </section>
+
+<ng-template #emptyCart>
+  <div class="container">
+    <div class="cart__empty">
+      <i class="fas fa-shopping-cart"></i>
+      <div class="cart__empty-text">
+        У вашому кошику немає товарів
+      </div>
+      <button class="btn" [routerLink]="backToShoppingLink">Повернутися до покупок</button>
+    </div>
+  </div>
+</ng-template>
 
 <ng-template #loader>
   <app-loader></app-loader>
