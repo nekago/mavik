@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FilterService} from '../../../product-list/services/filter.service';
 import {Subscription} from 'rxjs';
 
@@ -9,6 +9,8 @@ import {Subscription} from 'rxjs';
 })
 
 export class SearchComponent implements OnInit, OnDestroy {
+  @Input() isDisabled = false
+
   searchValue!: string;
 
   private searchTimeOut!: NodeJS.Timeout;
@@ -31,6 +33,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   public search($event: any) {
+    if (this.isDisabled) return;
+
     if (this.searchTimeOut) {
       clearTimeout(this.searchTimeOut);
     }
