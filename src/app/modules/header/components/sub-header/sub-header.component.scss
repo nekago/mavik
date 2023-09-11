@@ -2,7 +2,7 @@
 
 .sub-header {
   font-family: $nunito_semibold;
-  background-color: $dark_blue;
+  background-color: #002250;
   width: 100%;
   font-size: 12px;
   font-weight: 600;
@@ -32,6 +32,10 @@
     display: flex;
     &-text {
       color: $dark-white;
+
+      @media screen and (max-width: 960px) {
+        display: none;
+      }
     }
     &-call {
       margin-left: 4px;
@@ -39,9 +43,14 @@
       color: $white;
       cursor: pointer;
     }
+
+
   }
 
   &__telephone {
+    @media screen and (max-width: 960px) {
+      display: none;
+    }
     display: flex;
     color: $dark-white;
     cursor: pointer;
