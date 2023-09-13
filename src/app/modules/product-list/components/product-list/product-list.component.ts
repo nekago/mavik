@@ -51,6 +51,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription = new Subscription();
 
+  public isShowFilter: boolean = false
+
   private get priceRange() {
     return {
       price_min: [String(this.price.min)],
@@ -119,6 +121,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(this.filterService.currentPage$.subscribe(currentPage => {
       if (currentPage) {
+        console.log(currentPage)
         this.currentPage = currentPage;
       }
     }))
@@ -213,7 +216,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   // PRICE RANGE
 
   public setPriceRange($event: ChangeContext, priceType: 'min' | 'max') {
-    console.log($event)
     if (priceType === 'min') {
       this.price.min = $event.value;
     } else {
@@ -229,5 +231,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
         this.filterService.setQueryParams(this.priceRange);
       }, 400)
     }
+  }
+
+  public toggleIsShowFilter() {
+    this.isShowFilter = !this.isShowFilter
   }
 }

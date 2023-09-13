@@ -32,13 +32,13 @@ export class FilterService {
     new BehaviorSubject<string>('');
   private priceSlider: BehaviorSubject<Options> =
     new BehaviorSubject<Options>({});
-  private currentPage: BehaviorSubject<number> =
-    new BehaviorSubject<number>(1)
+  private currentPage: BehaviorSubject<number | null> =
+    new BehaviorSubject<number | null>(null)
 
   private activeFilterGroup: string = '';
   private lastSelectedFilterGroup: FilterFields = 'brand';
 
-  public isPageChanged = false
+  public isPageChanged = true
 
   public get selectedFilterGroup(): FilterFields {
     return this.lastSelectedFilterGroup;
@@ -59,7 +59,7 @@ export class FilterService {
     this.searchQuery.asObservable()
   public priceSlider$: Observable<Options> =
     this.priceSlider.asObservable();
-  public currentPage$: Observable<number> =
+  public currentPage$: Observable<number | null> =
     this.currentPage.asObservable();
 
   public filterStateCategory: CategorySlugNames | undefined;
@@ -75,7 +75,6 @@ export class FilterService {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    // TODO:
     activatedRoute.queryParams.subscribe(query => {
       const priceRage: PriceRange = {
         min: 0,
@@ -217,6 +216,7 @@ export class FilterService {
 
   public modifyFilterState(filters: Filters) {
     this.resetPage();
+
 
     const filterState = this.filterState.getValue();
     const filterKeys = Object.keys(filters) as Array<FilterFields | 'price'>;
@@ -432,14 +432,18 @@ export class FilterService {
     })
   }
 
-  public resetPage() {
-    this.currentPage.next(1);
+  public resetPage(force: boolean = false) {
+    if (force || !this.currentPage.value) {
+      this.currentPage.next(1);
+    }
+
   }
 
-  public reset() {
+  public reset(force: boolean = false) {
+
     this.filterState.next([]);
     this.filterTags.next([]);
-    this.currentPage.next(1);
+    this.resetPage(force);
     this.filterStateCategory = undefined;
   }
 }

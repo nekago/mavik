@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component,  OnDestroy, OnInit} from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { map, Observable, Subscription } from 'rxjs';
 import {
@@ -66,7 +66,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
     this.isBurgerClose$ = this.headerService.burgerIsClose$
 
-		this.filterService.reset();
+		this.filterService.reset(true);
 	}
 
 	ngOnDestroy(): void {

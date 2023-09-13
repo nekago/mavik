@@ -9,6 +9,7 @@
 }
 
 .product-list {
+
   &__info {
     display: flex;
     margin-top: 25px;
@@ -45,6 +46,7 @@
 
 
   &__filters {
+    position: relative;
     background: #F5F7FF;
     max-width: 330px;
     min-width: 200px;
@@ -53,7 +55,45 @@
     margin-right: 30px;
     gap: 8px;
 
+
+    @media screen and (max-width: 960px) {
+      position: absolute;
+      top: 112px;
+      background-color: $white;
+      min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 100px);
+      width: 100vw;
+      max-width: unset;
+      z-index: 999;
+      transition: all 0.5s;
+      transform: translateX(-960px);
+      &.show {
+        transform: translateX(-15px);
+      }
+    }
+
+    .close-btn {
+      display: none;
+      position: absolute;
+      right: 14px;
+      top: 24px;
+      border: none;
+      background-color: unset;
+
+      i {
+        color: $dark_blue;
+        font-size: 32px;
+      }
+
+      @media screen and (max-width: 960px) {
+        display: flex;
+      }
+    }
+
     ::ng-deep {
+      .ngx-slider {
+
+        max-width: 250px;
+      }
       .ngx-slider .ngx-slider-bar {
         background: #9BA6B8;
         height: 3px;
@@ -335,11 +375,38 @@ span.disabled {
       background-color: $light_blue;
       color: $dark_blue;
     }
-    
+
+
+      @media screen and (max-width: 510px) {
+        &.arrow {
+          display: none;
+        }
+      }
+
+
   }
-
-
 }
 
+.filter-btn {
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  right: -3px;
+  top: 25%;
+  z-index: 999;
+  padding-inline: 20px 10px;
+  padding-block: 8px;
+  border-radius: 20px 0 0 20px;
+  background: $white;
+  border: 2px solid $dark_blue;
 
+  i {
+    color: $dark_blue;
+    font-size: 20px;
+  }
 
+  @media screen and (max-width: 960px) {
+    display: flex;
+  }
+}
