@@ -97,6 +97,18 @@ export class MainPageComponent implements OnInit, OnDestroy {
 			name: 'Dmitriy Ivanov',
 			isSelect: false,
 		},
+		{
+			src: 'assets/icons/review_icon.png',
+			text: 'Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu. Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu.',
+			name: 'Dmitriy Ivanov',
+			isSelect: false,
+		},
+		{
+			src: 'assets/icons/review_icon.png',
+			text: 'Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu. Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu.',
+			name: 'Dmitriy Ivanov',
+			isSelect: false,
+		},
 	];
 
 	customOptions: OwlOptions = {

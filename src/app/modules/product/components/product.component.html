@@ -1,5 +1,5 @@
 <app-breadcrumbs></app-breadcrumbs>
-<div class="product">
+<div class="product" *ngIf="!isMobile">
   <div class="container">
     <div class="product__inner" *ngIf="product; else isLoad">
 
@@ -54,6 +54,66 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="mobile-product" *ngIf="isMobile">
+  <div class="container">
+    <div class="mobile-product__inner" *ngIf="product; else isLoad">
+      <h1 class="mobile-product__title">{{product.name}}</h1>
+      <div class="mobile-product__img"><img [src]="product?.image" [alt]="product?.name" class="product__img"></div>
+        <div class="mobile-product__availability" *ngIf="this.product?.in_stock; else notInStock">
+          <img src="assets/icons/availability.svg" alt="availability"> в наявності
+        </div>
+        <ng-template #notInStock>
+          <div class="mobile-product__availability-not">
+            <img src="assets/icons/availability-not.svg" alt="availability"> немає в наявності
+          </div>
+        </ng-template>
+        <div class="mobile-product__price">
+          <span class="mobile-product__price-text">Ціна:</span>
+          <div class="mobile-product_price">
+            <div class="mobile-product__price-sale" *ngIf="product?.sale_price"><i class="fas fa-hryvnia"></i>{{product?.price}}
+            </div>
+            <div class="mobile-product__price-value"><i class="fas fa-hryvnia"></i>{{product?.sale_price || product?.price}}
+            </div>
+          </div>
+
+          <app-product-counter [isDelete]="true" [product]="product" [count]="count"></app-product-counter>
+        </div>
+
+        <app-product-in-cart-button [product]="product" [isLargeButton]="true"></app-product-in-cart-button>
+        <div class="details">
+          <div class="details__title">
+            <button class="details__title-desk" (click)="toggleTab('Опис')"
+                    [ngClass]="{'selected': selectedTab === 'Опис', 'not-selected': selectedTab !== 'Опис'}">Опис
+            </button>
+            <button class="details__title-characteristic" (click)="toggleTab('Характеристика')"
+                    [ngClass]="{'selected': selectedTab === 'Характеристика', 'not-selected': selectedTab !== 'Характеристика'}">
+              Характеристика
+            </button>
+          </div>
+
+          <div *ngIf="selectedTab === 'Опис'" class="details__desk"
+          >
+            <div class="details__desk--text" [innerHTML]="product.description"></div>
+          </div>
+
+
+          <div *ngIf="selectedTab === 'Характеристика'" class="characteristic"
+          >
+            <div class="characteristic__list">
+              <div class="characteristic__item" *ngFor="let characteristic of productCharacteristics()">
+                <div>{{characteristic[0]}}</div>
+                <div>{{characteristic[1]}}</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+    </div>
+
   </div>
 </div>
 

@@ -6,6 +6,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 60px;
+
   }
 
   &__img {
@@ -19,9 +20,17 @@
   }
 
   &__img img {
+    max-width: 680px;
     width: 100%;
     height: auto;
     object-fit: cover;
+
+    @media screen and (max-width: 1220px) {
+      max-width: 450px;
+    }
+    @media screen and (max-width: 1051px) {
+      max-width: 350px;
+    }
   }
 
   &__info {
@@ -144,6 +153,11 @@
     font-weight: 400;
     font-size: 24px;
 
+    @media screen and (max-width: 550px) {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
 
     &-desk {
       position: relative;
@@ -162,6 +176,10 @@
         width: 2px;
         background-color: $textColor;
         border-radius: 4px;
+
+        @media screen and (max-width: 550px) {
+          left: 80px;
+        }
       }
 
     }
@@ -182,9 +200,15 @@
       font-weight: 400;
       font-size: 16px;
       color: $textColor;
+
+      @media screen and (max-width: 550px) {
+        font-size: 14px;
+      }
     }
   }
 }
+
+
 
 .characteristic {
   font-family: $nunito_regular;
@@ -202,6 +226,10 @@
     justify-content: space-between;
     padding: 10px 24px;
     border-radius: 4px;
+
+    @media screen and (max-width: 550px) {
+      padding: 10px 10px;
+    }
 
     div {
       width: 50%;
@@ -224,6 +252,111 @@
 
 .not-selected {
   color: #9BA6B8;
+}
+
+
+
+.mobile-product {
+  &__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 16px;
+  }
+  &__title {
+    font-family: $nunito_bold;
+    font-weight: 700;
+    font-size: 24px;
+    max-width: 563px;
+    text-align: center;
+  }
+
+  &__img {
+    margin-top: 24px;
+
+    img {
+
+      width: 344px;
+      height: 299px;
+    }
+  }
+
+  &__availability {
+    display: flex;
+    align-items: center;
+    font-family: $nunito_regular;
+    font-weight: 400;
+    font-size: 16px;
+    color: #5EB935;
+    margin-top: 8px;
+
+    img {
+      width: 10px;
+      height: 10px;
+      margin-right: 3px;
+    }
+
+    &-not {
+      color: #F44336;
+      display: flex;
+      align-items: center;
+      font-family: $nunito_regular;
+      font-weight: 400;
+      font-size: 16px;
+      width: auto;
+      margin-top: 8px;
+
+      img {
+        max-width: 10px;
+        max-height: 10px;
+        margin-right: 3px;
+      }
+    }
+  }
+
+
+  &__availability img{
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+  }
+
+  &__price {
+    max-width: 340px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 24px;
+
+    &-text {
+      font-family: $nunito_regular;
+      font-weight: 400;
+      font-size: 24px;
+    }
+
+    &-sale {
+      font-size: 16px;
+      color: $textAdditional;
+      text-align: left;
+      text-decoration: line-through;
+
+      i {
+        font-size: 16px;
+      }
+    }
+
+    &-value {
+      font-size: 24px;
+      color: $textColor;
+      font-weight: 600;
+
+      i {
+        font-size: 24px;
+      }
+    }
+  }
 }
 
 
