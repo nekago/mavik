@@ -20,6 +20,11 @@
       max-height: 55px;
       object-fit: cover;
       margin-right: 16px;
+
+      @media screen and (max-width: 960px) {
+        width: 32px;
+        height: 32px;
+      }
     }
 
     &-name {
@@ -28,6 +33,10 @@
       font-size: 32px;
       color: $textColor;
       margin-right: 5px;
+
+      @media screen and (max-width: 960px) {
+        font-size: 24px;
+      }
     }
 
     &-count {
@@ -36,12 +45,17 @@
       font-size: 32px;
       color: $textColor;
       margin-right: 44px;
+
+      @media screen and (max-width: 960px) {
+        font-size: 24px;
+      }
     }
   }
 
   &__inner {
     display: flex;
     margin-top: 40px;
+
   }
 
 
@@ -58,9 +72,10 @@
 
     @media screen and (max-width: 960px) {
       position: absolute;
+      overflow: auto;
       top: 112px;
       background-color: $white;
-      min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 100px);
+      height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 100px);
       width: 100vw;
       max-width: unset;
       z-index: 999;
@@ -269,6 +284,8 @@
   display: flex;
 
 
+
+
   &__reset {
     display: flex;
     justify-content: space-between;
@@ -317,6 +334,10 @@
     &:hover {
       background-color: $light_blue;
     }
+
+    @media screen and (max-width: 960px) {
+      display: none;
+    }
   }
 }
 
@@ -328,6 +349,11 @@ span.disabled {
   &__inner {
     display: flex;
     flex-wrap: wrap;
+
+    @media screen and (max-width: 960px) {
+      justify-content: center;
+
+    }
   }
 
 
@@ -393,7 +419,7 @@ span.disabled {
   justify-content: center;
   align-items: center;
   right: -3px;
-  top: 25%;
+  top: 40%;
   z-index: 999;
   padding-inline: 20px 10px;
   padding-block: 8px;

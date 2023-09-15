@@ -142,6 +142,10 @@
   border-radius: 8px;
   overflow: hidden;
 
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
+
   &__title {
     max-height: 62px;
     display: flex;
@@ -262,7 +266,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 16px;
+    margin-top: 26px;
   }
   &__title {
     font-family: $nunito_bold;
@@ -270,6 +274,7 @@
     font-size: 24px;
     max-width: 563px;
     text-align: center;
+    line-height: 25px;
   }
 
   &__img {

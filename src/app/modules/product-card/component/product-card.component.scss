@@ -18,6 +18,12 @@
 
   transition: 0.5s;
 
+  @media screen and (max-width: 960px) {
+    width: 152px;
+    padding: 12px;
+    height: 276px;
+  }
+
   &:hover {
     box-shadow: 0 0 8px 2px #e8e6e6;
   }
@@ -27,11 +33,18 @@
     height: 150px;
     object-fit: cover;
     cursor: pointer;
+
+    @media screen and (max-width: 960px) {
+
+      width: 100px;
+      height: 100px;
+
+    }
   }
 
   &__name {
     width: auto;
-    max-height: 42px;
+    height: auto;
     font-family: $nunito_regular;
     font-weight: 400;
     font-size: 14px;
@@ -41,14 +54,32 @@
     cursor: pointer;
     text-align: center;
     margin-top: 12px;
+
+    @media screen and (max-width: 960px) {
+      font-size: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -moz-box;
+      -moz-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-clamp: 2;
+      box-orient: vertical;
+    }
   }
 
   &__price {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 8px;
-    margin-top: auto;
+    margin-top: 10px;
+
+    &.price-with-sale {
+      width: 100%;
+      justify-content: space-between;
+    }
 
     &-price {
       font-family: $nunito_semibold;
@@ -61,7 +92,10 @@
 
       i {
         font-size: 16px;
+
       }
+
+
     }
 
     &-sale {
@@ -71,10 +105,17 @@
       font-size: 14px;
       text-decoration: line-through;
       color: $textAdditional;
-      margin-right: 35px;
 
       i {
         font-size: 14px;
+      }
+
+      @media screen and (max-width: 960px) {
+        font-size: 12px;
+        margin-right: 0;
+        i {
+          font-size: 12px;
+        }
       }
     }
   }

@@ -16,8 +16,8 @@
       <app-loader></app-loader>
     </div>
     <div class="product-list__info">
-      <img class="product-list__info-img" src="assets/icons/product-list/{{slugName}}-icon.svg" alt="{{slugName}}-icon">
-      <div class="product-list__info-name" >{{categoryName}}</div>
+      <img class="product-list__info-img" src="assets/icons/product-list/{{slugName}}-icon.png" alt="{{slugName}}-icon">
+      <div class="product-list__info-name">{{categoryName}}</div>
       <div class="product-list__info-count"> ({{cheese20}})</div>
       <div class="filter-tag" *ngIf="(filterTags$ | async)?.length">
         <button (click)="resetFilter()" class="filter-tag__reset">Очистити фільтри

@@ -5,6 +5,7 @@
   font-weight: 700;
   font-size: 16px;
 
+
   &__list {
     width: 100%;
     display: flex;
@@ -24,10 +25,32 @@
   }
 
   @media screen and (max-width: 960px) {
+    font-size: 28px;
 
     &__list {
+      position: relative;
       flex-direction: column;
+      margin-top: 24px;
+      padding: 24px 16px;
+
+      &:before {
+        content: '';
+        position: absolute;
+        width: 95%;
+        height: 2px;
+        background: #CACDD8;
+        top: -12px;
+        right: 12px;
+
+      }
+
+      &-item {
+        margin-top: 16px;
+        text-align: center;
+      }
     }
+
+
 
   }
 }

@@ -235,5 +235,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   public toggleIsShowFilter() {
     this.isShowFilter = !this.isShowFilter
+
+    document.body.style.overflow = this.isShowFilter ? 'hidden' : 'auto'
+
+
   }
 }
