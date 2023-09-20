@@ -9,7 +9,7 @@ import {CartService} from './modules/cart/service/cart.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'mavik-freelance';
+  title = 'mavik-fe';
 
   constructor(
     private router: Router,

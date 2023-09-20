@@ -19,7 +19,7 @@
  */
 
 /**
- * By default, zone.js will patch all possible macroTask and DomEvents
+ * By default.conf, zone.js will patch all possible macroTask and DomEvents
  * user can disable parts of macroTask/DomEvents patch by setting following flags
  * because those flags need to be set before `zone.js` being loaded, and webpack
  * will put import in the top of bundle, so user need to create a separate file
@@ -43,7 +43,7 @@
  */
 
 /***************************************************************************************************
- * Zone JS is required by default for Angular itself.
+ * Zone JS is required by default.conf for Angular itself.
  */
 import 'zone.js';  // Included with Angular CLI.
 
