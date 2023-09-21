@@ -50,8 +50,8 @@
           <div class="form__row">
             <div class="form__item">
               <label for="formPhone" class="form__label">Телефон<span>*</span></label>
-              <input id="formPhone" formControlName="phone_number" type="number" class="form__input"
-                     placeholder="(095)-11-22-333">
+              <input id="formPhone" formControlName="phone_number" type="text" class="form__input"
+                     placeholder="+380951112233">
               <span class="form__notification"
                     *ngIf="showErrorForFormControl('phone_number')">Неправильний формат</span>
               <span class="form__notification"

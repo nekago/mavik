@@ -43,12 +43,7 @@ export class CheckoutComponent implements OnInit {
     this.totalPrice = this.cartService.getTotalPrice();
   }
 
-  ngOnInit() {
-    // this.form.valueChanges.subscribe(data => {
-    //   console.log(data);
-    //   console.log(this.form);
-    // })
-  }
+  ngOnInit() {}
 
   public submitForm() {
     const form = this.form.value;
