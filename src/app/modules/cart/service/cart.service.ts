@@ -37,8 +37,11 @@ export class CartService {
   }
 
   public setCartListFromLocalStorage() {
-    const cartList = JSON.parse(window.localStorage.getItem('cartList') || '');
-    this.cartList.next(cartList)
+    let cartList;
+    try {
+      cartList = JSON.parse(window.localStorage.getItem('cartList') || '');
+      this.cartList.next(cartList)
+    } catch {}
   }
 
   public isProductInCart(cartList: CartList, id: number): number {

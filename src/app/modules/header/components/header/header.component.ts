@@ -83,7 +83,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   scrollHandler() {
-    console.log(this.currentPage)
     if (this.currentPage === 'main') {
       window.scrollTo({
         top: 0,
