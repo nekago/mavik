@@ -23,6 +23,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     },
   };
 
+  private currentPage: string = '';
+
   cartCounter = 0;
 
   public isHideAppMenu = true;
@@ -79,9 +81,22 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.headerService.toggleBurger(!this.burgerIsClose);
   }
 
+  scrollHandler() {
+    console.log(this.currentPage)
+    if (this.currentPage === 'main') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    } else {
+      this.router.navigateByUrl('/')
+    }
+  }
+
   private toggleDisplayingBlocks(url: string) {
     const pages = url.split('/');
     const page = pages[pages.length - 1];
+    this.currentPage = page;
     this.isHideAppMenu =
       !this.headerConfig.pagesToHideBlocks.appMenu.includes(page);
   }

@@ -2,9 +2,9 @@
 <header class="header">
   <div class="container">
     <div class="header__inner">
-      <a routerLink="/" class="header__logo">
+      <div (click)="scrollHandler()" class="header__logo">
         <img class="header__logo-img" src="assets/images/logo.png" alt="logo">
-      </a>
+      </div>
 
       <!--    burger -->
       <div class="header__burger" *ngIf="isMobile && !isHideAppMenu" [class.open]="!burgerIsClose" (click)="toggleBurger()">

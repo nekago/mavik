@@ -149,6 +149,14 @@
         font-size: 20px;
       }
     }
+
+    .btn {
+      @media screen and (max-width: 960px) {
+        width: auto;
+        max-width: 370px;
+      }
+    }
+
   }
 
 }
@@ -199,7 +207,6 @@
     margin: 0 auto;
     font-size: 14px;
     font-family: $nunito_semibold;
-
 
     &:hover {
       color: $dark_blue;
