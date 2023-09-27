@@ -1,7 +1,7 @@
 FROM node:lts-alpine as build-stage
 
-#ARG MODE=local
-#ENV MODE=${MODE}
+ARG MODE=""
+ENV MODE=${MODE}
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ RUN npm install -g @angular/cli
 
 
 COPY .. .
-RUN ng build --configuration=production
+RUN ng build --configuration=${MODE}
 
 FROM nginx:stable-alpine as production-stage
 COPY nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
