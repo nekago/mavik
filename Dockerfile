@@ -11,7 +11,7 @@ RUN npm install -g @angular/cli
 
 
 COPY .. .
-RUN ng build
+RUN ng build --configuration=production
 
 FROM nginx:stable-alpine as production-stage
 COPY nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
