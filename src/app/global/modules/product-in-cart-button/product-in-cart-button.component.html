@@ -1,9 +1,9 @@
 <button
-  *ngIf="!product?.in_cart; else inCart;"
+  *ngIf="!product.in_cart; else inCart;"
   [ngClass]="{'product-card__btn': true, 'product-card__btn--large': isLargeButton}"
   class="product-card__btn"
   (click)="addProductToCart()"
-  [disabled]="!product?.in_stock"
+  [disabled]="!product.in_stock"
 >У кошик <img src="/assets/icons/cart-btn-icon.svg" alt="btn-icon"></button>
 <ng-template #inCart>
   <button class="product-card__btn in-cart"

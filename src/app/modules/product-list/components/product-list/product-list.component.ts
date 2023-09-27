@@ -121,7 +121,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(this.filterService.currentPage$.subscribe(currentPage => {
       if (currentPage) {
-        console.log(currentPage)
         this.currentPage = currentPage;
       }
     }))

@@ -18,8 +18,8 @@ import {HeaderService} from '../../header.service';
 })
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   private headerConfig = {
-    pagesToHideBlocks: {
-      appMenu: ['main'],
+    pagesToShowBlocks: {
+      navMenu: ['main'],
     },
   };
 
@@ -27,7 +27,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   cartCounter = 0;
 
-  public isHideAppMenu = true;
+  public isHideNavMenu = true;
+  public isHideSearch = true;
 
   private subscriptions: Subscription = new Subscription();
 
@@ -97,7 +98,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     const pages = url.split('/');
     const page = pages[pages.length - 1];
     this.currentPage = page;
-    this.isHideAppMenu =
-      !this.headerConfig.pagesToHideBlocks.appMenu.includes(page);
+    this.isHideNavMenu =
+      !this.headerConfig.pagesToShowBlocks.navMenu.includes(page);
+    this.isHideSearch = !(pages[1] === 'categories' && !Number(pages[pages.length - 1]))
   }
 }

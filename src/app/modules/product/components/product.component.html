@@ -4,10 +4,10 @@
     <div class="product__inner" *ngIf="product; else isLoad">
 
 
-      <div class="product__img"><img [src]="product?.image" [alt]="product?.name" class="product__img"></div>
+      <div class="product__img"><img [src]="product.image" [alt]="product.name" class="product__img"></div>
       <div class="product__info">
         <h1 class="product__title">{{product.name}}</h1>
-        <div class="product__availability" *ngIf="this.product?.in_stock; else notInStock">
+        <div class="product__availability" *ngIf="this.product.in_stock; else notInStock">
           <img src="assets/icons/availability.svg" alt="availability"> в наявності
         </div>
         <ng-template #notInStock>
@@ -17,9 +17,9 @@
         </ng-template>
         <div class="product__price">
           <span class="product__price-text">Ціна:</span>
-          <div class="product__price-sale" *ngIf="product?.sale_price"><i class="fas fa-hryvnia"></i>{{product?.price}}
+          <div class="product__price-sale" *ngIf="product.sale_price"><i class="fas fa-hryvnia"></i>{{product.price}}
           </div>
-          <div class="product__price-value"><i class="fas fa-hryvnia"></i>{{product?.sale_price || product?.price}}
+          <div class="product__price-value"><i class="fas fa-hryvnia"></i>{{product.sale_price || product.price}}
           </div>
         </div>
         <app-product-counter [isDelete]="true" [product]="product" [count]="count"></app-product-counter>
@@ -61,8 +61,8 @@
   <div class="container">
     <div class="mobile-product__inner" *ngIf="product; else isLoad">
       <h1 class="mobile-product__title">{{product.name}}</h1>
-      <div class="mobile-product__img"><img [src]="product?.image" [alt]="product?.name" class="product__img"></div>
-        <div class="mobile-product__availability" *ngIf="this.product?.in_stock; else notInStock">
+      <div class="mobile-product__img"><img [src]="product.image" [alt]="product.name" class="product__img"></div>
+        <div class="mobile-product__availability" *ngIf="this.product.in_stock; else notInStock">
           <img src="assets/icons/availability.svg" alt="availability"> в наявності
         </div>
         <ng-template #notInStock>
@@ -73,9 +73,9 @@
         <div class="mobile-product__price">
           <span class="mobile-product__price-text">Ціна:</span>
           <div class="mobile-product_price">
-            <div class="mobile-product__price-sale" *ngIf="product?.sale_price"><i class="fas fa-hryvnia"></i>{{product?.price}}
+            <div class="mobile-product__price-sale" *ngIf="product.sale_price"><i class="fas fa-hryvnia"></i>{{product.price}}
             </div>
-            <div class="mobile-product__price-value"><i class="fas fa-hryvnia"></i>{{product?.sale_price || product?.price}}
+            <div class="mobile-product__price-value"><i class="fas fa-hryvnia"></i>{{product.sale_price || product.price}}
             </div>
           </div>
 
