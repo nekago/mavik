@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductListService} from '../../services/product-list.service';
 import {
@@ -20,7 +20,7 @@ import {MobileService} from '../../../../global/services/mobile.service';
   templateUrl: 'product-list.component.html',
   styleUrls: ['product-list.component.scss'],
 })
-export class ProductListComponent implements OnInit, OnDestroy {
+export class ProductListComponent implements OnInit, OnDestroy, OnChanges {
   public categoryName: CategoryNames = 'Сир';
   public slugName: CategorySlugNames = 'cheese';
   public productList: Array<Product> = [];
@@ -53,7 +53,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
     min: 0,
     max: 0,
   }
-
 
 
   private isSliderInit = false
@@ -150,6 +149,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.isLoadingProductList$ = this.productListService.isLoadingProductList$;
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+
+  }
+
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
     this.productListService.reset();
@@ -159,7 +162,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   // FILTER
 
   public onToggleFilterValue({key, filterField, $event}: OnToggleFilterInterface) {
-    this.toggleFilterValue(key, filterField, $event)
+    this.toggleFilterValue(key, filterField, $event);
   }
 
   private toggleFilterValue(key: string, filterField: FilterFieldsGroupValue, $event: any = true) {

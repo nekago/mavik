@@ -50,10 +50,10 @@ export class FilterCategoryComponent implements OnInit {
   }
 
   public toggleCategoryCollapsing() {
-      this.filterFieldCountToShow = this.isCollapsing
-        ? this.filterItemsCount
-        : this.defaultValueToShow;
+    this.filterFieldCountToShow = this.isCollapsing
+      ? this.filterItemsCount
+      : this.defaultValueToShow;
 
-      this.isCollapsing = !this.isCollapsing
+    this.isCollapsing = !this.isCollapsing
   }
 }
