@@ -6,9 +6,10 @@ import {BreadcrumbsModule} from "../breadcrumbs/breadcrumbs.module";
 import {ProductCardModule} from "../product-card/product-card.module";
 import {NgxSliderModule} from "@angular-slider/ngx-slider";
 import {LoaderModule} from "../../global/modules/loader/loader.module";
+import { FilterCategoryComponent } from './components/filter-category/filter-category.component';
 
 @NgModule({
-	declarations: [ProductListComponent],
+	declarations: [ProductListComponent, FilterCategoryComponent],
 	imports: [
 		RouterModule,
 		CommonModule,

@@ -1,0 +1,21 @@
+<h2 class="filters__head">{{filterGroup?.key}}</h2>
+<div class="filters__value" *ngFor="let filterField of filterGroup?.values | slice: 0 : filterFieldCountToShow">
+  <label class="filter-container" [class.disabled]="!filterField.isChecked && !filterField.isActive"
+         [for]="filterGroup.key + '_' + filterField.value">
+    {{filterField.value || 'test'}}
+    <input
+      type="checkbox"
+      checked="checked"
+      (input)="toggleFilterValue(filterGroup.key_en, filterField, $event)"
+      [id]="filterGroup.key + '_' + filterField.value"
+      [disabled]="!filterField.isChecked && !filterField.isActive"
+      [checked]="filterField.isChecked"
+    >
+    <span class="checkmark" [class.disabled]="filterFieldIsDisable(filterField)"></span>
+  </label>
+</div>
+
+<button *ngIf="!availableToShowAllFilterItems" class="toggle-button" (click)="toggleCategoryCollapsing()">
+  <span *ngIf="isCollapsing">Показати всі ({{remainingToShow}})</span>
+  <span *ngIf="!isCollapsing">Згорнути</span>
+</button>

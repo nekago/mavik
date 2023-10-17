@@ -21,3 +21,9 @@ export interface PriceRange {
   min: number,
   max: number,
 }
+
+export interface OnToggleFilterInterface {
+  key: string,
+  filterField: FilterFieldsGroupValue,
+  $event: any,
+}

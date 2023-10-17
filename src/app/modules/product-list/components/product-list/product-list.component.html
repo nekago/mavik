@@ -31,7 +31,7 @@
     </div>
 
     <div class="product-list__inner">
-      <div class="product-list__filters" [class.show]="isShowFilter">
+      <div class="product-list__filters" [ngStyle]="filterListPosition" [class.show]="isShowFilter">
         <button class="close-btn" (click)="toggleIsShowFilter()"><i class="fas fa-close"></i></button>
         <h1 class="product-list__filters-title">Фільтри</h1>
 
@@ -48,23 +48,10 @@
 
 
         <div *ngFor="let filterGroup of filterState$ | async">
-          <h2 class="product-list__filters-head">{{filterGroup?.key}}</h2>
-          <div class="product-list__filters-value" *ngFor="let filterField of filterGroup?.values">
-            <label class="filter__container" [class.disabled]="!filterField.isChecked && !filterField.isActive"
-                   [for]="filterGroup.key + '_' + filterField.value">
-              {{filterField.value || 'test'}}
-              <input
-                type="checkbox"
-                checked="checked"
-                (input)="toggleFilterValue(filterGroup.key_en, filterField, $event)"
-                [id]="filterGroup.key + '_' + filterField.value"
-                [disabled]="!filterField.isChecked && !filterField.isActive"
-                [checked]="filterField.isChecked"
-              >
-              <span class="checkmark" [class.disabled]="filterFieldIsDisable(filterField)"></span>
-            </label>
-          </div>
-
+          <app-filter-category
+            [filterGroup]="filterGroup"
+            (onToggleFilterValue)="onToggleFilterValue($event)"
+          ></app-filter-category>
         </div>
       </div>
       <div class="products" *ngIf="productList.length; else productListEmpty">

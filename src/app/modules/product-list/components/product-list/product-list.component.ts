@@ -5,10 +5,15 @@ import {
   CategoryNames, CategorySlugNames, FilterFields,
   Product,
 } from '../../../../global/entities/product.interface';
-import {FilterFieldsGroupValue, FilterState, FilterTag} from '../../../../global/entities/filter.inerface';
+import {
+  FilterFieldsGroupValue,
+  FilterState,
+  FilterTag, OnToggleFilterInterface
+} from '../../../../global/entities/filter.inerface';
 import {Observable, Subscription} from 'rxjs';
 import {FilterService} from '../../services/filter.service';
 import {ChangeContext, Options} from '@angular-slider/ngx-slider';
+import {MobileService} from '../../../../global/services/mobile.service';
 
 @Component({
   selector: 'app-product-list',
@@ -40,10 +45,16 @@ export class ProductListComponent implements OnInit, OnDestroy {
     ceil: 100,
   };
 
+  public filterListPosition = {
+    top: `145px`,
+  };
+
   private price = {
     min: 0,
     max: 0,
   }
+
+
 
   private isSliderInit = false
 
@@ -65,11 +76,20 @@ export class ProductListComponent implements OnInit, OnDestroy {
     private productListService: ProductListService,
     private router: Router,
     private cdr: ChangeDetectorRef,
+    private mobileService: MobileService,
     private filterService: FilterService,
   ) {
   }
 
   ngOnInit() {
+    this.subscriptions.add(
+      this.mobileService.isMobile$.subscribe(() => {
+        this.filterListPosition.top = `145px`;
+        document.body.style.overflow = 'auto';
+        this.cdr.detectChanges();
+      })
+    )
+
     this.subscriptions.add(this.route.params.subscribe(params => {
       const slug = params['categorySlug'];
       this.slugName = slug;
@@ -138,7 +158,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   // FILTER
 
-  public toggleFilterValue(key: string, filterField: FilterFieldsGroupValue, $event: any = true) {
+  public onToggleFilterValue({key, filterField, $event}: OnToggleFilterInterface) {
+    this.toggleFilterValue(key, filterField, $event)
+  }
+
+  private toggleFilterValue(key: string, filterField: FilterFieldsGroupValue, $event: any = true) {
     delete this.filterService.params?.['price_min'];
     delete this.filterService.params?.['price_max'];
 
@@ -153,10 +177,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   public deleteFilterTag(elem: [string, string]) {
     this.filterService.removeFilterTag(elem[1], elem[0])
-  }
-
-  public filterFieldIsDisable(filterField: FilterFieldsGroupValue): boolean {
-    return !filterField.isChecked && !filterField.isActive;
   }
 
   public resetFilter() {
@@ -233,10 +253,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   public toggleIsShowFilter() {
+    this.filterListPosition.top = `${window.scrollY + 120}px`
     this.isShowFilter = !this.isShowFilter
 
-    document.body.style.overflow = this.isShowFilter ? 'hidden' : 'auto'
-
+    document.body.style.overflow = this.isShowFilter ? 'hidden' : 'auto';
 
   }
 }
