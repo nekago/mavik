@@ -71,7 +71,7 @@
       <button class="pagination__page arrow" (click)="changePage('first')" [disabled]="currentPage === 1"><i
         class="fas fa-angles-left"></i></button>
       <div [ngSwitch]="paginationState()">
-        <div *ngSwitchCase="'start'">
+        <div class="pagination__list"  *ngSwitchCase="'start'">
           <button class="pagination__page" (click)="changePage(page)" *ngFor="let page of pages | slice:0:4"
                   [class.active]="page === +currentPage">
             {{page}}
@@ -84,7 +84,7 @@
           </button>
         </div>
 
-        <div *ngSwitchCase="'middle'">
+        <div class="pagination__list"  *ngSwitchCase="'middle'">
           <button class="pagination__page" (click)="changePage(1)">
             1
           </button>
@@ -104,7 +104,7 @@
           </button>
         </div>
 
-        <div *ngSwitchCase="'end'">
+        <div class="pagination__list"  *ngSwitchCase="'end'">
           <button class="pagination__page" (click)="changePage(1)">
             1
           </button>
@@ -117,7 +117,7 @@
           </button>
         </div>
 
-        <div *ngSwitchCase="'all'">
+        <div class="pagination__list" *ngSwitchCase="'all'">
           <button class="pagination__page" (click)="changePage(page)" *ngFor="let page of pages"
                   [class.active]="page === +currentPage">
             {{page}}

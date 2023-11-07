@@ -82,7 +82,9 @@
       left: 10px;
       top: 0;
       img {
-        transform: scale(0.8);
+        transform: scale(0.7); /* Увеличиваем изображение в 1.5 раза */
+        transform-origin: center;
+
       }
     }
   }

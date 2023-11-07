@@ -63,7 +63,7 @@
     max-width: 330px;
     min-width: 200px;
     width: auto;
-    height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 163px);
+    height: calc(100vh - 163px);
 
     position: sticky;
     top: 145px;
@@ -82,7 +82,7 @@
       position: absolute;
       top: 112px;
       background-color: $white;
-      height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 100px);
+      height: 100vh;
       width: 100vw;
       max-width: unset;
       z-index: 999;
@@ -285,23 +285,30 @@ span.disabled {
 }
 
 .pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin-top: 20px;
 
   font-family: $nunito_light, sans-serif;
   font-weight: 300;
   font-size: 13px;
   text-align: center;
-  color: $textAdditional;
+  color: $textAdditional!important;
 
 
+  &__list {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+  }
 
   &__page {
+
     margin-right: 12px;
     width: 37px;
     height: 37px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     border: 2px solid $textAdditional;
     border-radius: 50px;
@@ -310,6 +317,8 @@ span.disabled {
     cursor: pointer;
 
     transition: background-color 0.3s ease;
+
+    color: $textColor;
 
     i  {
       font-size: 12px;

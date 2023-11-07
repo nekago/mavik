@@ -16,8 +16,10 @@
   &__logo {
     cursor: pointer;
     img {
-      min-width: 92px;
+      min-width: 108px;
       height: 92px;
+      transform: scale(1); /* Увеличиваем изображение в 1.5 раза */
+      transform-origin: center;
     }
 
   }
