@@ -294,6 +294,10 @@ span.disabled {
   color: $textAdditional!important;
 
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   &__list {
     display: flex;
     justify-content: center;
@@ -306,9 +310,6 @@ span.disabled {
     width: 37px;
     height: 37px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     border: 2px solid $textAdditional;
     border-radius: 50px;
