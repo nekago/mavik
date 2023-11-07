@@ -10,7 +10,7 @@ import {
   FilterState,
   FilterTag, OnToggleFilterInterface
 } from '../../../../global/entities/filter.inerface';
-import {Observable, Subscription} from 'rxjs';
+import {map, Observable, Subscription} from 'rxjs';
 import {FilterService} from '../../services/filter.service';
 import {ChangeContext, Options} from '@angular-slider/ngx-slider';
 import {MobileService} from '../../../../global/services/mobile.service';
@@ -62,6 +62,8 @@ export class ProductListComponent implements OnInit, OnDestroy, OnChanges {
   private subscriptions: Subscription = new Subscription();
 
   public isShowFilter: boolean = false
+
+  private readonly filterFieldOrder: Array<string> = ['Тип', 'Вид', 'country', 'brand']
 
   private get priceRange() {
     return {
@@ -144,7 +146,19 @@ export class ProductListComponent implements OnInit, OnDestroy, OnChanges {
       }
     }))
 
-    this.filterState$ = this.filterService.filterState$;
+    this.filterState$ = this.filterService.filterState$.pipe(
+      map(state =>
+        state.reduce((arr, elem) => {
+          const filterFieldOrder = this.filterFieldOrder
+          if (filterFieldOrder.includes(elem.key_en) || filterFieldOrder.includes(elem.key)) {
+            const i = filterFieldOrder.findIndex(order => (order === elem.key_en || order === elem.key))
+            arr[i] = elem
+          }
+          console.log(arr)
+          return arr
+        }, Array(this.filterFieldOrder.length)).filter(element => element !== null)
+      )
+    );
     this.filterTags$ = this.filterService.filterTags$;
     this.isLoadingProductList$ = this.productListService.isLoadingProductList$;
   }

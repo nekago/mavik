@@ -35,6 +35,12 @@ export class FilterCategoryComponent implements OnInit {
     if (this.remainingToShow < 1) {
       this.availableToShowAllFilterItems = true;
     }
+
+    this.filterGroup.values = [...this.filterGroup.values].sort((a, b) => {
+      const first = a.value.toLowerCase(); // or a.toLocaleLowerCase()
+      const second = b.value.toLowerCase(); // or b.toLocaleLowerCase()
+      return first.localeCompare(second);
+    })
   }
 
   public toggleFilterValue(key: string, filterField: FilterFieldsGroupValue, $event: any = true) {

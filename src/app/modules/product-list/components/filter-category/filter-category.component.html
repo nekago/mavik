@@ -16,6 +16,6 @@
 </div>
 
 <button *ngIf="!availableToShowAllFilterItems" class="toggle-button" (click)="toggleCategoryCollapsing()">
-  <span *ngIf="isCollapsing">Показати всі ({{remainingToShow}})</span>
+  <span *ngIf="isCollapsing">Показати ще ({{remainingToShow}})</span>
   <span *ngIf="!isCollapsing">Згорнути</span>
 </button>
