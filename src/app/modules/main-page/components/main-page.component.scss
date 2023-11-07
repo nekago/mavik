@@ -290,6 +290,7 @@
       font-family: $nunito_light;
       font-weight: 300;
       font-size: 24px;
+      text-align: justify;
 
       @media (max-width: 600px) {
         font-size: 14px;
@@ -471,6 +472,7 @@
       font-weight: 300;
       font-size: 24px;
       color: $textColor;
+      text-align: justify;
 
       @media (max-width: 1320px) {
         font-size: 14px;
