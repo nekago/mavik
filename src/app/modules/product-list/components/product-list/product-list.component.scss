@@ -80,14 +80,16 @@
 
     @media screen and (max-width: 960px) {
       position: absolute;
-      top: 112px;
       background-color: $white;
-      height: 100vh;
+      top: 112px;
+      height: calc(100vh - 120px);
       width: 100vw;
       max-width: unset;
       z-index: 999;
+      overflow: auto;
       transition: transform 0.5s;
       transform: translateX(-960px);
+      padding-bottom: env(safe-area-inset-bottom, 20px);
       &.show {
         transform: translateX(-15px);
       }
