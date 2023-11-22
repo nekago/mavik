@@ -88,8 +88,9 @@
     <owl-carousel-o [options]="customOptions">
       <ng-template carouselSlide *ngFor="let slide of slides">
         <img [src]="slide.src" alt="review_icon" class="reviews__img">
-        <div class="reviews__text">{{slide.text}}
-        </div>
+        <div class="reviews__quest">{{slide.quest}}</div>
+        <div class="reviews__text">{{slide.text}}</div>
+
         <div class="reviews__name">- {{slide.name}}</div>
       </ng-template>
 

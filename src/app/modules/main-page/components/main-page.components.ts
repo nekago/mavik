@@ -75,40 +75,61 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
 	slides: Array<{
 		src: string;
+    quest: string;
 		text: string;
 		name: string;
 		isSelect: boolean;
 	}> = [
 		{
 			src: 'assets/icons/review_icon.png',
-			text: 'Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu. Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu.',
-			name: 'Dmitriy Ivanov',
+      quest: 'Як виник інтернет-магазин "Смаколик" та яка історія стоїть за його відкриттям?',
+			text: 'Наш фізичний магазин працював більше 10 років, і ми вирішили розвиватися, запускаючи інтернет-платформу для більшого охоплення та задоволення потреб наших клієнтів.',
+			name: 'Смаколик',
 			isSelect: true,
 		},
 		{
 			src: 'assets/icons/review_icon.png',
-			text: 'Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu. Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu.',
-			name: 'Dmitriy Ivanov',
-			isSelect: false,
+      quest: 'Які цінності лежать в основі нашого інтернет-магазину сиру та деликатесів?',
+			text: 'Ми прагнемо надавати не лише вишукані продукти, але і неповторний досвід покупок. Співпраця з партнерами виробниками дозволяє нам пропонувати продукцію високої якості, а також забезпечуємо найкращі ціни на ринку.',
+			name: 'Смаколик',
+			isSelect: true,
 		},
 		{
 			src: 'assets/icons/review_icon.png',
-			text: 'Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu. Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu.',
-			name: 'Dmitriy Ivanov',
-			isSelect: false,
+      quest: 'Як ми відбираємо сир та масло для наших клієнтів?',
+			text: 'Експерти в смаколиках ретельно відбирають найкращі сири та масла, забезпечуючи їхню вишуканість та високу якість через наші партнерські відносини.',
+			name: 'Смаколик',
+			isSelect: true,
 		},
 		{
 			src: 'assets/icons/review_icon.png',
-			text: 'Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu. Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu.',
-			name: 'Dmitriy Ivanov',
-			isSelect: false,
+      quest: 'Що робить наш інтернет-магазин унікальним серед інших магазинів сиру та деликатесів?',
+			text: 'Унікальність нашого магазину полягає в різноманітній пропозиції та стійких відносинах із партнерами-виробниками сиру та масла, а також в пропозиції найкращих цін на ринку.',
+			name: 'Смаколик',
+			isSelect: true,
 		},
 		{
 			src: 'assets/icons/review_icon.png',
-			text: 'Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu. Lorem ipsum dolor sit amet consectetur. Duis odio velit massa sit amet feugiat et eu.',
-			name: 'Dmitriy Ivanov',
-			isSelect: false,
+      quest: 'Як ми враховуємо різноманіття смаків у нашому асортименті продуктів?',
+			text: 'Ми розуміємо, що кожен клієнт унікальний, тому ми пропонуємо різноманіття смаків та видів сирів та масел, щоб задовольнити найвибагливіші гастрономічні уподобання.',
+			name: 'Смаколик',
+			isSelect: true,
 		},
+		{
+			src: 'assets/icons/review_icon.png',
+      quest: 'Як ми гарантуємо якість наших продуктів та їх відповідність стандартам безпеки?',
+			text: 'Наш інтернет-магазин пильно слідкує за якістю продуктів та дотримується високих стандартів безпеки, співпрацюючи тільки з надійними постачальниками та виробниками.',
+			name: 'Смаколик',
+			isSelect: true,
+		},
+		{
+			src: 'assets/icons/review_icon.png',
+      quest: 'Як ми стежимо за останніми тенденціями у світі сиру, масла та деликатесів для розширення нашого асортименту?',
+			text: 'Ми постійно досліджуємо гастрономічні тенденції, щоб приводити в асортимент нові та захоплюючі продукти, які відповідають сучасним смаковим уподобанням.',
+			name: 'Смаколик',
+			isSelect: true,
+		},
+
 	];
 
 	customOptions: OwlOptions = {
