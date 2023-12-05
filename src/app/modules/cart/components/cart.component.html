@@ -24,8 +24,16 @@
 
     <div class="cart__controller">
       <button class="cart__controller-back btn" [routerLink]="backToShoppingLink">Повернутися до покупок</button>
-      <div class="cart__controller-sum">Разом: <span><i class="fas fa-hryvnia"></i>{{totalPrice + '.00'}}</span></div>
+      <div class="cart__controller-sum">
+        Разом: <span><i class="fas fa-hryvnia"></i>{{totalPrice + '.00'}}</span>
+      </div>
       <button class="cart__controller-issue btn" routerLink="/checkout">Оформити замовлення</button>
+    </div>
+
+    <div class="cart__message">
+      <p>Шановні покупці, зверніть увагу, що продаж позицій відбувається лише поштучно. <br>
+        Фактична вага може несуттєво відрізнятися від зазначеної в описі товару.<br>
+        Кінцева вартість замовлення буде узгоджена з Вами після опрацювання замовлення.</p>
     </div>
   </div>
 
@@ -63,6 +71,13 @@
       <div class="mobile-cart__controller-sum">Разом: <span><i class="fas fa-hryvnia"></i>{{totalPrice + '.00'}}</span></div>
       <button class="mobile-cart__controller-issue btn" routerLink="/checkout">Оформити замовлення</button>
     </div>
+
+    <div class="mobile-cart__message">
+      <p>Шановні покупці, зверніть увагу, що продаж позицій відбувається лише поштучно. <br>
+        Фактична вага може несуттєво відрізнятися від зазначеної в описі товару.<br>
+        Кінцева вартість замовлення буде узгоджена з Вами після опрацювання замовлення.</p>
+    </div>
+
   </div>
 
 </section>

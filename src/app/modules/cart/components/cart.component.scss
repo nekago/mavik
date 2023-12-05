@@ -97,9 +97,13 @@
       font-weight: 400;
       font-size: 36px;
 
+
       span {
         font-weight: bold;
       }
+
+
+
 
       @media screen and (max-width: 1110px) {
         display: flex;
@@ -110,6 +114,24 @@
     }
 
     &-issue {
+      margin: 0;
+    }
+  }
+
+  &__message{
+    font-family: $nunito_bold;
+    font-weight: 600;
+    font-size: 13px;
+    margin: 30px auto;
+    max-width: 600px;
+    background-color: #ffc107;
+    color: $textColor;
+    border: 1px solid #ffca28;
+    padding: 10px;
+    border-radius: 5px;
+
+    p {
+      text-align: justify;
       margin: 0;
     }
   }
@@ -295,6 +317,24 @@
       span {
         font-weight: bold;
       }
+    }
+  }
+
+  &__message{
+    font-family: $nunito_bold;
+    font-weight: 600;
+    font-size: 10px;
+    margin: 10px auto;
+    max-width: 380px;
+    background-color: #ffc107;
+    color: $textColor;
+    border: 1px solid #ffca28;
+    padding: 10px;
+    border-radius: 5px;
+
+    p {
+      text-align: justify;
+      margin: 0;
     }
   }
 }
